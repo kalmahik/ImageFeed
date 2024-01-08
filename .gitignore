@@ -1,6 +1,6 @@
 # Default ignored files
 /shelf/
-/workspace.xml
+/.idea/
 
 ### Xcode ###
 ## User settings
@@ -18,3 +18,4 @@ xcuserdata/
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
+/ImageFeed.xcodeproj/xcuserdata/
