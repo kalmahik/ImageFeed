@@ -7,11 +7,20 @@
 
 import UIKit
 
+let tableContentInsets: UIEdgeInsets = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
+let cellInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 8, right: 16)
+
 class ImagesListViewController: UIViewController {
     
     private let photosName: [String] = Array(0..<20).map{ "\($0)" }
     
     @IBOutlet private var tableView: UITableView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.contentInset = tableContentInsets
+        tableView.showsVerticalScrollIndicator = false
+    }
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         cell.picture.image = UIImage(named: "\(indexPath.row)")
@@ -41,9 +50,10 @@ extension ImagesListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let image = UIImage(named: "\(indexPath.row)") ?? UIImage()
+        let image = UIImage(named: "\(indexPath.row)")
+        guard let image else { return 0 }
         let originalRatio =  image.size.height / image.size.width
-        let imageViewWidth = tableView.bounds.width
+        let imageViewWidth = tableView.bounds.width - cellInsets.right - cellInsets.left
         let cellHeight = imageViewWidth * originalRatio + 8
         return cellHeight
     }
