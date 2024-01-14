@@ -23,10 +23,9 @@ class ImagesListViewController: UIViewController {
     }
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
-        cell.picture.image = UIImage(named: "\(indexPath.row)")
-        cell.date.text = Date().dateString
-        let image = UIImage(named: indexPath.row % 2 == 0 ? "favorite_active" : "favorite_inactive")
-        cell.like.setImage(image, for: .normal)
+        cell.pictureImageView.image = UIImage(named: "\(indexPath.row)")
+        cell.dateLabel.text = Date().dateString
+        cell.likeButton.setImage( UIImage(named: indexPath.row % 2 == 0 ? "favorite_active" : "favorite_inactive"), for: .normal)
     }
 }
 
@@ -54,7 +53,7 @@ extension ImagesListViewController: UITableViewDataSource {
         guard let image else { return 0 }
         let originalRatio =  image.size.height / image.size.width
         let imageViewWidth = tableView.bounds.width - cellInsets.right - cellInsets.left
-        let cellHeight = imageViewWidth * originalRatio + 8
+        let cellHeight = imageViewWidth * originalRatio + cellInsets.bottom
         return cellHeight
     }
 }
