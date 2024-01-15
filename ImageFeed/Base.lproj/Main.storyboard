@@ -33,7 +33,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="300"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kxq-cM-PY9" userLabel="image">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kxq-cM-PY9" userLabel="imageView">
                                                     <rect key="frame" x="0.0" y="0.0" width="390" height="300"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqa-xf-YPj" userLabel="GradientView" customClass="GradientView" customModule="ImageFeed" customModuleProvider="target">
@@ -56,13 +56,13 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KL4-fP-c7d" userLabel="like">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KL4-fP-c7d" userLabel="likeButton">
                                                     <rect key="frame" x="348" y="0.0" width="42" height="42"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" image="favorite_active"/>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 января 2024" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="62d-kx-Udp" userLabel="date">
-                                                    <rect key="frame" x="8" y="276.33333333333331" width="93.666666666666671" height="15.666666666666686"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 января 2024" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="62d-kx-Udp" userLabel="dateLabel">
+                                                    <rect key="frame" x="8" y="276.33333333333331" width="88" height="15.666666666666686"/>
                                                     <fontDescription key="fontDescription" name="YSDisplay-Medium" family="YS Display" pointSize="13"/>
                                                     <color key="textColor" name="YP White"/>
                                                     <nil key="highlightedColor"/>
@@ -86,9 +86,9 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="YP Black"/>
                                         <connections>
-                                            <outlet property="date" destination="62d-kx-Udp" id="nYa-8E-mOV"/>
-                                            <outlet property="like" destination="KL4-fP-c7d" id="dpe-fe-0cY"/>
-                                            <outlet property="picture" destination="Kxq-cM-PY9" id="JzE-Qt-bbr"/>
+                                            <outlet property="dateLabel" destination="62d-kx-Udp" id="UBa-Uv-E0g"/>
+                                            <outlet property="likeButton" destination="KL4-fP-c7d" id="o2M-x2-Bz7"/>
+                                            <outlet property="pictureImageView" destination="Kxq-cM-PY9" id="p9T-5f-YAY"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -125,7 +125,7 @@
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="gradient_end">
-            <color red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="0.20000000298023224" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="gradient_start">
             <color red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
