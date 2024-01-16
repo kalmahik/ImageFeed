@@ -8,7 +8,7 @@
 import UIKit
 
 let tableContentInsets: UIEdgeInsets = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
-let cellInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 8, right: 16)
+let imageInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 8, right: 16)
 
 class ImagesListViewController: UIViewController {
     
@@ -42,6 +42,7 @@ extension ImagesListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath)
+
         guard let imageListCell = cell as? ImagesListCell else {
             return UITableViewCell()
         }
@@ -53,8 +54,8 @@ extension ImagesListViewController: UITableViewDataSource {
         let image = UIImage(named: "\(indexPath.row)")
         guard let image else { return 0 }
         let originalRatio =  image.size.height / image.size.width
-        let imageViewWidth = tableView.bounds.width - cellInsets.right - cellInsets.left
-        let cellHeight = imageViewWidth * originalRatio + cellInsets.bottom
+        let imageViewWidth = tableView.bounds.width - imageInsets.right - imageInsets.left
+        let cellHeight = imageViewWidth * originalRatio + imageInsets.bottom
         return cellHeight
     }
 }
