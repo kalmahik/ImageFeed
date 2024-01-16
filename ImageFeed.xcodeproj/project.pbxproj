@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7CE513AE2B4FC62C00DD146A /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE513AD2B4FC62C00DD146A /* ImagesListCell.swift */; };
+		84A730502B56433D00350016 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A7304F2B56433D00350016 /* Utils.swift */; };
 		84ED9C582B51F49F00BB8102 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED9C572B51F49F00BB8102 /* GradientView.swift */; };
 		84ED9C5A2B52806400BB8102 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED9C592B52806400BB8102 /* Date+Extensions.swift */; };
 		84ED9C6C2B52898D00BB8102 /* YS Display-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84ED9C6A2B52898D00BB8102 /* YS Display-Medium.ttf */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		7CE513AD2B4FC62C00DD146A /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
+		84A7304F2B56433D00350016 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		84ED9C572B51F49F00BB8102 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		84ED9C592B52806400BB8102 /* Date+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		84ED9C6A2B52898D00BB8102 /* YS Display-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Medium.ttf"; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				F5BF84FB2B49EE89007CC292 /* AppDelegate.swift */,
 				F5BF85042B49EE8B007CC292 /* Assets.xcassets */,
 				84ED9C592B52806400BB8102 /* Date+Extensions.swift */,
+				84A7304F2B56433D00350016 /* Utils.swift */,
 				84ED9C5F2B52876D00BB8102 /* Fonts */,
 				84ED9C572B51F49F00BB8102 /* GradientView.swift */,
 				7CE513AF2B4FC65E00DD146A /* ImageList */,
@@ -174,6 +177,7 @@
 				F5BF85002B49EE89007CC292 /* ImagesListViewController.swift in Sources */,
 				7CE513AE2B4FC62C00DD146A /* ImagesListCell.swift in Sources */,
 				84ED9C582B51F49F00BB8102 /* GradientView.swift in Sources */,
+				84A730502B56433D00350016 /* Utils.swift in Sources */,
 				F5BF84FC2B49EE89007CC292 /* AppDelegate.swift in Sources */,
 				F5BF84FE2B49EE89007CC292 /* SceneDelegate.swift in Sources */,
 				84ED9C5A2B52806400BB8102 /* Date+Extensions.swift in Sources */,
@@ -254,7 +258,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -311,7 +315,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;

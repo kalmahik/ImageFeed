@@ -18,4 +18,10 @@ final class ImagesListCell: UITableViewCell {
         contentView.layer.cornerRadius = 16
         contentView.frame = contentView.frame.inset(by: cellInsets)
     }
+    
+func configCell(_ imageName: String, _ dateText: String, _ isLike: Bool) {
+        pictureImageView.image = UIImage(named: imageName)
+        dateLabel.text = dateText
+        likeButton.setImage( UIImage(named: isLike ? "favorite_active" : "favorite_inactive"), for: .normal)
+    }
 }

@@ -23,9 +23,10 @@ class ImagesListViewController: UIViewController {
     }
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
-        cell.pictureImageView.image = UIImage(named: "\(indexPath.row)")
-        cell.dateLabel.text = Date().dateString
-        cell.likeButton.setImage( UIImage(named: indexPath.row % 2 == 0 ? "favorite_active" : "favorite_inactive"), for: .normal)
+        let imageName = "\(indexPath.row)"
+        let dateLabel = Date().dateString
+        let isLike = indexPath.row % 2 == 0
+        cell.configCell(imageName, dateLabel, isLike)
     }
 }
 
