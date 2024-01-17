@@ -9,9 +9,9 @@ import UIKit
 
 final class ImagesListCell: UITableViewCell {
     static let reuseIdentifier = "ImagesListCell"
-    @IBOutlet var pictureImageView: UIImageView!
-    @IBOutlet var likeButton: UIButton!
-    @IBOutlet var dateLabel: UILabel!
+    @IBOutlet private var pictureImageView: UIImageView!
+    @IBOutlet private var likeButton: UIButton!
+    @IBOutlet private var dateLabel: UILabel!
     
     func configCell(_ imageName: String, _ dateText: String, _ isLike: Bool) {
         pictureImageView.image = UIImage(named: imageName)
