@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7CE513AE2B4FC62C00DD146A /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE513AD2B4FC62C00DD146A /* ImagesListCell.swift */; };
+		841FDACC2B58EFA90001C286 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FDACB2B58EFA90001C286 /* ProfileViewController.swift */; };
 		84ED9C582B51F49F00BB8102 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED9C572B51F49F00BB8102 /* GradientView.swift */; };
 		84ED9C5A2B52806400BB8102 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED9C592B52806400BB8102 /* Date+Extensions.swift */; };
 		84ED9C6C2B52898D00BB8102 /* YS Display-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84ED9C6A2B52898D00BB8102 /* YS Display-Medium.ttf */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		7CE513AD2B4FC62C00DD146A /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
+		841FDACB2B58EFA90001C286 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		84ED9C572B51F49F00BB8102 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		84ED9C592B52806400BB8102 /* Date+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		84ED9C6A2B52898D00BB8102 /* YS Display-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Medium.ttf"; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				F5BF85062B49EE8B007CC292 /* LaunchScreen.storyboard */,
 				F5BF85012B49EE89007CC292 /* Main.storyboard */,
 				F5BF84FD2B49EE89007CC292 /* SceneDelegate.swift */,
+				841FDACB2B58EFA90001C286 /* ProfileViewController.swift */,
 			);
 			path = ImageFeed;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 				7CE513AE2B4FC62C00DD146A /* ImagesListCell.swift in Sources */,
 				84ED9C582B51F49F00BB8102 /* GradientView.swift in Sources */,
 				F5BF84FC2B49EE89007CC292 /* AppDelegate.swift in Sources */,
+				841FDACC2B58EFA90001C286 /* ProfileViewController.swift in Sources */,
 				F5BF84FE2B49EE89007CC292 /* SceneDelegate.swift in Sources */,
 				84ED9C5A2B52806400BB8102 /* Date+Extensions.swift in Sources */,
 			);
