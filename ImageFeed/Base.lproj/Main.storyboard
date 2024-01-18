@@ -65,7 +65,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KL4-fP-c7d" userLabel="likeButton">
                                                     <rect key="frame" x="332" y="0.0" width="42" height="42"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" image="favorite_active"/>
+                                                    <state key="normal" image="fav"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 января 2024" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="62d-kx-Udp" userLabel="dateLabel">
                                                     <rect key="frame" x="24" y="268.33333333333331" width="88" height="15.666666666666686"/>
@@ -142,7 +142,8 @@
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OQG-nl-vtv">
-                                                <rect key="frame" x="314" y="0.0" width="44" height="70"/>
+                                                <rect key="frame" x="318" y="0.0" width="40" height="70"/>
+                                                <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" image="exit"/>
                                             </button>
@@ -189,9 +190,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="avatart_placeholder" width="70" height="70"/>
-        <image name="exit" width="44" height="44"/>
-        <image name="favorite_active" width="42" height="42"/>
+        <image name="avatart_placeholder" width="24" height="24"/>
+        <image name="exit" width="24" height="24"/>
+        <image name="fav" width="42" height="42"/>
         <namedColor name="YP Black">
             <color red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
