@@ -205,7 +205,7 @@
                             <constraint firstItem="NMy-3n-6Rb" firstAttribute="top" secondItem="1qz-vm-8HM" secondAttribute="top" constant="32" id="yHV-5y-LaH"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="tab_profile_active" id="X8U-Lo-ZcZ"/>
+                    <tabBarItem key="tabBarItem" title="" image="tab_profile" id="X8U-Lo-ZcZ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TdW-FU-x78" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -215,7 +215,7 @@
         <scene sceneID="Xkq-5c-Pzw">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="h4n-W9-GeT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="tab_editorial_active" id="YKZ-Kw-KLr"/>
+                    <tabBarItem key="tabBarItem" title="" image="tab_editorial" id="YKZ-Kw-KLr"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dkO-W4-dYT">
                         <rect key="frame" x="0.0" y="47" width="390" height="44"/>
@@ -270,8 +270,8 @@
         <image name="avatart_placeholder" width="24" height="24"/>
         <image name="exit" width="24" height="24"/>
         <image name="fav" width="42" height="42"/>
-        <image name="tab_editorial_active" width="30" height="30"/>
-        <image name="tab_profile_active" width="30" height="30"/>
+        <image name="tab_editorial" width="30" height="30"/>
+        <image name="tab_profile" width="30" height="30"/>
         <namedColor name="YP Black">
             <color red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>

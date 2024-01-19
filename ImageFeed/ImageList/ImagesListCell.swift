@@ -16,6 +16,8 @@ final class ImagesListCell: UITableViewCell {
     func configCell(_ imageName: String, _ dateText: String, _ isLike: Bool) {
         pictureImageView.image = UIImage(named: imageName)
         dateLabel.text = dateText
-        likeButton.setImage( UIImage(named: isLike ? "favorite_active" : "favorite_inactive"), for: .normal)
+        let image = UIImage(named:  "favorite")?.withRenderingMode(.alwaysTemplate)
+        likeButton.setImage(image, for: .normal)
+        likeButton.tintColor = isLike ? .ypRed : .ypWhite50
     }
 }
