@@ -60,6 +60,20 @@
 			path = ImageList;
 			sourceTree = "<group>";
 		};
+		841FDAD12B5D196D0001C286 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				F5BF84FB2B49EE89007CC292 /* AppDelegate.swift */,
+				841FDACF2B5A41D80001C286 /* SingleImageViewController.swift */,
+				84ED9C592B52806400BB8102 /* Date+Extensions.swift */,
+				84ED9C572B51F49F00BB8102 /* GradientView.swift */,
+				7CE513AF2B4FC65E00DD146A /* ImageList */,
+				841FDACB2B58EFA90001C286 /* ProfileViewController.swift */,
+				F5BF84FD2B49EE89007CC292 /* SceneDelegate.swift */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		84ED9C5F2B52876D00BB8102 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -88,18 +102,12 @@
 		F5BF84FA2B49EE89007CC292 /* ImageFeed */ = {
 			isa = PBXGroup;
 			children = (
-				F5BF84FB2B49EE89007CC292 /* AppDelegate.swift */,
+				841FDAD12B5D196D0001C286 /* src */,
 				F5BF85042B49EE8B007CC292 /* Assets.xcassets */,
-				841FDACF2B5A41D80001C286 /* SingleImageViewController.swift */,
-				84ED9C592B52806400BB8102 /* Date+Extensions.swift */,
 				84ED9C5F2B52876D00BB8102 /* Fonts */,
-				84ED9C572B51F49F00BB8102 /* GradientView.swift */,
-				7CE513AF2B4FC65E00DD146A /* ImageList */,
 				F5BF85092B49EE8B007CC292 /* Info.plist */,
 				F5BF85062B49EE8B007CC292 /* LaunchScreen.storyboard */,
 				F5BF85012B49EE89007CC292 /* Main.storyboard */,
-				841FDACB2B58EFA90001C286 /* ProfileViewController.swift */,
-				F5BF84FD2B49EE89007CC292 /* SceneDelegate.swift */,
 			);
 			path = ImageFeed;
 			sourceTree = "<group>";
