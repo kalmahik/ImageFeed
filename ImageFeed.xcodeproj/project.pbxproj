@@ -82,6 +82,7 @@
 		840C3F0F2B5F754C002BAA0F /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				7CE513AF2B4FC65E00DD146A /* ImageList */,
 				841FDACB2B58EFA90001C286 /* ProfileViewController.swift */,
 				841FDACF2B5A41D80001C286 /* SingleImageViewController.swift */,
 			);
@@ -95,7 +96,6 @@
 				840C3F0E2B5F750D002BAA0F /* Utils */,
 				F5BF84FB2B49EE89007CC292 /* AppDelegate.swift */,
 				840C3F0D2B5F74DE002BAA0F /* Components */,
-				7CE513AF2B4FC65E00DD146A /* ImageList */,
 				F5BF84FD2B49EE89007CC292 /* SceneDelegate.swift */,
 			);
 			path = src;

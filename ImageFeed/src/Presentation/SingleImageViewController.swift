@@ -2,7 +2,7 @@
 //  SingleImageViewController.swift
 //  ImageFeed
 //
-//  Created by Admin on 19.01.2024.
+//  Created by Murad Azimov on 11.01.2024.
 //
 
 import UIKit
@@ -11,7 +11,7 @@ import LinkPresentation
 class SingleImageViewController: UIViewController {
     var imageName: String!
     
-    @IBOutlet private var zoomImageView: PanZoomImageView!
+    @IBOutlet private weak var zoomImageView: PanZoomImageView!
     
     @IBAction private func didTapBackButton() {
         dismiss(animated: true, completion: nil)
