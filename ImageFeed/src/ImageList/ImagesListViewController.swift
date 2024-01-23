@@ -27,8 +27,7 @@ class ImagesListViewController: UIViewController {
         if segue.identifier == ShowSingleImageSegueIdentifier {
             let viewController = segue.destination as! SingleImageViewController
             let indexPath = sender as! IndexPath
-            let image = UIImage(named: "\(indexPath.row)")
-            viewController.image = image
+            viewController.imageName = "\(indexPath.row)"
         } else {
             super.prepare(for: segue, sender: sender)
         }
