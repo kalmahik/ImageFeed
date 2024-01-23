@@ -236,15 +236,36 @@
                                     <action selector="didTapBackButton" destination="Ya9-xE-nAz" eventType="touchUpInside" id="jDE-Ii-bLR"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tbr-nX-dGF">
+                                <rect key="frame" x="170" y="778" width="50" height="50"/>
+                                <color key="backgroundColor" name="YP Black"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="cue-Ry-rYN"/>
+                                    <constraint firstAttribute="width" constant="50" id="neq-2g-OF5"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="share"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="shareImageButton:" destination="Ya9-xE-nAz" eventType="touchUpInside" id="F4e-Gn-x7y"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aT2-gu-Dlx"/>
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
+                            <constraint firstItem="aT2-gu-Dlx" firstAttribute="bottom" secondItem="Tbr-nX-dGF" secondAttribute="bottom" constant="16" id="BVi-pI-V4E"/>
                             <constraint firstItem="5OC-Mz-KLV" firstAttribute="top" secondItem="oiX-7I-4tY" secondAttribute="top" id="KAy-2r-tOo"/>
                             <constraint firstItem="zoU-eJ-UvU" firstAttribute="top" secondItem="aT2-gu-Dlx" secondAttribute="top" id="LXY-RB-HN7"/>
                             <constraint firstAttribute="trailing" secondItem="5OC-Mz-KLV" secondAttribute="trailing" id="ShU-ec-yep"/>
                             <constraint firstAttribute="bottom" secondItem="5OC-Mz-KLV" secondAttribute="bottom" id="TSO-zH-vkx"/>
                             <constraint firstItem="5OC-Mz-KLV" firstAttribute="leading" secondItem="oiX-7I-4tY" secondAttribute="leading" id="YDZ-Gs-7WY"/>
+                            <constraint firstItem="Tbr-nX-dGF" firstAttribute="centerX" secondItem="5OC-Mz-KLV" secondAttribute="centerX" id="iRs-Mf-KZF"/>
                             <constraint firstItem="zoU-eJ-UvU" firstAttribute="leading" secondItem="oiX-7I-4tY" secondAttribute="leading" id="msz-xU-3eN"/>
                         </constraints>
                     </view>
@@ -263,6 +284,7 @@
         <image name="back" width="24" height="24"/>
         <image name="exit" width="24" height="24"/>
         <image name="fav" width="42" height="42"/>
+        <image name="share" width="30" height="30"/>
         <image name="tab_editorial" width="30" height="30"/>
         <image name="tab_profile" width="30" height="30"/>
         <namedColor name="YP Black">
