@@ -89,18 +89,6 @@
 			path = Presentation;
 			sourceTree = "<group>";
 		};
-		841FDAD12B5D196D0001C286 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				840C3F0F2B5F754C002BAA0F /* Presentation */,
-				840C3F0E2B5F750D002BAA0F /* Utils */,
-				F5BF84FB2B49EE89007CC292 /* AppDelegate.swift */,
-				840C3F0D2B5F74DE002BAA0F /* Components */,
-				F5BF84FD2B49EE89007CC292 /* SceneDelegate.swift */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
 		84ED9C5F2B52876D00BB8102 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,7 +117,11 @@
 		F5BF84FA2B49EE89007CC292 /* ImageFeed */ = {
 			isa = PBXGroup;
 			children = (
-				841FDAD12B5D196D0001C286 /* src */,
+				840C3F0F2B5F754C002BAA0F /* Presentation */,
+				840C3F0E2B5F750D002BAA0F /* Utils */,
+				F5BF84FB2B49EE89007CC292 /* AppDelegate.swift */,
+				840C3F0D2B5F74DE002BAA0F /* Components */,
+				F5BF84FD2B49EE89007CC292 /* SceneDelegate.swift */,
 				F5BF85042B49EE8B007CC292 /* Assets.xcassets */,
 				84ED9C5F2B52876D00BB8102 /* Fonts */,
 				F5BF85092B49EE8B007CC292 /* Info.plist */,
