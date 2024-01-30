@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -85,8 +86,12 @@
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KL4-fP-c7d" userLabel="likeButton">
                                                     <rect key="frame" x="332" y="0.0" width="42" height="42"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="42" id="2EK-iu-7OB"/>
+                                                        <constraint firstAttribute="height" constant="42" id="by1-8w-NX3"/>
+                                                    </constraints>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" image="fav"/>
+                                                    <state key="normal" image="heart.fill" catalog="system"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 января 2024" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="62d-kx-Udp" userLabel="dateLabel">
                                                     <rect key="frame" x="24" y="268.33333333333331" width="88" height="15.666666666666686"/>
@@ -133,7 +138,9 @@
                             <constraint firstItem="OOC-a7-VdI" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="zTx-Rl-FmD"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="tab_editorial" id="Nla-n7-9mK"/>
+                    <tabBarItem key="tabBarItem" title="" id="Nla-n7-9mK">
+                        <imageReference key="image" image="tab_editorial" symbolScale="default" variableValue="1"/>
+                    </tabBarItem>
                     <navigationItem key="navigationItem" id="Z3X-ws-MKj"/>
                     <connections>
                         <outlet property="tableView" destination="OOC-a7-VdI" id="sLR-2y-sK9"/>
@@ -178,7 +185,8 @@
                                     <constraint firstAttribute="height" constant="48" id="b1S-DJ-Lpl"/>
                                     <constraint firstAttribute="width" constant="48" id="cbc-HL-zdT"/>
                                 </constraints>
-                                <state key="normal" image="back"/>
+                                <color key="tintColor" name="YP White"/>
+                                <state key="normal" image="chevron.left" catalog="system"/>
                                 <connections>
                                     <action selector="didTapBackButton" destination="Ya9-xE-nAz" eventType="touchUpInside" id="jDE-Ii-bLR"/>
                                 </connections>
@@ -227,8 +235,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="back" width="24" height="24"/>
-        <image name="fav" width="42" height="42"/>
+        <image name="chevron.left" catalog="system" width="97" height="128"/>
+        <image name="heart.fill" catalog="system" width="128" height="107"/>
         <image name="share" width="30" height="30"/>
         <image name="tab_editorial" width="30" height="30"/>
         <image name="tab_profile" width="30" height="30"/>
