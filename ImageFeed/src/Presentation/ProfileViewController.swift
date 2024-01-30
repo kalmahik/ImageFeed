@@ -23,7 +23,7 @@ class ProfileViewController: UIViewController {
         rootStack.spacing = 8
     
         rootStack.addArrangedSubview(renderAvatarContainer())
-        rootStack.addArrangedSubview(renderLabel("Firstname and lastname"))
+        rootStack.addArrangedSubview(renderLabel("Firstname and lastname", size: 23))
         rootStack.addArrangedSubview(renderLabel("nickname", color: .ypGray))
         rootStack.addArrangedSubview(renderLabel("Description"))
         
@@ -70,11 +70,11 @@ class ProfileViewController: UIViewController {
     }
     
     func renderLabel(_ text: String, size: CGFloat = 13, color: UIColor = .ypWhite) -> UILabel {
-        let label = UILabel();
+        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = text
         label.textColor = color
-        label.font = UIFont(name: "YS Display-Medium", size: size)
+        label.font = UIFont(name: "YSDisplay-Medium", size: size)
         return label
     }
     
