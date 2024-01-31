@@ -9,65 +9,72 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    private let rootStack: UIStackView = UIStackView()
-    
     override func viewDidLoad() {
-        configureRootStack()
+        addSubViews()
+        applyConstraints()
     }
     
-    private func configureRootStack() {
+    private func applyConstraints() {
+        NSLayoutConstraint.activate([
+            rootStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            rootStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            rootStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
+            avatarStack.widthAnchor.constraint(equalToConstant: view.frame.width),
+            avatarImageView.widthAnchor.constraint(equalToConstant: 70),
+            avatarImageView.heightAnchor.constraint(equalToConstant: 70),
+        ])
+    }
+    
+    private func addSubViews() {
+        //важен ли порядок и какой он?
+        rootStack.addArrangedSubview(avatarStack)
+        rootStack.addArrangedSubview(configureLabel("Firstname and lastname", size: 23))
+        rootStack.addArrangedSubview(configureLabel("nickname", color: .ypGray))
+        rootStack.addArrangedSubview(configureLabel("Description"))
+        
+        avatarStack.addArrangedSubview(avatarImageView)
+        avatarStack.addArrangedSubview(exitButton)
+       
+//        rootStack.addSubview(avatarStack)
+        view.addSubview(rootStack)
+    }
+    
+    private let rootStack: UIStackView =  {
+        let rootStack: UIStackView = UIStackView()
         rootStack.translatesAutoresizingMaskIntoConstraints = false
         rootStack.axis = NSLayoutConstraint.Axis.vertical
         rootStack.distribution = UIStackView.Distribution.fill
         rootStack.alignment = UIStackView.Alignment.leading
         rootStack.spacing = 8
+        return rootStack
+    }()
     
-        rootStack.addArrangedSubview(configureAvatarContainer())
-        rootStack.addArrangedSubview(configureLabel("Firstname and lastname", size: 23))
-        rootStack.addArrangedSubview(configureLabel("nickname", color: .ypGray))
-        rootStack.addArrangedSubview(configureLabel("Description"))
-        
-        view.addSubview(rootStack)
-        
-        rootStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
-        rootStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
-        rootStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32).isActive = true
-    }
-    
-    private func configureAvatarContainer() -> UIView {
+    private let avatarStack: UIStackView = {
         let hStack: UIStackView = UIStackView()
         hStack.translatesAutoresizingMaskIntoConstraints = false
         hStack.axis = NSLayoutConstraint.Axis.horizontal
         hStack.distribution = UIStackView.Distribution.equalCentering
         hStack.alignment = UIStackView.Alignment.center
-        
-        hStack.addArrangedSubview(configureAvatar())
-        hStack.addArrangedSubview(configureExitButton())
-        
-        rootStack.addSubview(hStack)
-        hStack.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
-
         return hStack
-    }
+    }()
     
-    private func configureAvatar() -> UIImageView {
+    private let avatarImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "avatar_placeholder"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
         return imageView
-    }
+    }()
     
-    private func configureExitButton() -> UIButton {
+    private let exitButton: UIButton = {
+        //как понять нужен ли тут weak self
         let button = UIButton.systemButton(
             with: UIImage(systemName: "ipad.and.arrow.forward")!,
-            target: self,
+            target: ProfileViewController.self,
             action: #selector(didTapButton)
         )
         button.tintColor = .ypRed
         button.contentEdgeInsets = UIEdgeInsets(top: 16, left: 8, bottom: 16, right: 8)
         return button
-    }
+    }()
     
     private func configureLabel(_ text: String, size: CGFloat = 13, color: UIColor = .ypWhite, type: UIFont.FontType = .regular) -> UILabel {
         let label = UILabel()
