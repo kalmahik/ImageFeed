@@ -9,7 +9,7 @@ import UIKit
 import LinkPresentation
 
 class SingleImageViewController: UIViewController {
-    var imageName: String!
+    var imageName: String = ""
     
     @IBOutlet private weak var zoomImageView: PanZoomImageView!
     
@@ -17,8 +17,8 @@ class SingleImageViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func shareImageButton(_ sender: UIButton) {
-        let image = UIImage(named: imageName)!
+    @IBAction private func shareImageButton(_ sender: UIButton) {
+        let image = UIImage(named: imageName) ?? UIImage()
         let activityViewController = UIActivityViewController(activityItems: [image, self], applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
         self.present(activityViewController, animated: true, completion: nil)
@@ -40,9 +40,7 @@ extension SingleImageViewController: UIActivityItemSource {
         return metadata
     }
     
-    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
-        return "123"
-    }
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any { imageName }
     
     func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
         return nil

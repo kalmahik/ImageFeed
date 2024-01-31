@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7CE513AE2B4FC62C00DD146A /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE513AD2B4FC62C00DD146A /* ImagesListCell.swift */; };
+		840FEB4D2B6A0B100076067E /* UIFont+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840FEB4C2B6A0B100076067E /* UIFont+Extentions.swift */; };
 		841FDACC2B58EFA90001C286 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FDACB2B58EFA90001C286 /* ProfileViewController.swift */; };
 		841FDAD02B5A41D80001C286 /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FDACF2B5A41D80001C286 /* SingleImageViewController.swift */; };
 		847B024F2B5F17D9005CC977 /* PanZoomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847B024E2B5F17D9005CC977 /* PanZoomImageView.swift */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		7CE513AD2B4FC62C00DD146A /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
+		840FEB4C2B6A0B100076067E /* UIFont+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extentions.swift"; sourceTree = "<group>"; };
 		841FDACB2B58EFA90001C286 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		841FDACF2B5A41D80001C286 /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 		847B024E2B5F17D9005CC977 /* PanZoomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanZoomImageView.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				84ED9C592B52806400BB8102 /* Date+Extensions.swift */,
+				840FEB4C2B6A0B100076067E /* UIFont+Extentions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				F5BF84FE2B49EE89007CC292 /* SceneDelegate.swift in Sources */,
 				841FDAD02B5A41D80001C286 /* SingleImageViewController.swift in Sources */,
 				84ED9C5A2B52806400BB8102 /* Date+Extensions.swift in Sources */,
+				840FEB4D2B6A0B100076067E /* UIFont+Extentions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

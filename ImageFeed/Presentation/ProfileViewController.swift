@@ -2,7 +2,7 @@
 //  ProfileViewController.swift
 //  ImageFeed
 //
-//  Created by Admin on 18.01.2024.
+//  Created by Murad Azimov on 18.01.2024.
 //
 
 import UIKit
@@ -12,20 +12,20 @@ class ProfileViewController: UIViewController {
     private let rootStack: UIStackView = UIStackView()
     
     override func viewDidLoad() {
-        render()
+        configureRootStack()
     }
     
-    func render() {
+    private func configureRootStack() {
         rootStack.translatesAutoresizingMaskIntoConstraints = false
         rootStack.axis = NSLayoutConstraint.Axis.vertical
         rootStack.distribution = UIStackView.Distribution.fill
         rootStack.alignment = UIStackView.Alignment.leading
         rootStack.spacing = 8
     
-        rootStack.addArrangedSubview(renderAvatarContainer())
-        rootStack.addArrangedSubview(renderLabel("Firstname and lastname", size: 23))
-        rootStack.addArrangedSubview(renderLabel("nickname", color: .ypGray))
-        rootStack.addArrangedSubview(renderLabel("Description"))
+        rootStack.addArrangedSubview(configureAvatarContainer())
+        rootStack.addArrangedSubview(configureLabel("Firstname and lastname", size: 23))
+        rootStack.addArrangedSubview(configureLabel("nickname", color: .ypGray))
+        rootStack.addArrangedSubview(configureLabel("Description"))
         
         view.addSubview(rootStack)
         
@@ -34,15 +34,15 @@ class ProfileViewController: UIViewController {
         rootStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32).isActive = true
     }
     
-    func renderAvatarContainer() -> UIView {
+    private func configureAvatarContainer() -> UIView {
         let hStack: UIStackView = UIStackView()
         hStack.translatesAutoresizingMaskIntoConstraints = false
         hStack.axis = NSLayoutConstraint.Axis.horizontal
         hStack.distribution = UIStackView.Distribution.equalCentering
         hStack.alignment = UIStackView.Alignment.center
         
-        hStack.addArrangedSubview(renderAvatar())
-        hStack.addArrangedSubview(renderExitButton())
+        hStack.addArrangedSubview(configureAvatar())
+        hStack.addArrangedSubview(configureExitButton())
         
         rootStack.addSubview(hStack)
         hStack.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
@@ -50,7 +50,7 @@ class ProfileViewController: UIViewController {
         return hStack
     }
     
-    func renderAvatar() -> UIImageView {
+    private func configureAvatar() -> UIImageView {
         let imageView = UIImageView(image: UIImage(named: "avatar_placeholder"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
@@ -58,7 +58,7 @@ class ProfileViewController: UIViewController {
         return imageView
     }
     
-    func renderExitButton() -> UIButton {
+    private func configureExitButton() -> UIButton {
         let button = UIButton.systemButton(
             with: UIImage(systemName: "ipad.and.arrow.forward")!,
             target: self,
@@ -69,12 +69,12 @@ class ProfileViewController: UIViewController {
         return button
     }
     
-    func renderLabel(_ text: String, size: CGFloat = 13, color: UIColor = .ypWhite) -> UILabel {
+    private func configureLabel(_ text: String, size: CGFloat = 13, color: UIColor = .ypWhite, type: UIFont.FontType = .regular) -> UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = text
         label.textColor = color
-        label.font = UIFont(name: "YSDisplay-Medium", size: size)
+        label.font = UIFont.font(type: type, size: size)
         return label
     }
     
