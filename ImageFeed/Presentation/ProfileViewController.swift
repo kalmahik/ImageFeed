@@ -26,16 +26,12 @@ class ProfileViewController: UIViewController {
     }
     
     private func addSubViews() {
-        //важен ли порядок и какой он?
         rootStack.addArrangedSubview(avatarStack)
         rootStack.addArrangedSubview(configureLabel("Firstname and lastname", size: 23))
         rootStack.addArrangedSubview(configureLabel("nickname", color: .ypGray))
         rootStack.addArrangedSubview(configureLabel("Description"))
-        
         avatarStack.addArrangedSubview(avatarImageView)
         avatarStack.addArrangedSubview(exitButton)
-       
-//        rootStack.addSubview(avatarStack)
         view.addSubview(rootStack)
     }
     
@@ -64,11 +60,10 @@ class ProfileViewController: UIViewController {
         return imageView
     }()
     
-    private let exitButton: UIButton = {
-        //как понять нужен ли тут weak self
+    private lazy var exitButton: UIButton = {
         let button = UIButton.systemButton(
             with: UIImage(systemName: "ipad.and.arrow.forward")!,
-            target: ProfileViewController.self,
+            target: self,
             action: #selector(didTapButton)
         )
         button.tintColor = .ypRed
