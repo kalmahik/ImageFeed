@@ -13,13 +13,25 @@ let imageInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 8, right:
 class ImagesListViewController: UIViewController {
     
     private let photosName: [String] = Array(0..<20).map{ "\($0)" }
-    
+    private let showSingleImageSegueIdentifier = "ShowSingleImage"
+
     @IBOutlet private var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.contentInset = tableContentInsets
         tableView.showsVerticalScrollIndicator = false
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == showSingleImageSegueIdentifier {
+            let viewController = segue.destination as? SingleImageViewController
+            let indexPath = sender as? IndexPath
+            guard let viewController, let indexPath else  { return }
+            viewController.imageName = "\(indexPath.row)"
+        } else {
+            super.prepare(for: segue, sender: sender)
+        }
     }
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
@@ -31,8 +43,9 @@ class ImagesListViewController: UIViewController {
 }
 
 extension ImagesListViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { }
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: indexPath)
+    }
 }
 
 extension ImagesListViewController: UITableViewDataSource {
