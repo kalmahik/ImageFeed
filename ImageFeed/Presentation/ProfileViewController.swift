@@ -20,8 +20,8 @@ class ProfileViewController: UIViewController {
             rootStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             rootStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
             avatarStack.widthAnchor.constraint(equalToConstant: view.frame.width),
-            avatarImageView.widthAnchor.constraint(equalToConstant: 70),
-            avatarImageView.heightAnchor.constraint(equalToConstant: 70),
+            avatarImage.widthAnchor.constraint(equalToConstant: 70),
+            avatarImage.heightAnchor.constraint(equalToConstant: 70),
         ])
     }
     
@@ -30,7 +30,7 @@ class ProfileViewController: UIViewController {
         rootStack.addArrangedSubview(configureLabel("Firstname and lastname", size: 23))
         rootStack.addArrangedSubview(configureLabel("nickname", color: .ypGray))
         rootStack.addArrangedSubview(configureLabel("Description"))
-        avatarStack.addArrangedSubview(avatarImageView)
+        avatarStack.addArrangedSubview(avatarImage)
         avatarStack.addArrangedSubview(exitButton)
         view.addSubview(rootStack)
     }
@@ -54,7 +54,7 @@ class ProfileViewController: UIViewController {
         return hStack
     }()
     
-    private let avatarImageView: UIImageView = {
+    private let avatarImage: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "avatar_placeholder"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView

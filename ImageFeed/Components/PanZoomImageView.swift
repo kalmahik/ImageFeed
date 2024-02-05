@@ -57,17 +57,10 @@ class PanZoomImageView: UIScrollView {
     }
     
     @objc private func handleDoubleTap(_ sender: UITapGestureRecognizer) {
-        if zoomScale == 1 {
-            setZoomScale(2, animated: true)
-        } else {
-            setZoomScale(1, animated: true)
-        }
+        setZoomScale(zoomScale == 1 ? 2 : 1, animated: true)
     }
 }
 
 extension PanZoomImageView: UIScrollViewDelegate {
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return imageView
-    }
-    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? { imageView }
 }
