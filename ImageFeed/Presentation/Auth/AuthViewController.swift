@@ -8,7 +8,6 @@
 import UIKit
 
 class AuthViewController: UIViewController {
-    
     override func viewDidLoad() {
         addSubViews()
         applyConstraints()
@@ -51,5 +50,22 @@ class AuthViewController: UIViewController {
 
     @objc private func didTapButton() {
         print("Hello world!")
+        let webviewController = WebViewViewController()
+        webviewController.delegate = self
+        self.navigationController?.pushViewController(webviewController, animated: true)
+    }
+}
+
+extension AuthViewController: WebViewViewControllerDelegate {
+    func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
+        print("-----------------------code", code)
+//        vc.dismiss(animated: true)
+        
+        navigationController?.popViewController(animated: true)
+
+    }
+    
+    func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
+        print("-----------------------cancel")
     }
 }
