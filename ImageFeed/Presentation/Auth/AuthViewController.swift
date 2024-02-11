@@ -30,6 +30,12 @@ class AuthViewController: UIViewController {
         ])
     }
     
+    @objc private func didTapButton() {
+        let webviewController = WebViewViewController()
+        webviewController.delegate = self
+        self.navigationController?.pushViewController(webviewController, animated: true)
+    }
+    
     private let logoImage: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "logo_unsplash"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -47,25 +53,16 @@ class AuthViewController: UIViewController {
         button.layer.cornerRadius = 16
         return button
     }()
-
-    @objc private func didTapButton() {
-        print("Hello world!")
-        let webviewController = WebViewViewController()
-        webviewController.delegate = self
-        self.navigationController?.pushViewController(webviewController, animated: true)
-    }
 }
 
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        print("-----------------------code", code)
-//        vc.dismiss(animated: true)
-        
+        //        print("-----------------------code", code)
+        //        vc.dismiss(animated: true)
         navigationController?.popViewController(animated: true)
-
     }
     
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
-        print("-----------------------cancel")
+        //        print("-----------------------cancel")
     }
 }
