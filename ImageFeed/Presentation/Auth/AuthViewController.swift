@@ -64,7 +64,6 @@ extension AuthViewController: WebViewViewControllerDelegate {
     }
     
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        navigationController?.popViewController(animated: true)
         loadData(code: code)
     }
     
@@ -74,6 +73,7 @@ extension AuthViewController: WebViewViewControllerDelegate {
                 switch result {
                 case .success(let token):
                     print(token)
+                    self?.navigationController?.popViewController(animated: true)
                 case .failure(let error):
                     print(error)
                 }

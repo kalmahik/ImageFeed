@@ -20,7 +20,6 @@
 		8484F81A2B791891006D0AF5 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484F8192B791891006D0AF5 /* NetworkClient.swift */; };
 		8484F81C2B791894006D0AF5 /* NetworkClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484F81B2B791894006D0AF5 /* NetworkClientProtocol.swift */; };
 		8484F81F2B795461006D0AF5 /* URLRequest+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484F81E2B795461006D0AF5 /* URLRequest+Extentions.swift */; };
-		8484F8222B79E623006D0AF5 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484F8212B79E623006D0AF5 /* URLSession.swift */; };
 		84ED9C582B51F49F00BB8102 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED9C572B51F49F00BB8102 /* GradientView.swift */; };
 		84ED9C5A2B52806400BB8102 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED9C592B52806400BB8102 /* Date+Extensions.swift */; };
 		84ED9C6C2B52898D00BB8102 /* YS Display-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84ED9C6A2B52898D00BB8102 /* YS Display-Medium.ttf */; };
@@ -50,7 +49,6 @@
 		8484F8192B791891006D0AF5 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		8484F81B2B791894006D0AF5 /* NetworkClientProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientProtocol.swift; sourceTree = "<group>"; };
 		8484F81E2B795461006D0AF5 /* URLRequest+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extentions.swift"; sourceTree = "<group>"; };
-		8484F8212B79E623006D0AF5 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
 		84ED9C572B51F49F00BB8102 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		84ED9C592B52806400BB8102 /* Date+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		84ED9C6A2B52898D00BB8102 /* YS Display-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Medium.ttf"; sourceTree = "<group>"; };
@@ -141,7 +139,6 @@
 			isa = PBXGroup;
 			children = (
 				8484F81E2B795461006D0AF5 /* URLRequest+Extentions.swift */,
-				8484F8212B79E623006D0AF5 /* URLSession.swift */,
 				8484F81B2B791894006D0AF5 /* NetworkClientProtocol.swift */,
 				8484F8192B791891006D0AF5 /* NetworkClient.swift */,
 			);
@@ -269,7 +266,6 @@
 			files = (
 				8484F81A2B791891006D0AF5 /* NetworkClient.swift in Sources */,
 				840FEB502B748E990076067E /* WebViewViewController.swift in Sources */,
-				8484F8222B79E623006D0AF5 /* URLSession.swift in Sources */,
 				847B024F2B5F17D9005CC977 /* PanZoomImageView.swift in Sources */,
 				F554FB582B6FDB8000241D83 /* Keys.swift in Sources */,
 				F554FB562B6FD93000241D83 /* Constants.swift in Sources */,

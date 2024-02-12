@@ -8,10 +8,14 @@
 import Foundation
 
 extension URLRequest {
-    static func makeHTTPRequest(path: String, httpMethod: String, baseURL: URL = URL(string: DefaultBaseURL)!) -> URLRequest {
-        var request = URLRequest(url: URL(string: path, relativeTo: baseURL)!)
+    static func makeRequest(httpMethod: String? = "GET", path: String, queryItems: [URLQueryItem]?) -> URLRequest {
+        var urlComponents = URLComponents()
+        urlComponents.scheme = schema
+        urlComponents.host = host
+        urlComponents.path = path
+        urlComponents.queryItems = queryItems
+        var request = URLRequest(url: urlComponents.url!)
         request.httpMethod = httpMethod
         return request
     }
 }
-

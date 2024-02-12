@@ -7,14 +7,16 @@
 
 import Foundation
 
-let AccessKey = "\(ACCESS_KEY)"
-let SecretKey = "\(SECRET_KEY)"
-let RedirectURI = "urn:ietf:wg:oauth:2.0:oob"
-let AccessScope = "public+read_user+write_likes"
-let DefaultBaseURL = "https://api.unsplash.com"
-let AuthURL = "https://unsplash.com/oauth/authorize"
-let TokenURL = "https://unsplash.com/oauth/token"
-let RedirectPath = "/oauth/authorize/native"
+let accessKey = "\(ACCESS_KEY)"
+let secretKey = "\(SECRET_KEY)"
+let redirectURI = "urn:ietf:wg:oauth:2.0:oob"
+let accessScope = "public+read_user+write_likes"
+let defaultBaseURL = "https://api.unsplash.com"
+let authURL = "https://unsplash.com/oauth/authorize"
+let tokenPath = "/oauth/token"
+let redirectPath = "/oauth/authorize/native"
+let host = "unsplash.com"
+let schema = "https"
 
 enum AuthKeys: String {
     case client_id, client_secret, redirect_uri, response_type, grant_type, scope, code, authorization_code

@@ -1,8 +1,10 @@
 import Foundation
 
-struct NetworkClient: NetworkClientProtocol {
+struct NetworkClient: NetworkClientProtocol {    
     private enum NetworkError: Error {
-        case codeError(Int)
+        case httpStatusCode(Int)
+        case urlRequestError(Error)
+        case urlSessionError
     }
 
     func fetch(urlRequest: URLRequest, handler: @escaping (Result<Data, Error>) -> Void) {
@@ -12,7 +14,7 @@ struct NetworkClient: NetworkClientProtocol {
                 return
             }
             if let response = response as? HTTPURLResponse, response.statusCode < 200 || response.statusCode >= 300 {
-                handler(.failure(NetworkError.codeError(response.statusCode)))
+                handler(.failure(NetworkError.httpStatusCode(response.statusCode)))
                 return
             }
             if let data {
