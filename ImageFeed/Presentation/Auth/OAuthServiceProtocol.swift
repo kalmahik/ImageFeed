@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+protocol OAuthServiceProtocol {
+    func fetchAuthToken(code: String, handler: @escaping (Result<String, Error>) -> Void)
+}

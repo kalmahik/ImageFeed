@@ -8,6 +8,9 @@
 import UIKit
 
 class AuthViewController: UIViewController {
+    private lazy var networkClient: NetworkClientProtocol = NetworkClient()
+    private lazy var oAuthService: OAuthService = OAuthService(networkClient: networkClient)
+    
     override func viewDidLoad() {
         addSubViews()
         applyConstraints()
@@ -56,13 +59,25 @@ class AuthViewController: UIViewController {
 }
 
 extension AuthViewController: WebViewViewControllerDelegate {
-    func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        //        print("-----------------------code", code)
-        //        vc.dismiss(animated: true)
-        navigationController?.popViewController(animated: true)
+    func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
+        
     }
     
-    func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
-        //        print("-----------------------cancel")
+    func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
+        navigationController?.popViewController(animated: true)
+        loadData(code: code)
+    }
+    
+    func loadData(code: String) {
+        oAuthService.fetchAuthToken(code: code) { [weak self] result in
+            DispatchQueue.main.async { [weak self] in
+                switch result {
+                case .success(let token):
+                    print(token)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
     }
 }

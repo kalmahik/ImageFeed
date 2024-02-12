@@ -2,7 +2,7 @@ import Foundation
 
 struct NetworkClient: NetworkClientProtocol {
     private enum NetworkError: Error {
-        case codeError
+        case codeError(Int)
     }
 
     func fetch(urlRequest: URLRequest, handler: @escaping (Result<Data, Error>) -> Void) {
@@ -12,11 +12,13 @@ struct NetworkClient: NetworkClientProtocol {
                 return
             }
             if let response = response as? HTTPURLResponse, response.statusCode < 200 || response.statusCode >= 300 {
-                handler(.failure(NetworkError.codeError))
+                handler(.failure(NetworkError.codeError(response.statusCode)))
                 return
             }
-            guard let data else { return }
-            handler(.success(data))
+            if let data {
+                handler(.success(data))
+                return
+            }
         }
         task.resume()
     }

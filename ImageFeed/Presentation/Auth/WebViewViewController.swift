@@ -81,9 +81,9 @@ final class WebViewViewController: UIViewController {
         var urlComponents = URLComponents(string: AuthURL)!
         urlComponents.queryItems = [
             URLQueryItem(name: AuthKeys.client_id.rawValue, value: AccessKey),
-            URLQueryItem(name:  AuthKeys.redirect_uri.rawValue, value: RedirectURI),
+            URLQueryItem(name: AuthKeys.redirect_uri.rawValue, value: RedirectURI),
             URLQueryItem(name: AuthKeys.response_type.rawValue, value: AuthKeys.code.rawValue),
-            URLQueryItem(name:  AuthKeys.scope.rawValue, value: AccessScope)
+            URLQueryItem(name: AuthKeys.scope.rawValue, value: AccessScope)
         ]
         webView.load(URLRequest(url: urlComponents.url!))
     }
@@ -115,7 +115,6 @@ extension WebViewViewController: WKNavigationDelegate {
     ) {
         if let code = parseCode(from: navigationAction) {
             delegate?.webViewViewController(self, didAuthenticateWithCode: code)
-            //TODO: process code
             decisionHandler(.cancel)
         } else {
             decisionHandler(.allow)
