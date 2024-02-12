@@ -1,5 +1,5 @@
 //
-//  OAuth2Service.swift
+//  OAuthService.swift
 //  ImageFeed
 //
 //  Created by kalmahik on 11.02.2024.

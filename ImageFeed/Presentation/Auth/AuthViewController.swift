@@ -10,6 +10,7 @@ import UIKit
 class AuthViewController: UIViewController {
     private lazy var networkClient: NetworkClientProtocol = NetworkClient()
     private lazy var oAuthService: OAuthService = OAuthService(networkClient: networkClient)
+    private lazy var oAuthTokenStorage: OAuthTokenStorage = OAuthTokenStorage()
     
     override func viewDidLoad() {
         addSubViews()
@@ -72,7 +73,7 @@ extension AuthViewController: WebViewViewControllerDelegate {
             DispatchQueue.main.async { [weak self] in
                 switch result {
                 case .success(let token):
-                    print(token)
+                    self?.oAuthTokenStorage.storeToken(token: token)
                     self?.navigationController?.popViewController(animated: true)
                 case .failure(let error):
                     print(error)

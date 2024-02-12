@@ -20,6 +20,8 @@
 		8484F81A2B791891006D0AF5 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484F8192B791891006D0AF5 /* NetworkClient.swift */; };
 		8484F81C2B791894006D0AF5 /* NetworkClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484F81B2B791894006D0AF5 /* NetworkClientProtocol.swift */; };
 		8484F81F2B795461006D0AF5 /* URLRequest+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484F81E2B795461006D0AF5 /* URLRequest+Extentions.swift */; };
+		8484F8292B7AA416006D0AF5 /* OAuthTokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484F8272B7AA416006D0AF5 /* OAuthTokenStorage.swift */; };
+		8484F82A2B7AA416006D0AF5 /* OAuthTokenStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484F8282B7AA416006D0AF5 /* OAuthTokenStorageProtocol.swift */; };
 		84ED9C582B51F49F00BB8102 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED9C572B51F49F00BB8102 /* GradientView.swift */; };
 		84ED9C5A2B52806400BB8102 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED9C592B52806400BB8102 /* Date+Extensions.swift */; };
 		84ED9C6C2B52898D00BB8102 /* YS Display-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84ED9C6A2B52898D00BB8102 /* YS Display-Medium.ttf */; };
@@ -49,6 +51,8 @@
 		8484F8192B791891006D0AF5 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		8484F81B2B791894006D0AF5 /* NetworkClientProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientProtocol.swift; sourceTree = "<group>"; };
 		8484F81E2B795461006D0AF5 /* URLRequest+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extentions.swift"; sourceTree = "<group>"; };
+		8484F8272B7AA416006D0AF5 /* OAuthTokenStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthTokenStorage.swift; sourceTree = "<group>"; };
+		8484F8282B7AA416006D0AF5 /* OAuthTokenStorageProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthTokenStorageProtocol.swift; sourceTree = "<group>"; };
 		84ED9C572B51F49F00BB8102 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		84ED9C592B52806400BB8102 /* Date+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		84ED9C6A2B52898D00BB8102 /* YS Display-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Medium.ttf"; sourceTree = "<group>"; };
@@ -118,8 +122,6 @@
 		840FEB4E2B748E560076067E /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				8484F8132B78EDFF006D0AF5 /* OAuthService.swift */,
-				8484F8172B78F4CD006D0AF5 /* OAuthServiceProtocol.swift */,
 				F554FB592B70A69B00241D83 /* AuthViewController.swift */,
 				840FEB4F2B748E990076067E /* WebViewViewController.swift */,
 				8484F80F2B749BB5006D0AF5 /* WebViewViewControllerDelegate.swift */,
@@ -138,11 +140,22 @@
 		8484F8202B7954A1006D0AF5 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				8484F8132B78EDFF006D0AF5 /* OAuthService.swift */,
+				8484F8172B78F4CD006D0AF5 /* OAuthServiceProtocol.swift */,
 				8484F81E2B795461006D0AF5 /* URLRequest+Extentions.swift */,
 				8484F81B2B791894006D0AF5 /* NetworkClientProtocol.swift */,
 				8484F8192B791891006D0AF5 /* NetworkClient.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		8484F8242B7AA24F006D0AF5 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				8484F8272B7AA416006D0AF5 /* OAuthTokenStorage.swift */,
+				8484F8282B7AA416006D0AF5 /* OAuthTokenStorageProtocol.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		84ED9C5F2B52876D00BB8102 /* Fonts */ = {
@@ -173,6 +186,7 @@
 		F5BF84FA2B49EE89007CC292 /* ImageFeed */ = {
 			isa = PBXGroup;
 			children = (
+				8484F8242B7AA24F006D0AF5 /* Service */,
 				8484F8202B7954A1006D0AF5 /* Network */,
 				F554FB552B6FD93000241D83 /* Constants.swift */,
 				F554FB572B6FDB8000241D83 /* Keys.swift */,
@@ -275,6 +289,8 @@
 				8484F8102B749BB5006D0AF5 /* WebViewViewControllerDelegate.swift in Sources */,
 				8484F81C2B791894006D0AF5 /* NetworkClientProtocol.swift in Sources */,
 				84ED9C582B51F49F00BB8102 /* GradientView.swift in Sources */,
+				8484F82A2B7AA416006D0AF5 /* OAuthTokenStorageProtocol.swift in Sources */,
+				8484F8292B7AA416006D0AF5 /* OAuthTokenStorage.swift in Sources */,
 				8484F8182B78F4CD006D0AF5 /* OAuthServiceProtocol.swift in Sources */,
 				F5BF84FC2B49EE89007CC292 /* AppDelegate.swift in Sources */,
 				8484F8142B78EDFF006D0AF5 /* OAuthService.swift in Sources */,
