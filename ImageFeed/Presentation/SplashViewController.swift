@@ -19,24 +19,23 @@ final class SplashViewController: UIViewController {
     
     private func checkToken() {
         if oAuthTokenStorage.token != nil {
-            switchToTabBarController()
+            switchToApp()
         } else {
-            switchToAuthController()
+            switchToAuth()
         }
     }
     
-    private func switchToTabBarController() {
+    private func switchToApp() {
         guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
         let tabBarController = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(withIdentifier: "TabBarViewController")
         window.rootViewController = tabBarController
     }
     
-    
-    private func switchToAuthController() {
-        guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
+    private func switchToAuth() {
         let authController = AuthViewController(delegate: self)
         let navigationController = UINavigationController(rootViewController: authController)
-        window.rootViewController = navigationController
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
     }
 }
 
@@ -52,7 +51,7 @@ extension SplashViewController: AuthViewControllerDelegate {
                 case .success(let token):
                     self?.navigationController?.popViewController(animated: true)
                     self?.oAuthTokenStorage.storeToken(token: token)
-                    self?.switchToTabBarController()
+                    self?.switchToApp()
                 case .failure(let error):
                     print(error)
                 }
