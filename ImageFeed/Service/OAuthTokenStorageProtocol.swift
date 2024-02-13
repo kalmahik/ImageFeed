@@ -2,5 +2,5 @@ import Foundation
 
 protocol OAuthTokenStorageProtocol {
     var token: String? { get }
-    func storeToken(token: String)
+    func storeToken(token: String?)
 }

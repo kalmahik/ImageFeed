@@ -8,6 +8,7 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+    private lazy var oAuthTokenStorage: OAuthTokenStorage = OAuthTokenStorage()
     
     override func viewDidLoad() {
         addSubViews()
@@ -81,6 +82,6 @@ class ProfileViewController: UIViewController {
     }
     
     @objc private func didTapButton() {
-        print("Hello world!")
+        oAuthTokenStorage.storeToken(token: nil)
     }
 }

@@ -7,10 +7,17 @@
 
 import UIKit
 
-class AuthViewController: UIViewController {
-    private lazy var networkClient: NetworkClientProtocol = NetworkClient()
-    private lazy var oAuthService: OAuthService = OAuthService(networkClient: networkClient)
-    private lazy var oAuthTokenStorage: OAuthTokenStorage = OAuthTokenStorage()
+final class AuthViewController: UIViewController {
+    private weak var delegate: AuthViewControllerDelegate?
+
+    init(delegate: AuthViewControllerDelegate) {
+        super.init(nibName: nil, bundle: nil)
+        self.delegate = delegate
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         addSubViews()
@@ -60,25 +67,7 @@ class AuthViewController: UIViewController {
 }
 
 extension AuthViewController: WebViewViewControllerDelegate {
-    func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
-        
-    }
-    
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        loadData(code: code)
-    }
-    
-    func loadData(code: String) {
-        oAuthService.fetchAuthToken(code: code) { [weak self] result in
-            DispatchQueue.main.async { [weak self] in
-                switch result {
-                case .success(let token):
-                    self?.oAuthTokenStorage.storeToken(token: token)
-                    self?.navigationController?.popViewController(animated: true)
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        }
+        delegate?.authViewController(self, didAuthenticateWithCode: code)
     }
 }

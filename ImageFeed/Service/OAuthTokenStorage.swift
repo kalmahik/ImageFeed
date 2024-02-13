@@ -11,7 +11,7 @@ class OAuthTokenStorage: OAuthTokenStorageProtocol {
         get { userDefaults.string(forKey: KeysToStore.token.rawValue) }
     }
     
-    func storeToken(token: String) {
+    func storeToken(token: String?) {
         userDefaults.set(token, forKey: KeysToStore.token.rawValue)
     }
 }
