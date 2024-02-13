@@ -34,9 +34,9 @@ final class SplashViewController: UIViewController {
     
     private func switchToAuthController() {
         guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
-        let vc = AuthViewController(delegate: self)
-        let nc = UINavigationController(rootViewController: vc)
-        window.rootViewController = nc
+        let authController = AuthViewController(delegate: self)
+        let navigationController = UINavigationController(rootViewController: authController)
+        window.rootViewController = navigationController
     }
 }
 

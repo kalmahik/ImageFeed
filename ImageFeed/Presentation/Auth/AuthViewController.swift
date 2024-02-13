@@ -8,7 +8,7 @@
 import UIKit
 
 final class AuthViewController: UIViewController {
-    private weak var delegate: AuthViewControllerDelegate?
+    private var delegate: AuthViewControllerDelegate?
 
     init(delegate: AuthViewControllerDelegate) {
         super.init(nibName: nil, bundle: nil)
