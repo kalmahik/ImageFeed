@@ -17,6 +17,23 @@ final class SplashViewController: UIViewController {
         checkToken()
     }
     
+    override func viewDidLoad() {
+        addSubViews()
+        applyConstraints()
+    }
+    
+    private func addSubViews() {
+        view.backgroundColor = .ypBlack
+        view.addSubview(logoImage)
+    }
+    
+    private func applyConstraints() {
+        NSLayoutConstraint.activate([
+            logoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logoImage.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
+    }
+    
     private func checkToken() {
         if oAuthTokenStorage.token != nil {
             switchToApp()
@@ -35,8 +52,15 @@ final class SplashViewController: UIViewController {
         let authController = AuthViewController(delegate: self)
         let navigationController = UINavigationController(rootViewController: authController)
         navigationController.modalPresentationStyle = .fullScreen
+        navigationController.navigationBar.topItem?.title = ""
         present(navigationController, animated: true)
     }
+    
+    private let logoImage: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "logo"))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
 }
 
 extension SplashViewController: AuthViewControllerDelegate {

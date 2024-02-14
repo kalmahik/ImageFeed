@@ -19,6 +19,7 @@ final class WebViewViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        configure()
         subscribeProgress()
         updateProgress()
     }
@@ -39,6 +40,9 @@ final class WebViewViewController: UIViewController {
         } else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
+    }
+    
+    private func configure() {
     }
     
     private func addSubViews() {
