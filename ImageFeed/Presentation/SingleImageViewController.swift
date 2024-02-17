@@ -79,7 +79,7 @@ class SingleImageViewController: UIViewController {
     
     private lazy var backButton: UIButton = {
         let button = UIButton.systemButton(
-            with: UIImage(systemName: "chevron.left")!,
+            with: UIImage(systemName: "chevron.left") ?? UIImage(),
             target: self,
             action: #selector(didTapBackButton)
         )
@@ -91,7 +91,7 @@ class SingleImageViewController: UIViewController {
 
 extension SingleImageViewController: UIActivityItemSource {
     func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
-        let image = UIImage(named: imageName)!
+        let image = UIImage(named: imageName) ?? UIImage()
         let imageProvider = NSItemProvider(object: image)
         let metadata = LPLinkMetadata()
         metadata.imageProvider = imageProvider

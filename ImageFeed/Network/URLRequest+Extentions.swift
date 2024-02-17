@@ -14,7 +14,7 @@ extension URLRequest {
         urlComponents.host = host
         urlComponents.path = path
         urlComponents.queryItems = queryItems
-        var request = URLRequest(url: urlComponents.url!)
+        var request = URLRequest(url: urlComponents.url ?? defaultBaseURL)
         request.httpMethod = httpMethod
         return request
     }

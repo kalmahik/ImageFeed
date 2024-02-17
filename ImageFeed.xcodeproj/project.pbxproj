@@ -29,7 +29,6 @@
 		84ED9C6C2B52898D00BB8102 /* YS Display-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84ED9C6A2B52898D00BB8102 /* YS Display-Medium.ttf */; };
 		84ED9C6D2B52898D00BB8102 /* YS Display-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84ED9C6B2B52898D00BB8102 /* YS Display-Bold.ttf */; };
 		F554FB562B6FD93000241D83 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F554FB552B6FD93000241D83 /* Constants.swift */; };
-		F554FB582B6FDB8000241D83 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F554FB572B6FDB8000241D83 /* Keys.swift */; };
 		F554FB5A2B70A69B00241D83 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F554FB592B70A69B00241D83 /* AuthViewController.swift */; };
 		F5773D7C2B7CA01B00D62D7D /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = F5773D7B2B7CA01B00D62D7D /* Readme.md */; };
 		F5BF84FC2B49EE89007CC292 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BF84FB2B49EE89007CC292 /* AppDelegate.swift */; };
@@ -63,7 +62,6 @@
 		84ED9C6A2B52898D00BB8102 /* YS Display-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Medium.ttf"; sourceTree = "<group>"; };
 		84ED9C6B2B52898D00BB8102 /* YS Display-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Bold.ttf"; sourceTree = "<group>"; };
 		F554FB552B6FD93000241D83 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		F554FB572B6FDB8000241D83 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		F554FB592B70A69B00241D83 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		F5773D7B2B7CA01B00D62D7D /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 		F5BF84F82B49EE89007CC292 /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -198,7 +196,6 @@
 				8484F8242B7AA24F006D0AF5 /* Service */,
 				8484F8202B7954A1006D0AF5 /* Network */,
 				F554FB552B6FD93000241D83 /* Constants.swift */,
-				F554FB572B6FDB8000241D83 /* Keys.swift */,
 				8484F81D2B791A78006D0AF5 /* Models */,
 				840C3F0F2B5F754C002BAA0F /* Presentation */,
 				840C3F0E2B5F750D002BAA0F /* Utils */,
@@ -291,7 +288,6 @@
 				8484F81A2B791891006D0AF5 /* NetworkClient.swift in Sources */,
 				840FEB502B748E990076067E /* WebViewViewController.swift in Sources */,
 				847B024F2B5F17D9005CC977 /* PanZoomImageView.swift in Sources */,
-				F554FB582B6FDB8000241D83 /* Keys.swift in Sources */,
 				F554FB562B6FD93000241D83 /* Constants.swift in Sources */,
 				8484F8122B78ED1F006D0AF5 /* OAuthTokenResponse.swift in Sources */,
 				F5BF85002B49EE89007CC292 /* ImagesListViewController.swift in Sources */,

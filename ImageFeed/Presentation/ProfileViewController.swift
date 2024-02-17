@@ -63,7 +63,7 @@ class ProfileViewController: UIViewController {
     
     private lazy var exitButton: UIButton = {
         let button = UIButton.systemButton(
-            with: UIImage(systemName: "ipad.and.arrow.forward")!,
+            with: UIImage(systemName: "ipad.and.arrow.forward") ?? UIImage(),
             target: self,
             action: #selector(didTapButton)
         )
