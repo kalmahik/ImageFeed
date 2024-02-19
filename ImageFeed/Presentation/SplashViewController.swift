@@ -11,7 +11,7 @@ final class SplashViewController: UIViewController {
     private lazy var networkClient: NetworkClientProtocol = NetworkClient()
     private lazy var oAuthService: OAuthService = OAuthService(networkClient: networkClient)
     private lazy var oAuthTokenStorage: OAuthTokenStorage = OAuthTokenStorage()
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         checkToken()
@@ -43,8 +43,8 @@ final class SplashViewController: UIViewController {
     }
     
     private func switchToApp() {
+        let tabBarController = TabBarViewController()
         guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
-        let tabBarController = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(withIdentifier: "TabBarViewController")
         window.rootViewController = tabBarController
     }
     

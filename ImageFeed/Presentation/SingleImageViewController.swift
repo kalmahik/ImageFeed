@@ -21,7 +21,6 @@ class SingleImageViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         addSubViews()
         applyConstraints()
     }
@@ -78,11 +77,7 @@ class SingleImageViewController: UIViewController {
     }()
     
     private lazy var backButton: UIButton = {
-        let button = UIButton.systemButton(
-            with: UIImage(systemName: "chevron.left") ?? UIImage(),
-            target: self,
-            action: #selector(didTapBackButton)
-        )
+        let button = UIButton.systemButton(with: UIImage(systemName: "chevron.left") ?? UIImage(), target: self, action: #selector(didTapBackButton))
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .ypWhite
         return button

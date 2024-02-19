@@ -13,6 +13,3 @@ struct OAuthTokenResponse: Decodable {
     let scope: String
     let createdAt: Int
 }
-
-
-

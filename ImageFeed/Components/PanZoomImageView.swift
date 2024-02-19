@@ -9,7 +9,6 @@ import UIKit
 
 class PanZoomImageView: UIScrollView {
     
-    @IBInspectable
     var imageName: String? {
         didSet {
             guard let imageName else { return }

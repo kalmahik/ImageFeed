@@ -34,6 +34,7 @@ class ProfileViewController: UIViewController {
         avatarStack.addArrangedSubview(avatarImage)
         avatarStack.addArrangedSubview(exitButton)
         view.addSubview(rootStack)
+        view.backgroundColor = .ypBlack
     }
     
     private let rootStack: UIStackView =  {

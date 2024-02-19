@@ -31,10 +31,10 @@
 		F554FB562B6FD93000241D83 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F554FB552B6FD93000241D83 /* Constants.swift */; };
 		F554FB5A2B70A69B00241D83 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F554FB592B70A69B00241D83 /* AuthViewController.swift */; };
 		F5773D7C2B7CA01B00D62D7D /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = F5773D7B2B7CA01B00D62D7D /* Readme.md */; };
+		F58494832B8222C4004EA7F5 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58494822B8222C4004EA7F5 /* TabBarViewController.swift */; };
 		F5BF84FC2B49EE89007CC292 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BF84FB2B49EE89007CC292 /* AppDelegate.swift */; };
 		F5BF84FE2B49EE89007CC292 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BF84FD2B49EE89007CC292 /* SceneDelegate.swift */; };
 		F5BF85002B49EE89007CC292 /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BF84FF2B49EE89007CC292 /* ImagesListViewController.swift */; };
-		F5BF85032B49EE89007CC292 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5BF85012B49EE89007CC292 /* Main.storyboard */; };
 		F5BF85052B49EE8B007CC292 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5BF85042B49EE8B007CC292 /* Assets.xcassets */; };
 		F5BF85082B49EE8B007CC292 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5BF85062B49EE8B007CC292 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -64,11 +64,11 @@
 		F554FB552B6FD93000241D83 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F554FB592B70A69B00241D83 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		F5773D7B2B7CA01B00D62D7D /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
+		F58494822B8222C4004EA7F5 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		F5BF84F82B49EE89007CC292 /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5BF84FB2B49EE89007CC292 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F5BF84FD2B49EE89007CC292 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F5BF84FF2B49EE89007CC292 /* ImagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListViewController.swift; sourceTree = "<group>"; };
-		F5BF85022B49EE89007CC292 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F5BF85042B49EE8B007CC292 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F5BF85072B49EE8B007CC292 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F5BF85092B49EE8B007CC292 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -120,6 +120,7 @@
 				841FDACF2B5A41D80001C286 /* SingleImageViewController.swift */,
 				840FEB4E2B748E560076067E /* Auth */,
 				8484F82B2B7AB73B006D0AF5 /* SplashViewController.swift */,
+				F58494822B8222C4004EA7F5 /* TabBarViewController.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -206,7 +207,6 @@
 				84ED9C5F2B52876D00BB8102 /* Fonts */,
 				F5BF85092B49EE8B007CC292 /* Info.plist */,
 				F5BF85062B49EE8B007CC292 /* LaunchScreen.storyboard */,
-				F5BF85012B49EE89007CC292 /* Main.storyboard */,
 			);
 			path = ImageFeed;
 			sourceTree = "<group>";
@@ -274,7 +274,6 @@
 				F5773D7C2B7CA01B00D62D7D /* Readme.md in Resources */,
 				84ED9C6D2B52898D00BB8102 /* YS Display-Bold.ttf in Resources */,
 				F5BF85052B49EE8B007CC292 /* Assets.xcassets in Resources */,
-				F5BF85032B49EE89007CC292 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +297,7 @@
 				8484F82A2B7AA416006D0AF5 /* OAuthTokenStorageProtocol.swift in Sources */,
 				8484F8292B7AA416006D0AF5 /* OAuthTokenStorage.swift in Sources */,
 				8484F8182B78F4CD006D0AF5 /* OAuthServiceProtocol.swift in Sources */,
+				F58494832B8222C4004EA7F5 /* TabBarViewController.swift in Sources */,
 				F5BF84FC2B49EE89007CC292 /* AppDelegate.swift in Sources */,
 				8484F82C2B7AB73C006D0AF5 /* SplashViewController.swift in Sources */,
 				8484F8142B78EDFF006D0AF5 /* OAuthService.swift in Sources */,
@@ -315,14 +315,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		F5BF85012B49EE89007CC292 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F5BF85022B49EE89007CC292 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		F5BF85062B49EE8B007CC292 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -464,8 +456,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ImageFeed/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -496,8 +487,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ImageFeed/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
