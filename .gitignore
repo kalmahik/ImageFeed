@@ -20,3 +20,5 @@ xcuserdata/
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
 /ImageFeed.xcodeproj/xcuserdata/
+
+/ImageFeed/Keys.swift

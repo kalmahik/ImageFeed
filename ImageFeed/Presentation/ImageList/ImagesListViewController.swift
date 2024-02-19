@@ -13,26 +13,6 @@ let imageInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 8, right:
 class ImagesListViewController: UIViewController {
     
     private let photosName: [String] = Array(0..<20).map{ "\($0)" }
-    private let showSingleImageSegueIdentifier = "ShowSingleImage"
-
-    @IBOutlet private var tableView: UITableView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.contentInset = tableContentInsets
-        tableView.showsVerticalScrollIndicator = false
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == showSingleImageSegueIdentifier {
-            let viewController = segue.destination as? SingleImageViewController
-            let indexPath = sender as? IndexPath
-            guard let viewController, let indexPath else  { return }
-            viewController.imageName = "\(indexPath.row)"
-        } else {
-            super.prepare(for: segue, sender: sender)
-        }
-    }
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         let imageName = "\(indexPath.row)"
@@ -40,11 +20,45 @@ class ImagesListViewController: UIViewController {
         let isLike = indexPath.row % 2 == 0
         cell.configCell(imageName, dateLabel, isLike)
     }
+    
+    override func viewDidLoad() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        addSubViews()
+        applyConstraints()
+    }
+    
+    private func addSubViews() {
+        view.addSubview(tableView)
+        view.backgroundColor = .ypBlack
+    }
+    
+    private func applyConstraints() {
+        NSLayoutConstraint.activate([
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+    }
+    
+    private let tableView: UITableView = {
+        let tableView  = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.contentInset = tableContentInsets
+        tableView.showsVerticalScrollIndicator = false
+        tableView.register(ImagesListCell.self, forCellReuseIdentifier: ImagesListCell.reuseIdentifier)
+        tableView.separatorColor = .ypBlack
+        tableView.backgroundColor = .ypBlack
+        return tableView
+    }()
 }
 
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: indexPath)
+        let viewController = SingleImageViewController(imageName: "\(indexPath.row)")
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: true)
     }
 }
 
@@ -55,10 +69,8 @@ extension ImagesListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath)
-
-        guard let imageListCell = cell as? ImagesListCell else {
-            return UITableViewCell()
-        }
+        guard let imageListCell = cell as? ImagesListCell else { return UITableViewCell() }
+        imageListCell.selectionStyle = .none
         configCell(for: imageListCell, with: indexPath)
         return imageListCell
     }
