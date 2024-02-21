@@ -19,6 +19,7 @@ class ImagesListViewController: UIViewController {
         let dateLabel = Date().dateString
         let isLike = indexPath.row % 2 == 0
         cell.configCell(imageName, dateLabel, isLike)
+        cell.backgroundColor = .ypBlack
     }
     
     override func viewDidLoad() {

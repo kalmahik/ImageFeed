@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ProgressHUD
 
 final class SplashViewController: UIViewController {
     private lazy var networkClient: NetworkClientProtocol = NetworkClient()
@@ -65,12 +66,14 @@ final class SplashViewController: UIViewController {
 
 extension SplashViewController: AuthViewControllerDelegate {
     func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
-        self.loadData(code: code)
+        self.loadToken(code: code)
     }
     
-    private func loadData(code: String) {
+    private func loadToken(code: String) {
+        ProgressHUD.animate()
         oAuthService.fetchAuthToken(code: code) { [weak self] result in
             DispatchQueue.main.async { [weak self] in
+                ProgressHUD.dismiss()
                 switch result {
                 case .success(let token):
                     self?.navigationController?.popViewController(animated: true)
