@@ -10,5 +10,5 @@ import Foundation
 protocol ProfileServiceProtocol {
     var networkClient: NetworkClientProtocol { get }
 
-    func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void)
+    func fetchProfile(completion: @escaping (Result<Profile, Error>) -> Void)
 }

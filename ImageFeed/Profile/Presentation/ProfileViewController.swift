@@ -8,19 +8,17 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-    private lazy var oAuthTokenStorage: OAuthTokenStorage = OAuthTokenStorage()
+    private lazy var storage = OAuthTokenStorage()
     private lazy var profileService: ProfileService = ProfileService.shared
 
     override func viewDidLoad() {
         addSubViews()
         applyConstraints()
-        loadData()
+        loadProfile()
     }
     
-    private func loadData() {
-        guard let token = oAuthTokenStorage.token else { return }
-        
-        profileService.fetchProfile(token) { result in
+    private func loadProfile() {
+        profileService.fetchProfile() { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let profile):
@@ -100,6 +98,6 @@ class ProfileViewController: UIViewController {
     }
     
     @objc private func didTapButton() {
-        oAuthTokenStorage.storeToken(token: nil)
+        storage.storeToken(token: nil)
     }
 }

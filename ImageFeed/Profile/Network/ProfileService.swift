@@ -17,10 +17,9 @@ final class ProfileService: ProfileServiceProtocol {
     
     private init() {}
     
-    func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
+    func fetchProfile(completion: @escaping (Result<Profile, Error>) -> Void) {
         assert(Thread.isMainThread)
-        var request = URLRequest.makeRequest(path: profileMePath)
-        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization") //TODO: remove from here
+        let request = URLRequest.makeRequest(path: profileMePath)
         networkClient.fetch(urlRequest: request) { result in
             switch result {
             case .failure(let error):

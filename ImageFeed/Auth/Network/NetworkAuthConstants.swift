@@ -18,5 +18,5 @@ let hostToken = "unsplash.com"
 let redirectPath = "/oauth/authorize/native"
 
 enum AuthKeys: String {
-    case client_id, client_secret, redirect_uri, response_type, grant_type, scope, code, authorization_code
+    case client_id, client_secret, redirect_uri, response_type, grant_type, scope, code, authorization_code, Bearer, Authorization
 }
