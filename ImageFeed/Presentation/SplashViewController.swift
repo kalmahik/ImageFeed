@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import ProgressHUD
 
 final class SplashViewController: UIViewController {
     private lazy var oAuthService: OAuthService = OAuthService.shared
@@ -69,10 +68,10 @@ extension SplashViewController: AuthViewControllerDelegate {
     }
     
     private func loadToken(code: String) {
-        ProgressHUD.animate()
+        UIBlockingProgressHUD.show()
         oAuthService.fetchAuthToken(code: code) { [weak self] result in
             DispatchQueue.main.async { [weak self] in
-                ProgressHUD.dismiss()
+                UIBlockingProgressHUD.dismiss()
                 switch result {
                 case .success(let token):
                     self?.navigationController?.popViewController(animated: true)
