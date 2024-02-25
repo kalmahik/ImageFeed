@@ -9,8 +9,7 @@ import UIKit
 import ProgressHUD
 
 final class SplashViewController: UIViewController {
-    private lazy var networkClient: NetworkClientProtocol = NetworkClient()
-    private lazy var oAuthService: OAuthService = OAuthService(networkClient: networkClient)
+    private lazy var oAuthService: OAuthService = OAuthService.shared
     private lazy var oAuthTokenStorage: OAuthTokenStorage = OAuthTokenStorage()
     
     override func viewDidAppear(_ animated: Bool) {
