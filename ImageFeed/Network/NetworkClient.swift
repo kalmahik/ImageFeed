@@ -1,12 +1,12 @@
 import Foundation
 
-struct NetworkClient: NetworkClientProtocol {    
-    private enum NetworkError: Error {
-        case httpStatusCode(Int)
-        case urlRequestError(Error)
-        case urlSessionError
-    }
+private enum NetworkError: Error {
+    case httpStatusCode(Int)
+    case urlRequestError(Error)
+    case urlSessionError
+}
 
+struct NetworkClient: NetworkClientProtocol {
     func fetch(urlRequest: URLRequest, handler: @escaping (Result<Data, Error>) -> Void) {
         let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             if let error {

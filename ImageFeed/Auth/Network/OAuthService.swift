@@ -7,20 +7,21 @@
 
 import Foundation
 
+private enum OAuthServiceError: Error {
+    case invalidRequest
+}
+
 final class OAuthService: OAuthServiceProtocol {
     static let shared = OAuthService()
-    private enum OAuthServiceError: Error { case invalidRequest }
-    private let networkClient: NetworkClientProtocol
+    let networkClient: NetworkClientProtocol = NetworkClient()
     private var lastCode: String?
     
-    private init() {
-        self.networkClient = NetworkClient()
-    }
+    private init() {}
     
-    func fetchAuthToken(code: String, handler:  @escaping (Result<String, Error>) -> Void) {
+    func fetchAuthToken(code: String, completion:  @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
         if (lastCode == code) {
-            handler(.failure(OAuthServiceError.invalidRequest))
+            completion(.failure(OAuthServiceError.invalidRequest))
             return
         }
         lastCode = code
@@ -31,20 +32,20 @@ final class OAuthService: OAuthServiceProtocol {
             URLQueryItem(name: AuthKeys.code.rawValue, value: code),
             URLQueryItem(name: AuthKeys.grant_type.rawValue, value: AuthKeys.authorization_code.rawValue),
         ]
-        let request = URLRequest.makeRequest(httpMethod: "POST", path: tokenPath, queryItems: queryItems)
+        let request = URLRequest.makeRequest(httpMethod: Methods.POST.rawValue, path: tokenPath, host: hostToken, queryItems: queryItems)
         networkClient.fetch(urlRequest: request) { [weak self] result in
             switch result {
             case .failure(let error):
-                handler(.failure(error))
+                completion(.failure(error))
             case .success(let data):
                 do {
                     let decoder = JSONDecoder()
                     decoder.keyDecodingStrategy = .convertFromSnakeCase
                     let response = try decoder.decode(OAuthTokenResponse.self, from: data)
-                    handler(.success(response.accessToken))
+                    completion(.success(response.accessToken))
                     self?.lastCode = nil
                 } catch {
-                    handler(.failure(error))
+                    completion(.failure(error))
                 }
             }
         }

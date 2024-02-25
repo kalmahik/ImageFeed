@@ -9,10 +9,27 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     private lazy var oAuthTokenStorage: OAuthTokenStorage = OAuthTokenStorage()
-    
+    private lazy var profileService: ProfileService = ProfileService.shared
+
     override func viewDidLoad() {
         addSubViews()
         applyConstraints()
+        loadData()
+    }
+    
+    private func loadData() {
+        guard let token = oAuthTokenStorage.token else { return }
+        
+        profileService.fetchProfile(token) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let profile):
+                    print(profile)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
     }
     
     private func applyConstraints() {
@@ -20,7 +37,7 @@ class ProfileViewController: UIViewController {
             rootStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             rootStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             rootStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
-            avatarStack.widthAnchor.constraint(equalToConstant: view.frame.width),
+            avatarStack.widthAnchor.constraint(equalTo: rootStack.widthAnchor),
             avatarImage.widthAnchor.constraint(equalToConstant: 70),
             avatarImage.heightAnchor.constraint(equalToConstant: 70),
         ])

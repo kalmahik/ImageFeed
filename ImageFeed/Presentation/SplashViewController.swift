@@ -8,8 +8,9 @@
 import UIKit
 
 final class SplashViewController: UIViewController {
-    private lazy var oAuthService: OAuthService = OAuthService.shared
-    private lazy var oAuthTokenStorage: OAuthTokenStorage = OAuthTokenStorage()
+    private let oAuthService = OAuthService.shared
+    private let profileService = ProfileService.shared
+    private let storage = OAuthTokenStorage()
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -34,7 +35,7 @@ final class SplashViewController: UIViewController {
     }
     
     private func checkToken() {
-        if oAuthTokenStorage.token != nil {
+        if storage.token != nil {
             switchToApp()
         } else {
             switchToAuth()
@@ -75,7 +76,7 @@ extension SplashViewController: AuthViewControllerDelegate {
                 switch result {
                 case .success(let token):
                     self?.navigationController?.popViewController(animated: true)
-                    self?.oAuthTokenStorage.storeToken(token: token)
+                    self?.storage.storeToken(token: token)
                     self?.switchToApp()
                 case .failure(let error):
                     print(error)
