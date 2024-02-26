@@ -14,22 +14,8 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         addSubViews()
         applyConstraints()
-        loadProfile()
     }
-    
-    private func loadProfile() {
-        profileService.fetchProfile() { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let profile):
-                    print(profile)
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        }
-    }
-    
+        
     private func applyConstraints() {
         NSLayoutConstraint.activate([
             rootStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
@@ -43,9 +29,9 @@ class ProfileViewController: UIViewController {
     
     private func addSubViews() {
         rootStack.addArrangedSubview(avatarStack)
-        rootStack.addArrangedSubview(configureLabel("Firstname and lastname", size: 23))
-        rootStack.addArrangedSubview(configureLabel("nickname", color: .ypGray))
-        rootStack.addArrangedSubview(configureLabel("Description"))
+        rootStack.addArrangedSubview(configureLabel(profileService.profile?.name ?? "Firstname and lastname", size: 23))
+        rootStack.addArrangedSubview(configureLabel(profileService.profile?.loginName ?? "nickname", color: .ypGray))
+        rootStack.addArrangedSubview(configureLabel(profileService.profile?.bio ?? "Description"))
         avatarStack.addArrangedSubview(avatarImage)
         avatarStack.addArrangedSubview(exitButton)
         view.addSubview(rootStack)

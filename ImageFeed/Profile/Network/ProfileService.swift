@@ -14,7 +14,8 @@ private enum ProfileServiceError: Error {
 final class ProfileService: ProfileServiceProtocol {
     static let shared = ProfileService()
     let networkClient: NetworkClientProtocol = NetworkClient()
-    
+    private(set) var profile: Profile?
+
     private init() {}
     
     func fetchProfile(completion: @escaping (Result<Profile, Error>) -> Void) {
@@ -30,6 +31,7 @@ final class ProfileService: ProfileServiceProtocol {
                     decoder.keyDecodingStrategy = .convertFromSnakeCase
                     let profileResponse = try decoder.decode(ProfileResponse.self, from: data)
                     let profile = Profile.convertProfile(profileResponse)
+                    self.profile = profile
                     completion(.success(profile))
                 } catch {
                     completion(.failure(error))

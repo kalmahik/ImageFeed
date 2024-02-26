@@ -91,7 +91,7 @@ extension SplashViewController: AuthViewControllerDelegate {
             DispatchQueue.main.async { [weak self] in
                 UIBlockingProgressHUD.dismiss()
                 switch result {
-                case .success(let profile):
+                case .success(_):
                     self?.switchToApp()
                 case .failure(let error):
                     print(error)
