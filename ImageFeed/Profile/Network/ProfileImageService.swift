@@ -19,25 +19,18 @@ final class ProfileImageService: ProfileImageServiceProtocol {
     func fetchProfileImageURL(username: String, completion: @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
         let request = URLRequest.makeRequest(path: "\(userPath)\(username)")
-        networkClient.fetch(urlRequest: request) { result in
+        networkClient.fetch(urlRequest: request) { [weak self] (result: Result<UserResponse, Error>) in
             switch result {
             case .failure(let error):
                 completion(.failure(error))
-            case .success(let data):
-                do {
-                    let decoder = JSONDecoder()
-                    decoder.keyDecodingStrategy = .convertFromSnakeCase
-                    let profileResponse = try decoder.decode(UserResponse.self, from: data)
-                    let profileImageURL = profileResponse.profileImage.small
-                    self.profileImageURL = profileImageURL
-                    completion(.success(profileImageURL))
-                    NotificationCenter.default.post(
-                        name: ProfileImageService.didChangeNotification,
-                        object: self,
-                        userInfo: ["URL": profileImageURL])
-                } catch {
-                    completion(.failure(error))
-                }
+            case .success(let response):
+                let profileImageURL = response.profileImage.small
+                self?.profileImageURL = profileImageURL
+                completion(.success(profileImageURL))
+                NotificationCenter.default.post(
+                    name: ProfileImageService.didChangeNotification,
+                    object: self,
+                    userInfo: ["URL": profileImageURL])
             }
         }
     }

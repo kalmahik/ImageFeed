@@ -1,5 +1,5 @@
 import Foundation
 
 protocol NetworkClientProtocol {
-    func fetch(urlRequest: URLRequest, handler: @escaping (Result<Data, Error>) -> Void)
+    func fetch<T: Decodable>(urlRequest: URLRequest, completion: @escaping (Result<T, Error>) -> Void)
 }

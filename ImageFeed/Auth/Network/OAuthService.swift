@@ -33,20 +33,13 @@ final class OAuthService: OAuthServiceProtocol {
             URLQueryItem(name: AuthKeys.grant_type.rawValue, value: AuthKeys.authorization_code.rawValue),
         ]
         let request = URLRequest.makeRequest(httpMethod: Methods.POST.rawValue, path: tokenPath, host: hostToken, queryItems: queryItems)
-        networkClient.fetch(urlRequest: request) { [weak self] result in
+        networkClient.fetch(urlRequest: request) { [weak self] (result: Result<OAuthTokenResponse, Error>) in
             switch result {
             case .failure(let error):
                 completion(.failure(error))
-            case .success(let data):
-                do {
-                    let decoder = JSONDecoder()
-                    decoder.keyDecodingStrategy = .convertFromSnakeCase
-                    let response = try decoder.decode(OAuthTokenResponse.self, from: data)
-                    completion(.success(response.accessToken))
-                    self?.lastCode = nil
-                } catch {
-                    completion(.failure(error))
-                }
+            case .success(let response):
+                completion(.success(response.accessToken))
+                self?.lastCode = nil
             }
         }
     }
