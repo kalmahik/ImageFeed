@@ -7,14 +7,10 @@
 
 import Foundation
 
-private enum ProfileServiceError: Error {
-    case invalidRequest
-}
-
 final class ProfileService: ProfileServiceProtocol {
     static let shared = ProfileService()
     let networkClient: NetworkClientProtocol = NetworkClient()
-    private(set) var profile: Profile?
+    private (set) var profile: Profile?
 
     private init() {}
     

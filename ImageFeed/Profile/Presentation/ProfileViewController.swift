@@ -9,13 +9,29 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     private lazy var storage = OAuthTokenStorage()
-    private lazy var profileService: ProfileService = ProfileService.shared
-
+    private lazy var profileService = ProfileService.shared
+    private lazy var profileImageService = ProfileImageService.shared
+    private var profileImageServiceObserver: NSObjectProtocol?
+    
     override func viewDidLoad() {
         addSubViews()
         applyConstraints()
+        addObserver()
     }
-        
+    
+    private func addObserver() {
+        profileImageServiceObserver = NotificationCenter.default
+            .addObserver(forName: ProfileImageService.didChangeNotification, object: nil, queue: .main) { [weak self] _ in
+                self?.updateAvatar()
+            }
+        updateAvatar()
+    }
+    
+    private func updateAvatar() {
+        guard let avatarURL = profileImageService.profileImageURL, let url = URL(string:avatarURL) else { return }
+        print(url)
+    }
+    
     private func applyConstraints() {
         NSLayoutConstraint.activate([
             rootStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),

@@ -8,3 +8,4 @@
 import Foundation
 
 let profileMePath = "/me"
+let userPath = "/users/"

@@ -10,6 +10,7 @@ import UIKit
 final class SplashViewController: UIViewController {
     private let oAuthService = OAuthService.shared
     private let profileService = ProfileService.shared
+    private let profileImageService = ProfileImageService.shared
     private let storage = OAuthTokenStorage()
     
     override func viewDidAppear(_ animated: Bool) {
@@ -91,7 +92,8 @@ extension SplashViewController: AuthViewControllerDelegate {
             DispatchQueue.main.async { [weak self] in
                 UIBlockingProgressHUD.dismiss()
                 switch result {
-                case .success(_):
+                case .success(let profile):
+                    self?.profileImageService.fetchProfileImageURL(username: profile.username) { _ in }
                     self?.switchToApp()
                 case .failure(let error):
                     print(error)
