@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ProfileViewController: UIViewController {
     private lazy var storage = OAuthTokenStorage()
@@ -73,9 +74,15 @@ class ProfileViewController: UIViewController {
         return hStack
     }()
     
-    private let avatarImage: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "avatar_placeholder"))
+    private lazy var avatarImage: UIImageView = {
+        let placeholder = UIImage(named: "avatar_placeholder")
+        let imageView = UIImageView(image: placeholder)
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.cornerRadius = 35
+        imageView.layer.masksToBounds = true
+        if let url = profileImageService.profileImageURL {
+            imageView.kf.setImage(with: URL(string: url), placeholder: placeholder)
+        }
         return imageView
     }()
     

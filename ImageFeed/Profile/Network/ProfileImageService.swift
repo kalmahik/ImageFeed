@@ -24,7 +24,7 @@ final class ProfileImageService: ProfileImageServiceProtocol {
             case .failure(let error):
                 completion(.failure(error))
             case .success(let response):
-                let profileImageURL = response.profileImage.small
+                let profileImageURL = response.profileImage.medium
                 self?.profileImageURL = profileImageURL
                 completion(.success(profileImageURL))
                 NotificationCenter.default.post(
