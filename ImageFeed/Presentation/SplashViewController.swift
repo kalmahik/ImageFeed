@@ -81,6 +81,13 @@ extension SplashViewController: AuthViewControllerDelegate {
                     self?.fetchProfile()
                 case .failure(let error):
                     print(error)
+                    let alertData = AlertModel(
+                        title: "Что-то пошло не так(",
+                        message: "Не удалось войти в систему", 
+                        buttonText: "ОК",
+                        completion: nil
+                    )
+                    self?.showAlert(alertData: alertData)
                 }
             }
         }

@@ -48,6 +48,7 @@
 		F5BF85002B49EE89007CC292 /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BF84FF2B49EE89007CC292 /* ImagesListViewController.swift */; };
 		F5BF85052B49EE8B007CC292 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5BF85042B49EE8B007CC292 /* Assets.xcassets */; };
 		F5BF85082B49EE8B007CC292 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5BF85062B49EE8B007CC292 /* LaunchScreen.storyboard */; };
+		F5E9913A2B8E83D8001CEDDD /* UIViewController+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E991392B8E83D8001CEDDD /* UIViewController+Extentions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +94,7 @@
 		F5BF85042B49EE8B007CC292 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F5BF85072B49EE8B007CC292 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F5BF85092B49EE8B007CC292 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F5E991392B8E83D8001CEDDD /* UIViewController+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extentions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 			children = (
 				84ED9C592B52806400BB8102 /* Date+Extensions.swift */,
 				840FEB4C2B6A0B100076067E /* UIFont+Extentions.swift */,
+				F5E991392B8E83D8001CEDDD /* UIViewController+Extentions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 				F55D8F522B8D2B6900AAC426 /* ProfileImageService.swift in Sources */,
 				84A9F0FC2B8B62E500EC6307 /* ProfileServiceProtocol.swift in Sources */,
 				8484F81A2B791891006D0AF5 /* NetworkClient.swift in Sources */,
+				F5E9913A2B8E83D8001CEDDD /* UIViewController+Extentions.swift in Sources */,
 				840FEB502B748E990076067E /* WebViewViewController.swift in Sources */,
 				84A9F0EE2B8B5BE300EC6307 /* Profile.swift in Sources */,
 				F55D8F542B8D2B8600AAC426 /* ProfileImageServiceProtocol.swift in Sources */,

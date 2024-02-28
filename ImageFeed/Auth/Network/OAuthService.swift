@@ -37,6 +37,7 @@ final class OAuthService: OAuthServiceProtocol {
             switch result {
             case .failure(let error):
                 completion(.failure(error))
+                print(error)
             case .success(let response):
                 completion(.success(response.accessToken))
                 self?.lastCode = nil
