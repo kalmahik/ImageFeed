@@ -12,7 +12,7 @@ final class SplashViewController: UIViewController {
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
     private let storage = OAuthTokenStorage()
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         checkToken()
@@ -45,7 +45,7 @@ final class SplashViewController: UIViewController {
     
     private func switchToApp() {
         let tabBarController = TabBarViewController()
-        guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
+        guard let window = UIApplication.shared.windows.first else { fatalError("switchToApp error") }
         window.rootViewController = tabBarController
     }
     
@@ -81,13 +81,7 @@ extension SplashViewController: AuthViewControllerDelegate {
                     self?.fetchProfile()
                 case .failure(let error):
                     print(error)
-                    let alertData = AlertModel(
-                        title: "Что-то пошло не так(",
-                        message: "Не удалось войти в систему", 
-                        buttonText: "ОК",
-                        completion: nil
-                    )
-                    self?.showAlert(alertData: alertData)
+                    self?.showAlert()
                 }
             }
         }
@@ -103,6 +97,7 @@ extension SplashViewController: AuthViewControllerDelegate {
                     self?.profileImageService.fetchProfileImageURL(username: profile.username) { _ in }
                     self?.switchToApp()
                 case .failure(let error):
+                    self?.showAlert()
                     print(error)
                 }
                 

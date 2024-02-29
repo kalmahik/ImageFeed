@@ -107,6 +107,9 @@ class ProfileViewController: UIViewController {
     }
     
     @objc private func didTapButton() {
+        //TODO: refactor this method
         storage.storeToken(token: nil)
+        guard let window = UIApplication.shared.windows.first else { fatalError("logout error") }
+        window.rootViewController = SplashViewController()
     }
 }

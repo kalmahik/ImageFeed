@@ -6,9 +6,14 @@ private enum NetworkError: Error {
     case urlSessionError
 }
 
-struct NetworkClient: NetworkClientProtocol {
+class NetworkClient: NetworkClientProtocol {
+    private weak var task: URLSessionTask?
+    
     func fetch<Response: Decodable>(urlRequest: URLRequest, completion: @escaping (Result<Response, Error>) -> Void) {
-        let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+        if (task != nil) {
+            task?.cancel()
+        }
+        let task = URLSession.shared.dataTask(with: urlRequest) { [weak self] data, response, error in
             if let error {
                 completion(.failure(error))
                 return
@@ -23,12 +28,14 @@ struct NetworkClient: NetworkClientProtocol {
                     decoder.keyDecodingStrategy = .convertFromSnakeCase
                     let response = try decoder.decode(Response.self, from: data)
                     completion(.success(response))
+                    self?.task = nil
                 } catch {
                     completion(.failure(error))
                 }
                 return
             }
         }
+        self.task = task
         task.resume()
     }
 }
