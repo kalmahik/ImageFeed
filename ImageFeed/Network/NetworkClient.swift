@@ -16,10 +16,12 @@ class NetworkClient: NetworkClientProtocol {
         let task = URLSession.shared.dataTask(with: urlRequest) { [weak self] data, response, error in
             if let error {
                 completion(.failure(error))
+                print("[imageFeed][fetch][\(urlRequest.url ?? defaultBaseURL)]: [\(error)]")
                 return
             }
             if let response = response as? HTTPURLResponse, response.statusCode < 200 || response.statusCode >= 300 {
                 completion(.failure(NetworkError.httpStatusCode(response.statusCode)))
+                print("[imageFeed][fetch][\(urlRequest.url ?? defaultBaseURL)]: [\(response.statusCode)]")
                 return
             }
             if let data {
@@ -31,6 +33,7 @@ class NetworkClient: NetworkClientProtocol {
                     self?.task = nil
                 } catch {
                     completion(.failure(error))
+                    print("[imageFeed][fetch][\(urlRequest.url ?? defaultBaseURL)]: [\(error)]")
                 }
                 return
             }

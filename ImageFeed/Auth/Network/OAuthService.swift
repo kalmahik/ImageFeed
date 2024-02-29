@@ -22,6 +22,7 @@ final class OAuthService: OAuthServiceProtocol {
         assert(Thread.isMainThread)
         if (lastCode == code) {
             completion(.failure(OAuthServiceError.invalidRequest))
+            print("[imageFeed][fetchAuthToken][\(tokenPath)]: [the same code]")
             return
         }
         lastCode = code
@@ -37,7 +38,6 @@ final class OAuthService: OAuthServiceProtocol {
             switch result {
             case .failure(let error):
                 completion(.failure(error))
-                print(error)
             case .success(let response):
                 completion(.success(response.accessToken))
                 self?.lastCode = nil

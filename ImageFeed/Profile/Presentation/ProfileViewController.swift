@@ -30,7 +30,7 @@ class ProfileViewController: UIViewController {
     
     private func updateAvatar() {
         guard let avatarURL = profileImageService.profileImageURL, let url = URL(string:avatarURL) else { return }
-        print(url)
+        avatarImage.kf.setImage(with: url)
     }
     
     private func applyConstraints() {

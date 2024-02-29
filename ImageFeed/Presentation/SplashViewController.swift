@@ -79,8 +79,7 @@ extension SplashViewController: AuthViewControllerDelegate {
                     self?.navigationController?.popViewController(animated: true)
                     self?.storage.storeToken(token: token)
                     self?.fetchProfile()
-                case .failure(let error):
-                    print(error)
+                case .failure(_):
                     self?.showAlert()
                 }
             }
@@ -96,11 +95,9 @@ extension SplashViewController: AuthViewControllerDelegate {
                 case .success(let profile):
                     self?.profileImageService.fetchProfileImageURL(username: profile.username) { _ in }
                     self?.switchToApp()
-                case .failure(let error):
+                case .failure(_):
                     self?.showAlert()
-                    print(error)
                 }
-                
             }
         }
     }
