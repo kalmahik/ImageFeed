@@ -7,7 +7,7 @@ private enum NetworkError: Error {
 }
 
 struct NetworkClient: NetworkClientProtocol {
-    func fetch<T: Decodable>(urlRequest: URLRequest, completion: @escaping (Result<T, Error>) -> Void) {
+    func fetch<Response: Decodable>(urlRequest: URLRequest, completion: @escaping (Result<Response, Error>) -> Void) {
         let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             if let error {
                 completion(.failure(error))
@@ -21,7 +21,7 @@ struct NetworkClient: NetworkClientProtocol {
                 do {
                     let decoder = JSONDecoder()
                     decoder.keyDecodingStrategy = .convertFromSnakeCase
-                    let response = try decoder.decode(T.self, from: data)
+                    let response = try decoder.decode(Response.self, from: data)
                     completion(.success(response))
                 } catch {
                     completion(.failure(error))
