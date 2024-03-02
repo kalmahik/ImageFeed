@@ -90,7 +90,7 @@ class ProfileViewController: UIViewController {
         let button = UIButton.systemButton(
             with: UIImage(systemName: "ipad.and.arrow.forward") ?? UIImage(),
             target: self,
-            action: #selector(didTapButton)
+            action: #selector(didTapLogoutButton)
         )
         button.tintColor = .ypRed
         button.contentEdgeInsets = UIEdgeInsets(top: 16, left: 8, bottom: 16, right: 8)
@@ -106,7 +106,7 @@ class ProfileViewController: UIViewController {
         return label
     }
     
-    @objc private func didTapButton() {
+    @objc private func didTapLogoutButton() {
         //TODO: refactor this method
         storage.storeToken(token: nil)
         guard let window = UIApplication.shared.windows.first else { fatalError("logout error") }

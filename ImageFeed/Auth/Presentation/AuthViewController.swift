@@ -39,7 +39,7 @@ final class AuthViewController: UIViewController {
         ])
     }
     
-    @objc private func didTapButton() {
+    @objc private func didTapLogoutButton() {
         let webviewController = WebViewViewController()
         webviewController.delegate = self
         self.navigationController?.pushViewController(webviewController, animated: true)
@@ -57,7 +57,7 @@ final class AuthViewController: UIViewController {
         button.backgroundColor = .ypWhite
         button.setTitle("Войти", for: .normal)
         button.setTitleColor(.ypBlack, for: .normal)
-        button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTapLogoutButton), for: .touchUpInside)
         button.titleLabel?.font =  UIFont.font(type: .bold, size: 17)
         button.layer.cornerRadius = 16
         return button
