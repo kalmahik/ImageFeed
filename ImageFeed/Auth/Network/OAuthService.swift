@@ -20,8 +20,7 @@ final class OAuthService: OAuthServiceProtocol {
     
     func fetchAuthToken(code: String, completion:  @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
-        if (lastCode == code) {
-            completion(.failure(OAuthServiceError.invalidRequest))
+        if lastCode == code {
             print("[imageFeed][fetchAuthToken][\(AuthConstants.tokenPath)]: [the same code]")
             return
         }

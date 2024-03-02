@@ -10,7 +10,7 @@ class NetworkClient: NetworkClientProtocol {
     private weak var task: URLSessionTask?
     
     func fetch<Response: Decodable>(urlRequest: URLRequest, completion: @escaping (Result<Response, Error>) -> Void) {
-        if (task != nil) {
+        if task != nil {
             task?.cancel()
         }
         let task = URLSession.shared.dataTask(with: urlRequest) { [weak self] data, response, error in
