@@ -27,14 +27,14 @@ final class OAuthService: OAuthServiceProtocol {
         }
         lastCode = code
         let queryItems = [
-            URLQueryItem(name: AuthKeys.client_id.rawValue, value: AuthConstants.accessKey),
-            URLQueryItem(name: AuthKeys.client_secret.rawValue, value: AuthConstants.secretKey),
-            URLQueryItem(name: AuthKeys.redirect_uri.rawValue, value: AuthConstants.redirectURI),
+            URLQueryItem(name: AuthKeys.clientID.rawValue, value: AuthConstants.accessKey),
+            URLQueryItem(name: AuthKeys.clientSecret.rawValue, value: AuthConstants.secretKey),
+            URLQueryItem(name: AuthKeys.redirectUri.rawValue, value: AuthConstants.redirectURI),
             URLQueryItem(name: AuthKeys.code.rawValue, value: code),
-            URLQueryItem(name: AuthKeys.grant_type.rawValue, value: AuthKeys.authorization_code.rawValue),
+            URLQueryItem(name: AuthKeys.grantType.rawValue, value: AuthKeys.authorizationCode.rawValue),
         ]
         let request = URLRequest.makeRequest(
-            httpMethod: Methods.POST.rawValue,
+            httpMethod: Methods.post.rawValue,
             path: AuthConstants.tokenPath,
             host: AuthConstants.hostToken,
             queryItems: queryItems

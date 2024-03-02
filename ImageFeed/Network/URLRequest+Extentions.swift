@@ -9,7 +9,7 @@ import Foundation
 
 extension URLRequest {
     static func makeRequest(
-        httpMethod: String? = Methods.GET.rawValue,
+        httpMethod: String? = Methods.get.rawValue,
         path: String, host: String? = NetworkConstants.host,
         queryItems: [URLQueryItem]? = []
     ) -> URLRequest {
@@ -22,7 +22,7 @@ extension URLRequest {
         request.httpMethod = httpMethod
         let token = OAuthTokenStorage().token
         if let token {
-            request.setValue("\(AuthKeys.Bearer.rawValue) \(token)", forHTTPHeaderField: AuthKeys.Authorization.rawValue)
+            request.setValue("\(AuthKeys.bearer) \(token)", forHTTPHeaderField: AuthKeys.authorization.rawValue)
         }
         return request
     }

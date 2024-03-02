@@ -64,9 +64,9 @@ final class WebViewViewController: UIViewController {
     private func loadWebview() {
         var urlComponents = URLComponents(string: AuthConstants.authURL) ?? URLComponents()
         urlComponents.queryItems = [
-            URLQueryItem(name: AuthKeys.client_id.rawValue, value: AuthConstants.accessKey),
-            URLQueryItem(name: AuthKeys.redirect_uri.rawValue, value: AuthConstants.redirectURI),
-            URLQueryItem(name: AuthKeys.response_type.rawValue, value: AuthKeys.code.rawValue),
+            URLQueryItem(name: AuthKeys.clientID.rawValue, value: AuthConstants.accessKey),
+            URLQueryItem(name: AuthKeys.redirectUri.rawValue, value: AuthConstants.redirectURI),
+            URLQueryItem(name: AuthKeys.responseType.rawValue, value: AuthKeys.code.rawValue),
             URLQueryItem(name: AuthKeys.scope.rawValue, value: AuthConstants.accessScope)
         ]
         webView.load(URLRequest(url: urlComponents.url ?? NetworkConstants.defaultBaseURL))

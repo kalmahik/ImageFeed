@@ -20,5 +20,14 @@ struct AuthConstants {
 }
 
 enum AuthKeys: String {
-    case client_id, client_secret, redirect_uri, response_type, grant_type, scope, code, authorization_code, Bearer, Authorization
+    case clientID = "client_id"
+    case clientSecret = "client_secret"
+    case redirectUri = "redirect_uri"
+    case responseType = "response_type"
+    case grantType = "grant_type"
+    case scope = "scope"
+    case code = "code"
+    case authorizationCode = "authorization_code"
+    case bearer = "Bearer"
+    case authorization = "Authorization"
 }
