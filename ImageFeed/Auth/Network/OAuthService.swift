@@ -22,18 +22,23 @@ final class OAuthService: OAuthServiceProtocol {
         assert(Thread.isMainThread)
         if (lastCode == code) {
             completion(.failure(OAuthServiceError.invalidRequest))
-            print("[imageFeed][fetchAuthToken][\(tokenPath)]: [the same code]")
+            print("[imageFeed][fetchAuthToken][\(AuthConstants.tokenPath)]: [the same code]")
             return
         }
         lastCode = code
         let queryItems = [
-            URLQueryItem(name: AuthKeys.client_id.rawValue, value: accessKey),
-            URLQueryItem(name: AuthKeys.client_secret.rawValue, value: secretKey),
-            URLQueryItem(name: AuthKeys.redirect_uri.rawValue, value: redirectURI),
+            URLQueryItem(name: AuthKeys.client_id.rawValue, value: AuthConstants.accessKey),
+            URLQueryItem(name: AuthKeys.client_secret.rawValue, value: AuthConstants.secretKey),
+            URLQueryItem(name: AuthKeys.redirect_uri.rawValue, value: AuthConstants.redirectURI),
             URLQueryItem(name: AuthKeys.code.rawValue, value: code),
             URLQueryItem(name: AuthKeys.grant_type.rawValue, value: AuthKeys.authorization_code.rawValue),
         ]
-        let request = URLRequest.makeRequest(httpMethod: Methods.POST.rawValue, path: tokenPath, host: hostToken, queryItems: queryItems)
+        let request = URLRequest.makeRequest(
+            httpMethod: Methods.POST.rawValue,
+            path: AuthConstants.tokenPath,
+            host: AuthConstants.hostToken,
+            queryItems: queryItems
+        )
         networkClient.fetch(urlRequest: request) { [weak self] (result: Result<OAuthTokenResponse, Error>) in
             switch result {
             case .failure(let error):

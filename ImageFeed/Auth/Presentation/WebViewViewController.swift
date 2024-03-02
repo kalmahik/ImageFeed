@@ -62,14 +62,14 @@ final class WebViewViewController: UIViewController {
     }
     
     private func loadWebview() {
-        var urlComponents = URLComponents(string: authURL) ?? URLComponents()
+        var urlComponents = URLComponents(string: AuthConstants.authURL) ?? URLComponents()
         urlComponents.queryItems = [
-            URLQueryItem(name: AuthKeys.client_id.rawValue, value: accessKey),
-            URLQueryItem(name: AuthKeys.redirect_uri.rawValue, value: redirectURI),
+            URLQueryItem(name: AuthKeys.client_id.rawValue, value: AuthConstants.accessKey),
+            URLQueryItem(name: AuthKeys.redirect_uri.rawValue, value: AuthConstants.redirectURI),
             URLQueryItem(name: AuthKeys.response_type.rawValue, value: AuthKeys.code.rawValue),
-            URLQueryItem(name: AuthKeys.scope.rawValue, value: accessScope)
+            URLQueryItem(name: AuthKeys.scope.rawValue, value: AuthConstants.accessScope)
         ]
-        webView.load(URLRequest(url: urlComponents.url ?? defaultBaseURL))
+        webView.load(URLRequest(url: urlComponents.url ?? NetworkConstants.defaultBaseURL))
     }
     
     private lazy var webView: WKWebView = {
@@ -109,7 +109,7 @@ extension WebViewViewController: WKNavigationDelegate {
         if
             let url = navigationAction.request.url,
             let urlComponents = URLComponents(string: url.absoluteString),
-            urlComponents.path == redirectPath,
+            urlComponents.path == AuthConstants.redirectPath,
             let items = urlComponents.queryItems,
             let codeItem = items.first(where: { $0.name == AuthKeys.code.rawValue})
         {

@@ -18,7 +18,7 @@ final class ProfileImageService: ProfileImageServiceProtocol {
     
     func fetchProfileImageURL(username: String, completion: @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
-        let request = URLRequest.makeRequest(path: "\(userPath)\(username)")
+        let request = URLRequest.makeRequest(path: "\(ProfileConstants.userPath)\(username)")
         networkClient.fetch(urlRequest: request) { [weak self] (result: Result<UserResponse, Error>) in
             switch result {
             case .failure(let error):

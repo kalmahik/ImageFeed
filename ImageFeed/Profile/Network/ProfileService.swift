@@ -16,7 +16,7 @@ final class ProfileService: ProfileServiceProtocol {
     
     func fetchProfile(completion: @escaping (Result<Profile, Error>) -> Void) {
         assert(Thread.isMainThread)
-        let request = URLRequest.makeRequest(path: profileMePath)
+        let request = URLRequest.makeRequest(path: ProfileConstants.profileMePath)
         networkClient.fetch(urlRequest: request) { [weak self] (result: Result<ProfileResponse, Error>) in
             switch result {
             case .failure(let error):

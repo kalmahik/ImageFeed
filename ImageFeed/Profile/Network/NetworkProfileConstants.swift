@@ -7,5 +7,7 @@
 
 import Foundation
 
-let profileMePath = "/me"
-let userPath = "/users/"
+struct ProfileConstants {
+    static let profileMePath = "/me"
+    static let userPath = "/users/"
+}

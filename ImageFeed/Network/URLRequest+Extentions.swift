@@ -8,13 +8,17 @@
 import Foundation
 
 extension URLRequest {
-    static func makeRequest(httpMethod: String? = Methods.GET.rawValue, path: String, host: String? = host, queryItems: [URLQueryItem]? = []) -> URLRequest {
+    static func makeRequest(
+        httpMethod: String? = Methods.GET.rawValue,
+        path: String, host: String? = NetworkConstants.host,
+        queryItems: [URLQueryItem]? = []
+    ) -> URLRequest {
         var urlComponents = URLComponents()
-        urlComponents.scheme = schema
+        urlComponents.scheme = NetworkConstants.schema
         urlComponents.host = host
         urlComponents.path = path
         urlComponents.queryItems = queryItems
-        var request = URLRequest(url: urlComponents.url ?? defaultBaseURL)
+        var request = URLRequest(url: urlComponents.url ?? NetworkConstants.defaultBaseURL)
         request.httpMethod = httpMethod
         let token = OAuthTokenStorage().token
         if let token {
