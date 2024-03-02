@@ -36,11 +36,7 @@ final class SplashViewController: UIViewController {
     }
     
     private func checkToken() {
-        if storage.token != nil {
-            fetchProfile()
-        } else {
-            switchToAuth()
-        }
+        storage.token != nil ? fetchProfile() : switchToAuth()
     }
     
     private func switchToApp() {
@@ -79,7 +75,7 @@ extension SplashViewController: AuthViewControllerDelegate {
                     self?.navigationController?.popViewController(animated: true)
                     self?.storage.storeToken(token: token)
                     self?.fetchProfile()
-                case .failure(_):
+                case .failure:
                     self?.showAlert()
                 }
             }
@@ -95,7 +91,7 @@ extension SplashViewController: AuthViewControllerDelegate {
                 case .success(let profile):
                     self?.profileImageService.fetchProfileImageURL(username: profile.username) { _ in }
                     self?.switchToApp()
-                case .failure(_):
+                case .failure:
                     self?.showAlert()
                 }
             }
