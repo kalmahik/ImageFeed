@@ -15,6 +15,7 @@ class ProfileViewController: UIViewController {
     private var profileImageServiceObserver: NSObjectProtocol?
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         addSubViews()
         applyConstraints()
         addObserver()
