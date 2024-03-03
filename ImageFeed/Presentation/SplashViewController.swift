@@ -42,7 +42,7 @@ final class SplashViewController: UIViewController {
     
     private func switchToApp() {
         let tabBarController = TabBarViewController()
-        guard let window = UIApplication.shared.windows.first else { fatalError("switchToApp error") }
+        guard let window = UIApplication.shared.windows.first else { return }
         window.rootViewController = tabBarController
     }
     

@@ -14,16 +14,8 @@ final class ImagesListCell: UITableViewCell {
         pictureImageView.image = UIImage(named: imageName)
         dateLabel.text = dateText
         likeButton.tintColor = isLike ? .ypRed : .ypWhite50
-    }
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubViews()
         applyConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     private func addSubViews() {
@@ -49,7 +41,7 @@ final class ImagesListCell: UITableViewCell {
             gradientView.bottomAnchor.constraint(equalTo: pictureImageView.bottomAnchor),
             gradientView.leadingAnchor.constraint(equalTo: pictureImageView.leadingAnchor),
             gradientView.trailingAnchor.constraint(equalTo: pictureImageView.trailingAnchor),
-            gradientView.heightAnchor.constraint(equalToConstant: 30),
+            gradientView.heightAnchor.constraint(equalToConstant: 30)
         ])
     }
     
@@ -61,8 +53,11 @@ final class ImagesListCell: UITableViewCell {
     }()
     
     private let likeButton: UIButton = {
-        let button = UIButton.systemButton(with: UIImage(systemName: "heart.fill") ?? UIImage(), target: nil, action: nil)
-        return button
+        UIButton.systemButton(
+            with: UIImage(systemName: "heart.fill") ?? UIImage(),
+            target: nil,
+            action: nil
+        )
     }()
     
     private let dateLabel: UILabel = {

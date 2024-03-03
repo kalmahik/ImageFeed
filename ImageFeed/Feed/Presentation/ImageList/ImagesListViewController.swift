@@ -14,14 +14,6 @@ class ImagesListViewController: UIViewController {
     
     private let photosName: [String] = Array(0..<20).map{ "\($0)" }
     
-    func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
-        let imageName = "\(indexPath.row)"
-        let dateLabel = Date().dateString
-        let isLike = indexPath.row % 2 == 0
-        cell.configCell(imageName, dateLabel, isLike)
-        cell.backgroundColor = .ypBlack
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -72,8 +64,12 @@ extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath)
         guard let imageListCell = cell as? ImagesListCell else { return UITableViewCell() }
+        let imageName = "\(indexPath.row)"
+        let dateLabel = Date().dateString
+        let isLike = indexPath.row % 2 == 0
         imageListCell.selectionStyle = .none
-        configCell(for: imageListCell, with: indexPath)
+        imageListCell.backgroundColor = .ypBlack
+        imageListCell.configCell(imageName, dateLabel, isLike)
         return imageListCell
     }
     

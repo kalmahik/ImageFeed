@@ -22,7 +22,7 @@ extension URLRequest {
         request.httpMethod = httpMethod
         let token = OAuthTokenStorage().token
         if let token {
-            request.setValue("\(AuthKeys.bearer) \(token)", forHTTPHeaderField: AuthKeys.authorization.rawValue)
+            request.setValue("\(AuthKeys.bearer.rawValue) \(token)", forHTTPHeaderField: AuthKeys.authorization.rawValue)
         }
         return request
     }

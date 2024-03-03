@@ -109,7 +109,7 @@ class ProfileViewController: UIViewController {
     @objc private func didTapLogoutButton() {
         //TODO: refactor this method
         storage.storeToken(token: nil)
-        guard let window = UIApplication.shared.windows.first else { fatalError("logout error") }
+        guard let window = UIApplication.shared.windows.first else { return }
         window.rootViewController = SplashViewController()
     }
 }
