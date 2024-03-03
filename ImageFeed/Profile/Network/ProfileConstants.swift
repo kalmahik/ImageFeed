@@ -8,6 +8,6 @@
 import Foundation
 
 struct ProfileConstants {
-    static let profileMePath = "/my"
+    static let profileMePath = "/me"
     static let userPath = "/users/"
 }
