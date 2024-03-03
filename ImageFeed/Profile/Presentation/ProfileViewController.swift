@@ -77,7 +77,6 @@ class ProfileViewController: UIViewController {
     private lazy var avatarImage: UIImageView = {
         let placeholder = UIImage(named: "avatar_placeholder")
         let imageView = UIImageView(image: placeholder)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 35
         imageView.layer.masksToBounds = true
         if let url = profileImageService.profileImageURL {

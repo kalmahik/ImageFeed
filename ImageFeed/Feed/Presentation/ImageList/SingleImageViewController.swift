@@ -59,8 +59,8 @@ class SingleImageViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    private lazy var zoomImage: PanZoomImageView = {
-        let zoomImage = PanZoomImageView(named: self.imageName)
+    private lazy var zoomImage: UIPanZoomImageView = {
+        let zoomImage = UIPanZoomImageView(named: self.imageName)
         zoomImage.translatesAutoresizingMaskIntoConstraints = false
         zoomImage.imageName = imageName
         return zoomImage

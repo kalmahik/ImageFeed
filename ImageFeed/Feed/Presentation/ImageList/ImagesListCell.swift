@@ -27,10 +27,10 @@ final class ImagesListCell: UITableViewCell {
     }
     
     private func addSubViews() {
-        contentView.addSubview(pictureImageView)
-        contentView.addSubview(likeButton)
-        contentView.addSubview(gradientView)
-        contentView.addSubview(dateLabel)
+        [pictureImageView, likeButton, gradientView, dateLabel].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            contentView.addSubview($0)
+        }
         contentView.backgroundColor = .ypBlack
     }
     
@@ -55,7 +55,6 @@ final class ImagesListCell: UITableViewCell {
     
     private let pictureImageView: UIImageView = {
         let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
         image.layer.cornerRadius = 16
         image.layer.masksToBounds = true
         return image
@@ -63,21 +62,18 @@ final class ImagesListCell: UITableViewCell {
     
     private let likeButton: UIButton = {
         let button = UIButton.systemButton(with: UIImage(systemName: "heart.fill") ?? UIImage(), target: nil, action: nil)
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     private let dateLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .ypWhite
         label.font = UIFont.font(type: .regular, size: 13)
         return label
     }()
     
-    private let gradientView: GradientView = {
-        let gradient = GradientView()
-        gradient.translatesAutoresizingMaskIntoConstraints = false
+    private let gradientView: UIGradientView = {
+        let gradient = UIGradientView()
         gradient.startColor = .gradientStart
         gradient.endColor = .gradientEnd
         gradient.startLocation = 0

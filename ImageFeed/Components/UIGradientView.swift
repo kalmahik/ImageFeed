@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class GradientView: UIView {
+public class UIGradientView: UIView {
     var startColor:   UIColor = .black { didSet { updateColors() }}
     var endColor:     UIColor = .white { didSet { updateColors() }}
     var startLocation: Double =   0.05 { didSet { updateLocations() }}
