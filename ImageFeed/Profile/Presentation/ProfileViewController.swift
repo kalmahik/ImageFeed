@@ -47,7 +47,7 @@ class ProfileViewController: UIViewController {
     
     private func addSubViews() {
         rootStack.addArrangedSubview(avatarStack)
-        rootStack.addArrangedSubview(configureLabel(profileService.profile?.name ?? "Firstname and lastname", size: 23))
+        rootStack.addArrangedSubview(configureLabel(profileService.profile?.name ?? "Firstname and lastname", size: 23, weight: .bold))
         rootStack.addArrangedSubview(configureLabel(profileService.profile?.loginName ?? "nickname", color: .ypGray))
         rootStack.addArrangedSubview(configureLabel(profileService.profile?.bio ?? "Description"))
         avatarStack.addArrangedSubview(avatarImage)
@@ -97,12 +97,13 @@ class ProfileViewController: UIViewController {
         return button
     }()
     
-    private func configureLabel(_ text: String, size: CGFloat = 13, color: UIColor = .ypWhite, type: UIFont.FontType = .regular) -> UILabel {
+    private func configureLabel(_ text: String, size: CGFloat = 13, color: UIColor = .ypWhite, weight: UIFont.Weight = .regular) -> UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = text
         label.textColor = color
-        label.font = UIFont.font(type: type, size: size)
+        label.font = UIFont.systemFont(ofSize: size, weight: weight)
+
         return label
     }
     

@@ -61,7 +61,7 @@ final class AuthViewController: UIViewController {
         button.setTitle("Войти", for: .normal)
         button.setTitleColor(.ypBlack, for: .normal)
         button.addTarget(self, action: #selector(didTapLogoutButton), for: .touchUpInside)
-        button.titleLabel?.font =  UIFont.font(type: .bold, size: 17)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         button.layer.cornerRadius = 16
         return button
     }()

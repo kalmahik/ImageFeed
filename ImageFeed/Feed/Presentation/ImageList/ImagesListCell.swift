@@ -63,7 +63,7 @@ final class ImagesListCell: UITableViewCell {
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.textColor = .ypWhite
-        label.font = UIFont.font(type: .regular, size: 13)
+        label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         return label
     }()
     
