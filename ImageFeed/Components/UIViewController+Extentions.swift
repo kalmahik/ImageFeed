@@ -28,18 +28,8 @@ extension UIViewController {
         alert.addAction(action)
         alert.view.accessibilityIdentifier = "Alert"
         DispatchQueue.main.async { [weak self] in
-            self?.getTopView()?.present(alert, animated: true, completion: nil)
+            //TODO: refactor this later
+            (self?.presentedViewController ?? self)?.present(alert, animated: true, completion: nil)
         }
-    }
-    
-    func getTopView() -> UIViewController? {
-        let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
-        if var topController = keyWindow?.rootViewController {
-            while let presentedViewController = topController.presentedViewController {
-                topController = presentedViewController
-                return topController
-            }
-        }
-        return nil
     }
 }
