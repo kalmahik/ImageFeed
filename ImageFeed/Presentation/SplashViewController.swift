@@ -8,16 +8,18 @@
 import UIKit
 
 final class SplashViewController: UIViewController {
-    private lazy var networkClient: NetworkClientProtocol = NetworkClient()
-    private lazy var oAuthService: OAuthService = OAuthService(networkClient: networkClient)
-    private lazy var oAuthTokenStorage: OAuthTokenStorage = OAuthTokenStorage()
-    
+    private let oAuthService = OAuthService.shared
+    private let profileService = ProfileService.shared
+    private let profileImageService = ProfileImageService.shared
+    private let storage = OAuthTokenStorage()
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         checkToken()
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         addSubViews()
         applyConstraints()
     }
@@ -35,16 +37,12 @@ final class SplashViewController: UIViewController {
     }
     
     private func checkToken() {
-        if oAuthTokenStorage.token != nil {
-            switchToApp()
-        } else {
-            switchToAuth()
-        }
+        storage.token != nil ? fetchProfile() : switchToAuth()
     }
     
     private func switchToApp() {
         let tabBarController = TabBarViewController()
-        guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
+        guard let window = UIApplication.shared.windows.first else { return }
         window.rootViewController = tabBarController
     }
     
@@ -65,19 +63,37 @@ final class SplashViewController: UIViewController {
 
 extension SplashViewController: AuthViewControllerDelegate {
     func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
-        self.loadData(code: code)
+        self.loadToken(code: code)
     }
     
-    private func loadData(code: String) {
+    private func loadToken(code: String) {
+        UIBlockingProgressHUD.show()
         oAuthService.fetchAuthToken(code: code) { [weak self] result in
             DispatchQueue.main.async { [weak self] in
+                UIBlockingProgressHUD.dismiss()
                 switch result {
                 case .success(let token):
                     self?.navigationController?.popViewController(animated: true)
-                    self?.oAuthTokenStorage.storeToken(token: token)
+                    self?.storage.storeToken(token: token)
+                    self?.fetchProfile()
+                case .failure:
+                    self?.showAlert()
+                }
+            }
+        }
+    }
+    
+    private func fetchProfile() {
+        UIBlockingProgressHUD.show()
+        profileService.fetchProfile() { [weak self] result in
+            DispatchQueue.main.async { [weak self] in
+                UIBlockingProgressHUD.dismiss()
+                switch result {
+                case .success(let profile):
+                    self?.profileImageService.fetchProfileImageURL(username: profile.username) { _ in }
                     self?.switchToApp()
-                case .failure(let error):
-                    print(error)
+                case .failure:
+                    self?.showAlert()
                 }
             }
         }

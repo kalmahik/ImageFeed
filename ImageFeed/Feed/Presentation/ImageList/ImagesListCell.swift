@@ -14,23 +14,15 @@ final class ImagesListCell: UITableViewCell {
         pictureImageView.image = UIImage(named: imageName)
         dateLabel.text = dateText
         likeButton.tintColor = isLike ? .ypRed : .ypWhite50
-    }
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubViews()
         applyConstraints()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     private func addSubViews() {
-        contentView.addSubview(pictureImageView)
-        contentView.addSubview(likeButton)
-        contentView.addSubview(gradientView)
-        contentView.addSubview(dateLabel)
+        [pictureImageView, likeButton, gradientView, dateLabel].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            contentView.addSubview($0)
+        }
         contentView.backgroundColor = .ypBlack
     }
     
@@ -49,35 +41,34 @@ final class ImagesListCell: UITableViewCell {
             gradientView.bottomAnchor.constraint(equalTo: pictureImageView.bottomAnchor),
             gradientView.leadingAnchor.constraint(equalTo: pictureImageView.leadingAnchor),
             gradientView.trailingAnchor.constraint(equalTo: pictureImageView.trailingAnchor),
-            gradientView.heightAnchor.constraint(equalToConstant: 30),
+            gradientView.heightAnchor.constraint(equalToConstant: 30)
         ])
     }
     
     private let pictureImageView: UIImageView = {
         let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
         image.layer.cornerRadius = 16
         image.layer.masksToBounds = true
         return image
     }()
     
     private let likeButton: UIButton = {
-        let button = UIButton.systemButton(with: UIImage(systemName: "heart.fill") ?? UIImage(), target: nil, action: nil)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
+        UIButton.systemButton(
+            with: UIImage(systemName: "heart.fill") ?? UIImage(),
+            target: nil,
+            action: nil
+        )
     }()
     
     private let dateLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .ypWhite
-        label.font = UIFont.font(type: .regular, size: 13)
+        label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         return label
     }()
     
-    private let gradientView: GradientView = {
-        let gradient = GradientView()
-        gradient.translatesAutoresizingMaskIntoConstraints = false
+    private let gradientView: UIGradientView = {
+        let gradient = UIGradientView()
         gradient.startColor = .gradientStart
         gradient.endColor = .gradientEnd
         gradient.startLocation = 0

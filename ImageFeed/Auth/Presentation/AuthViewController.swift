@@ -15,9 +15,12 @@ final class AuthViewController: UIViewController {
         self.delegate = delegate
     }
     
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    required init?(coder: NSCoder) { 
+        super.init(nibName: nil, bundle: nil)
+    }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         addSubViews()
         applyConstraints()
     }
@@ -39,7 +42,7 @@ final class AuthViewController: UIViewController {
         ])
     }
     
-    @objc private func didTapButton() {
+    @objc private func didTapLogoutButton() {
         let webviewController = WebViewViewController()
         webviewController.delegate = self
         self.navigationController?.pushViewController(webviewController, animated: true)
@@ -57,8 +60,8 @@ final class AuthViewController: UIViewController {
         button.backgroundColor = .ypWhite
         button.setTitle("Войти", for: .normal)
         button.setTitleColor(.ypBlack, for: .normal)
-        button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
-        button.titleLabel?.font =  UIFont.font(type: .bold, size: 17)
+        button.addTarget(self, action: #selector(didTapLogoutButton), for: .touchUpInside)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         button.layer.cornerRadius = 16
         return button
     }()

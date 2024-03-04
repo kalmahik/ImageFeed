@@ -1,27 +1,44 @@
 import Foundation
 
-struct NetworkClient: NetworkClientProtocol {    
-    private enum NetworkError: Error {
-        case httpStatusCode(Int)
-        case urlRequestError(Error)
-        case urlSessionError
-    }
+private enum NetworkError: Error {
+    case httpStatusCode(Int)
+    case urlRequestError(Error)
+    case urlSessionError
+}
 
-    func fetch(urlRequest: URLRequest, handler: @escaping (Result<Data, Error>) -> Void) {
-        let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+class NetworkClient: NetworkClientProtocol {
+    private weak var task: URLSessionTask?
+    
+    func fetch<Response: Decodable>(urlRequest: URLRequest, completion: @escaping (Result<Response, Error>) -> Void) {
+        if task != nil {
+            task?.cancel()
+        }
+        let task = URLSession.shared.dataTask(with: urlRequest) { [weak self] data, response, error in
             if let error {
-                handler(.failure(error))
+                completion(.failure(error))
+                print("[imageFeed][fetch][\(urlRequest.url ?? NetworkConstants.defaultBaseURL)]: [\(error)]")
                 return
             }
             if let response = response as? HTTPURLResponse, response.statusCode < 200 || response.statusCode >= 300 {
-                handler(.failure(NetworkError.httpStatusCode(response.statusCode)))
+                completion(.failure(NetworkError.httpStatusCode(response.statusCode)))
+                print("[imageFeed][fetch][\(urlRequest.url ?? NetworkConstants.defaultBaseURL)]: [\(response.statusCode)]")
                 return
             }
             if let data {
-                handler(.success(data))
+                do {
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    let response = try decoder.decode(Response.self, from: data)
+                    completion(.success(response))
+                    self?.task = nil
+                } catch {
+                    completion(.failure(error))
+                    print("[imageFeed][fetch][\(urlRequest.url ?? NetworkConstants.defaultBaseURL)]: [\(error)]")
+                }
                 return
             }
         }
+        self.task = task
         task.resume()
     }
 }

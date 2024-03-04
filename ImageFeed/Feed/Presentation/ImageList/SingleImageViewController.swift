@@ -9,7 +9,11 @@ import UIKit
 import LinkPresentation
 
 class SingleImageViewController: UIViewController {
+    // MARK: - Private Properties
+
     private var imageName: String = ""
+    
+    // MARK: - Initializers
     
     init(imageName: String) {
         super.init(nibName: nil, bundle: nil)
@@ -17,18 +21,22 @@ class SingleImageViewController: UIViewController {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(nibName: nil, bundle: nil)
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         addSubViews()
         applyConstraints()
     }
     
+    // MARK: - Private Methods
+    
     private func addSubViews() {
-        view.addSubview(zoomImage)
-        view.addSubview(shareButton)
-        view.addSubview(backButton)
+        [zoomImage, shareButton, backButton].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview($0)
+        }
     }
     
     private func applyConstraints() {
@@ -48,6 +56,31 @@ class SingleImageViewController: UIViewController {
         ])
     }
     
+    private lazy var zoomImage: UIPanZoomImageView = {
+        let zoomImage = UIPanZoomImageView(named: self.imageName)
+        zoomImage.imageName = imageName
+        return zoomImage
+    }()
+    
+    private lazy var shareButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .ypBlack
+        button.setImage(UIImage(named: "share"), for: .normal)
+        button.addTarget(self, action: #selector(didShareImage), for: .touchUpInside)
+        button.layer.cornerRadius = 25.0
+        return button
+    }()
+    
+    private lazy var backButton: UIButton = {
+        let button = UIButton.systemButton(
+            with: UIImage(systemName: "chevron.left") ?? UIImage(),
+            target: self,
+            action: #selector(didTapBackButton)
+        )
+        button.tintColor = .ypWhite
+        return button
+    }()
+    
     @objc private func didShareImage() {
         let image = UIImage(named: imageName) ?? UIImage()
         let activityViewController = UIActivityViewController(activityItems: [image, self], applicationActivities: nil)
@@ -58,30 +91,6 @@ class SingleImageViewController: UIViewController {
     @objc private func didTapBackButton() {
         dismiss(animated: true, completion: nil)
     }
-    
-    private lazy var zoomImage: PanZoomImageView = {
-        let zoomImage = PanZoomImageView(named: self.imageName)
-        zoomImage.translatesAutoresizingMaskIntoConstraints = false
-        zoomImage.imageName = imageName
-        return zoomImage
-    }()
-    
-    private lazy var shareButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .ypBlack
-        button.setImage(UIImage(named: "share"), for: .normal)
-        button.addTarget(self, action: #selector(didShareImage), for: .touchUpInside)
-        button.layer.cornerRadius = 25.0
-        return button
-    }()
-    
-    private lazy var backButton: UIButton = {
-        let button = UIButton.systemButton(with: UIImage(systemName: "chevron.left") ?? UIImage(), target: self, action: #selector(didTapBackButton))
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.tintColor = .ypWhite
-        return button
-    }()
 }
 
 extension SingleImageViewController: UIActivityItemSource {
@@ -95,7 +104,10 @@ extension SingleImageViewController: UIActivityItemSource {
     
     func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any { imageName }
     
-    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
+    func activityViewController(
+        _ activityViewController: UIActivityViewController,
+        itemForActivityType activityType: UIActivity.ActivityType?
+    ) -> Any? {
         return nil
     }
 }

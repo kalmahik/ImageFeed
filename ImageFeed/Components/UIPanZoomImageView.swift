@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PanZoomImageView: UIScrollView {
+class UIPanZoomImageView: UIScrollView {
     
     var imageName: String? {
         didSet {
@@ -60,6 +60,6 @@ class PanZoomImageView: UIScrollView {
     }
 }
 
-extension PanZoomImageView: UIScrollViewDelegate {
+extension UIPanZoomImageView: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? { imageView }
 }
