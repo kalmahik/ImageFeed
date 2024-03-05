@@ -17,35 +17,35 @@ final class SplashViewController: UIViewController {
         super.viewDidAppear(animated)
         checkToken()
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubViews()
         applyConstraints()
     }
-    
+
     private func addSubViews() {
         view.backgroundColor = .ypBlack
         view.addSubview(logoImage)
     }
-    
+
     private func applyConstraints() {
         NSLayoutConstraint.activate([
             logoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logoImage.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            logoImage.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
-    
+
     private func checkToken() {
         storage.token != nil ? fetchProfile() : switchToAuth()
     }
-    
+
     private func switchToApp() {
         let tabBarController = TabBarViewController()
         guard let window = UIApplication.shared.windows.first else { return }
         window.rootViewController = tabBarController
     }
-    
+
     private func switchToAuth() {
         let authController = AuthViewController(delegate: self)
         let navigationController = UINavigationController(rootViewController: authController)
@@ -53,7 +53,7 @@ final class SplashViewController: UIViewController {
         navigationController.navigationBar.topItem?.title = ""
         present(navigationController, animated: true)
     }
-    
+
     private let logoImage: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "logo"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -62,10 +62,10 @@ final class SplashViewController: UIViewController {
 }
 
 extension SplashViewController: AuthViewControllerDelegate {
-    func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
+    func authViewController(_ viewController: AuthViewController, didAuthenticateWithCode code: String) {
         self.loadToken(code: code)
     }
-    
+
     private func loadToken(code: String) {
         UIBlockingProgressHUD.show()
         oAuthService.fetchAuthToken(code: code) { [weak self] result in
@@ -82,10 +82,10 @@ extension SplashViewController: AuthViewControllerDelegate {
             }
         }
     }
-    
+
     private func fetchProfile() {
         UIBlockingProgressHUD.show()
-        profileService.fetchProfile() { [weak self] result in
+        profileService.fetchProfile { [weak self] result in
             DispatchQueue.main.async { [weak self] in
                 UIBlockingProgressHUD.dismiss()
                 switch result {

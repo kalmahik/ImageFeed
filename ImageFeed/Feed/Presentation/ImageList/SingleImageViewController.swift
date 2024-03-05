@@ -12,33 +12,33 @@ class SingleImageViewController: UIViewController {
     // MARK: - Private Properties
 
     private var imageName: String = ""
-    
+
     // MARK: - Initializers
-    
+
     init(imageName: String) {
         super.init(nibName: nil, bundle: nil)
         self.imageName = imageName
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubViews()
         applyConstraints()
     }
-    
+
     // MARK: - Private Methods
-    
+
     private func addSubViews() {
         [zoomImage, shareButton, backButton].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)
         }
     }
-    
+
     private func applyConstraints() {
         NSLayoutConstraint.activate([
             zoomImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -52,16 +52,16 @@ class SingleImageViewController: UIViewController {
             backButton.heightAnchor.constraint(equalToConstant: 42),
             backButton.widthAnchor.constraint(equalToConstant: 42),
             backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         ])
     }
-    
+
     private lazy var zoomImage: UIPanZoomImageView = {
         let zoomImage = UIPanZoomImageView(named: self.imageName)
         zoomImage.imageName = imageName
         return zoomImage
     }()
-    
+
     private lazy var shareButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .ypBlack
@@ -70,7 +70,7 @@ class SingleImageViewController: UIViewController {
         button.layer.cornerRadius = 25.0
         return button
     }()
-    
+
     private lazy var backButton: UIButton = {
         let button = UIButton.systemButton(
             with: UIImage(systemName: "chevron.left") ?? UIImage(),
@@ -80,14 +80,14 @@ class SingleImageViewController: UIViewController {
         button.tintColor = .ypWhite
         return button
     }()
-    
+
     @objc private func didShareImage() {
         let image = UIImage(named: imageName) ?? UIImage()
         let activityViewController = UIActivityViewController(activityItems: [image, self], applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
         self.present(activityViewController, animated: true, completion: nil)
     }
-    
+
     @objc private func didTapBackButton() {
         dismiss(animated: true, completion: nil)
     }
@@ -101,9 +101,9 @@ extension SingleImageViewController: UIActivityItemSource {
         metadata.imageProvider = imageProvider
         return metadata
     }
-    
+
     func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any { imageName }
-    
+
     func activityViewController(
         _ activityViewController: UIActivityViewController,
         itemForActivityType activityType: UIActivity.ActivityType?
@@ -111,4 +111,3 @@ extension SingleImageViewController: UIActivityItemSource {
         return nil
     }
 }
-
