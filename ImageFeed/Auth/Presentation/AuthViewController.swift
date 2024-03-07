@@ -8,29 +8,37 @@
 import UIKit
 
 final class AuthViewController: UIViewController {
+    // MARK: - Private Properties
+
     private weak var delegate: AuthViewControllerDelegate?
+    
+    // MARK: - Initializers
 
     init(delegate: AuthViewControllerDelegate) {
         super.init(nibName: nil, bundle: nil)
         self.delegate = delegate
     }
-    
-    required init?(coder: NSCoder) { 
+
+    required init?(coder: NSCoder) {
         super.init(nibName: nil, bundle: nil)
     }
     
+    // MARK: - UIViewController(*)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubViews()
         applyConstraints()
     }
     
+    // MARK: - Private Methods
+
     private func addSubViews() {
         view.backgroundColor = .ypBlack
         view.addSubview(logoImage)
         view.addSubview(loginButton)
     }
-    
+
     private func applyConstraints() {
         NSLayoutConstraint.activate([
             logoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -38,22 +46,22 @@ final class AuthViewController: UIViewController {
             loginButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             loginButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             loginButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -90),
-            loginButton.heightAnchor.constraint(equalToConstant: 48),
+            loginButton.heightAnchor.constraint(equalToConstant: 48)
         ])
     }
-    
+
     @objc private func didTapLogoutButton() {
         let webviewController = WebViewViewController()
         webviewController.delegate = self
         self.navigationController?.pushViewController(webviewController, animated: true)
     }
-    
+
     private let logoImage: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "logo_unsplash"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
+
     private lazy var loginButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -68,7 +76,7 @@ final class AuthViewController: UIViewController {
 }
 
 extension AuthViewController: WebViewViewControllerDelegate {
-    func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
+    func webViewViewController(_ viewController: WebViewViewController, didAuthenticateWithCode code: String) {
         delegate?.authViewController(self, didAuthenticateWithCode: code)
     }
 }

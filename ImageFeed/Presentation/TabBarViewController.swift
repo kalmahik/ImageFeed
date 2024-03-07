@@ -8,13 +8,15 @@
 import UIKit
 
 final class TabBarViewController: UITabBarController {
+
+    // MARK: - UIViewController
     
     override public func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
         setupViewControllers()
     }
-    
+
     func setupViewControllers() {
         let feedVC = ImagesListViewController()
         let profileVC = ProfileViewController()
@@ -24,13 +26,13 @@ final class TabBarViewController: UITabBarController {
             image: UIImage(systemName: "rectangle.stack.fill"),
             selectedImage: UIImage(systemName: "rectangle.stack.fill")
         )
-        
+
         profileVC.tabBarItem = UITabBarItem(
             title: nil,
             image: UIImage(systemName: "person.crop.circle.fill"),
             selectedImage: UIImage(systemName: "person.crop.circle.fill")
         )
-        
+
         tabBar.tintColor = .ypWhite
         tabBar.barTintColor = .ypBlack
         tabBar.backgroundColor = .ypBlack

@@ -9,10 +9,14 @@ import UIKit
 import Kingfisher
 
 class ProfileViewController: UIViewController {
+    // MARK: - Private Properties
+
     private lazy var storage = OAuthTokenStorage()
     private lazy var profileService = ProfileService.shared
     private lazy var profileImageService = ProfileImageService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
+
+    // MARK: - UIViewController(*)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,19 +25,25 @@ class ProfileViewController: UIViewController {
         addObserver()
     }
     
+    // MARK: - Private Methods
+
     private func addObserver() {
         profileImageServiceObserver = NotificationCenter.default
-            .addObserver(forName: ProfileImageService.didChangeNotification, object: nil, queue: .main) { [weak self] _ in
+            .addObserver(
+                forName: ProfileImageService.didChangeNotification,
+                object: nil,
+                queue: .main
+            ) { [weak self] _ in
                 self?.updateAvatar()
             }
         updateAvatar()
     }
-    
+
     private func updateAvatar() {
-        guard let avatarURL = profileImageService.profileImageURL, let url = URL(string:avatarURL) else { return }
+        guard let avatarURL = profileImageService.profileImageURL, let url = URL(string: avatarURL) else { return }
         avatarImage.kf.setImage(with: url)
     }
-    
+
     private func applyConstraints() {
         NSLayoutConstraint.activate([
             rootStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
@@ -41,10 +51,10 @@ class ProfileViewController: UIViewController {
             rootStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
             avatarStack.widthAnchor.constraint(equalTo: rootStack.widthAnchor),
             avatarImage.widthAnchor.constraint(equalToConstant: 70),
-            avatarImage.heightAnchor.constraint(equalToConstant: 70),
+            avatarImage.heightAnchor.constraint(equalToConstant: 70)
         ])
     }
-    
+
     private func addSubViews() {
         rootStack.addArrangedSubview(avatarStack)
         rootStack.addArrangedSubview(configureLabel(profileService.profile?.name ?? "Firstname and lastname", size: 23, weight: .bold))
@@ -55,7 +65,7 @@ class ProfileViewController: UIViewController {
         view.addSubview(rootStack)
         view.backgroundColor = .ypBlack
     }
-    
+
     private let rootStack: UIStackView =  {
         let rootStack: UIStackView = UIStackView()
         rootStack.translatesAutoresizingMaskIntoConstraints = false
@@ -65,7 +75,7 @@ class ProfileViewController: UIViewController {
         rootStack.spacing = 8
         return rootStack
     }()
-    
+
     private let avatarStack: UIStackView = {
         let hStack: UIStackView = UIStackView()
         hStack.translatesAutoresizingMaskIntoConstraints = false
@@ -74,7 +84,7 @@ class ProfileViewController: UIViewController {
         hStack.alignment = UIStackView.Alignment.center
         return hStack
     }()
-    
+
     private lazy var avatarImage: UIImageView = {
         let placeholder = UIImage(named: "avatar_placeholder")
         let imageView = UIImageView(image: placeholder)
@@ -85,7 +95,7 @@ class ProfileViewController: UIViewController {
         }
         return imageView
     }()
-    
+
     private lazy var exitButton: UIButton = {
         let button = UIButton.systemButton(
             with: UIImage(systemName: "ipad.and.arrow.forward") ?? UIImage(),
@@ -96,7 +106,7 @@ class ProfileViewController: UIViewController {
         button.contentEdgeInsets = UIEdgeInsets(top: 16, left: 8, bottom: 16, right: 8)
         return button
     }()
-    
+
     private func configureLabel(_ text: String, size: CGFloat = 13, color: UIColor = .ypWhite, weight: UIFont.Weight = .regular) -> UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -106,9 +116,9 @@ class ProfileViewController: UIViewController {
 
         return label
     }
-    
+
     @objc private func didTapLogoutButton() {
-        //TODO: refactor this method
+        // TODO: refactor this method
         storage.storeToken(token: nil)
         guard let window = UIApplication.shared.windows.first else { return }
         window.rootViewController = SplashViewController()

@@ -12,10 +12,9 @@ final class ProfileImageService: ProfileImageServiceProtocol {
     static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
     let networkClient: NetworkClientProtocol = NetworkClient()
     private (set) var profileImageURL: String?
-    
-    
+
     private init() {}
-    
+
     func fetchProfileImageURL(username: String, completion: @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
         let request = URLRequest.makeRequest(path: "\(ProfileConstants.userPath)\(username)")

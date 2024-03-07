@@ -15,10 +15,10 @@ final class OAuthService: OAuthServiceProtocol {
     static let shared = OAuthService()
     let networkClient: NetworkClientProtocol = NetworkClient()
     private var lastCode: String?
-    
+
     private init() {}
-    
-    func fetchAuthToken(code: String, completion:  @escaping (Result<String, Error>) -> Void) {
+
+    func fetchAuthToken(code: String, completion: @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
         if lastCode == code {
             print("[imageFeed][fetchAuthToken][\(AuthConstants.tokenPath)]: [the same code]")
@@ -30,7 +30,7 @@ final class OAuthService: OAuthServiceProtocol {
             URLQueryItem(name: AuthKeys.clientSecret.rawValue, value: AuthConstants.secretKey),
             URLQueryItem(name: AuthKeys.redirectUri.rawValue, value: AuthConstants.redirectURI),
             URLQueryItem(name: AuthKeys.code.rawValue, value: code),
-            URLQueryItem(name: AuthKeys.grantType.rawValue, value: AuthKeys.authorizationCode.rawValue),
+            URLQueryItem(name: AuthKeys.grantType.rawValue, value: AuthKeys.authorizationCode.rawValue)
         ]
         let request = URLRequest.makeRequest(
             httpMethod: Methods.post.rawValue,

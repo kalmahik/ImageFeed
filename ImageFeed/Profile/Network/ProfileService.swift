@@ -13,7 +13,7 @@ final class ProfileService: ProfileServiceProtocol {
     private (set) var profile: Profile?
 
     private init() {}
-    
+
     func fetchProfile(completion: @escaping (Result<Profile, Error>) -> Void) {
         assert(Thread.isMainThread)
         let request = URLRequest.makeRequest(path: ProfileConstants.profileMePath)

@@ -9,9 +9,16 @@ import UIKit
 import WebKit
 
 final class WebViewViewController: UIViewController {
+    // MARK: - Public Properties
+
     weak var delegate: WebViewViewControllerDelegate?
-    private var estimatedProgressObservation: NSKeyValueObservation?
     
+    // MARK: - Private Properties
+
+    private var estimatedProgressObservation: NSKeyValueObservation?
+
+    // MARK: - UIViewController
+
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubViews()
@@ -19,17 +26,19 @@ final class WebViewViewController: UIViewController {
         loadWebview()
         updateProgress()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         subscribeProgress()
     }
     
+    // MARK: - Private Methods
+
     private func addSubViews() {
         view.addSubview(webView)
         view.addSubview(progressView)
     }
-    
+
     private func applyConstraints() {
         NSLayoutConstraint.activate([
             webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -38,10 +47,10 @@ final class WebViewViewController: UIViewController {
             webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             progressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             progressView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            progressView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            progressView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
-    
+
     private func subscribeProgress() {
         estimatedProgressObservation = webView.observe(
             \.estimatedProgress,
@@ -51,17 +60,17 @@ final class WebViewViewController: UIViewController {
              }
         )
     }
-    
+
     private func unsubscribeProgress() {
         webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), context: nil)
     }
-    
+
     private func updateProgress() {
         let progressValue = Float(webView.estimatedProgress)
         progressView.setProgress(progressValue, animated: true)
         progressView.isHidden = progressValue >= 1.0
     }
-    
+
     private func loadWebview() {
         var urlComponents = URLComponents(string: AuthConstants.authURL) ?? URLComponents()
         urlComponents.queryItems = [
@@ -72,7 +81,7 @@ final class WebViewViewController: UIViewController {
         ]
         webView.load(URLRequest(url: urlComponents.url ?? NetworkConstants.defaultBaseURL))
     }
-    
+
     private lazy var webView: WKWebView = {
         let webView = WKWebView()
         webView.navigationDelegate = self
@@ -80,7 +89,7 @@ final class WebViewViewController: UIViewController {
         webView.allowsBackForwardNavigationGestures = true
         return webView
     }()
-    
+
     private lazy var progressView: UIProgressView = {
         let progressView = UIProgressView(progressViewStyle: .bar)
         progressView.translatesAutoresizingMaskIntoConstraints = false
@@ -88,7 +97,7 @@ final class WebViewViewController: UIViewController {
         progressView.trackTintColor = .ypGray
         return progressView
     }()
-    
+
 }
 
 extension WebViewViewController: WKNavigationDelegate {
@@ -104,15 +113,14 @@ extension WebViewViewController: WKNavigationDelegate {
             decisionHandler(.allow)
         }
     }
-    
+
     private func parseCode(from navigationAction: WKNavigationAction) -> String? {
         if
             let url = navigationAction.request.url,
             let urlComponents = URLComponents(string: url.absoluteString),
             urlComponents.path == AuthConstants.redirectPath,
             let items = urlComponents.queryItems,
-            let codeItem = items.first(where: { $0.name == AuthKeys.code.rawValue})
-        {
+            let codeItem = items.first(where: { $0.name == AuthKeys.code.rawValue}) {
             return codeItem.value
         } else {
             return nil

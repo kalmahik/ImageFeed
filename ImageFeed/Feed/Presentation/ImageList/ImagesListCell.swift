@@ -8,8 +8,12 @@
 import UIKit
 
 final class ImagesListCell: UITableViewCell {
+    // MARK: - Constants
+    
     static let reuseIdentifier = "ImagesListCell"
     
+    // MARK: - Public Methods
+
     func configCell(_ imageName: String, _ dateText: String, _ isLike: Bool) {
         pictureImageView.image = UIImage(named: imageName)
         dateLabel.text = dateText
@@ -18,6 +22,8 @@ final class ImagesListCell: UITableViewCell {
         applyConstraints()
     }
     
+    // MARK: - Private Methods
+
     private func addSubViews() {
         [pictureImageView, likeButton, gradientView, dateLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -25,7 +31,7 @@ final class ImagesListCell: UITableViewCell {
         }
         contentView.backgroundColor = .ypBlack
     }
-    
+
     private func applyConstraints() {
         NSLayoutConstraint.activate([
             pictureImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -44,14 +50,14 @@ final class ImagesListCell: UITableViewCell {
             gradientView.heightAnchor.constraint(equalToConstant: 30)
         ])
     }
-    
+
     private let pictureImageView: UIImageView = {
         let image = UIImageView()
         image.layer.cornerRadius = 16
         image.layer.masksToBounds = true
         return image
     }()
-    
+
     private let likeButton: UIButton = {
         UIButton.systemButton(
             with: UIImage(systemName: "heart.fill") ?? UIImage(),
@@ -59,14 +65,14 @@ final class ImagesListCell: UITableViewCell {
             action: nil
         )
     }()
-    
+
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.textColor = .ypWhite
         label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         return label
     }()
-    
+
     private let gradientView: UIGradientView = {
         let gradient = UIGradientView()
         gradient.startColor = .gradientStart

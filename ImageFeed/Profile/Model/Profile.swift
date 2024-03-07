@@ -12,11 +12,11 @@ struct Profile {
     let name: String
     let loginName: String
     let bio: String
-    
-    static func convertProfile(_ profileResult: ProfileResponse) -> Profile{
+
+    static func convertProfile(_ profileResult: ProfileResponse) -> Profile {
         return Profile(
             username: profileResult.username,
-            name: "\(profileResult.firstName ?? "") \(profileResult.lastName ?? "")" ,
+            name: "\(profileResult.firstName ?? "") \(profileResult.lastName ?? "")",
             loginName: "@\(profileResult.username)",
             bio: profileResult.bio ?? ""
         )

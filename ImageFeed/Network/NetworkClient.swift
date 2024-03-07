@@ -8,7 +8,7 @@ private enum NetworkError: Error {
 
 class NetworkClient: NetworkClientProtocol {
     private weak var task: URLSessionTask?
-    
+
     func fetch<Response: Decodable>(urlRequest: URLRequest, completion: @escaping (Result<Response, Error>) -> Void) {
         if task != nil {
             task?.cancel()
