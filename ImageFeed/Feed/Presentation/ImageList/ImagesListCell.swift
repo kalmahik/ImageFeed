@@ -6,22 +6,23 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class ImagesListCell: UITableViewCell {
     // MARK: - Constants
-    
+
     static let reuseIdentifier = "ImagesListCell"
-    
+
     // MARK: - Public Methods
 
     func configCell(_ imageName: String, _ dateText: String, _ isLike: Bool) {
-        pictureImageView.image = UIImage(named: imageName)
+        pictureImageView.kf.setImage(with: URL(string: imageName))
         dateLabel.text = dateText
         likeButton.tintColor = isLike ? .ypRed : .ypWhite50
         addSubViews()
         applyConstraints()
     }
-    
+
     // MARK: - Private Methods
 
     private func addSubViews() {

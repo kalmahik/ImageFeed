@@ -25,11 +25,11 @@ final class ProfileImageService: ProfileImageServiceProtocol {
             case .success(let response):
                 let profileImageURL = response.profileImage.medium
                 self?.profileImageURL = profileImageURL
-                completion(.success(profileImageURL))
                 NotificationCenter.default.post(
                     name: ProfileImageService.didChangeNotification,
                     object: self,
                     userInfo: ["URL": profileImageURL])
+                completion(.success(profileImageURL))
             }
         }
     }

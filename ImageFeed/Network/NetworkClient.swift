@@ -28,15 +28,16 @@ class NetworkClient: NetworkClientProtocol {
                 do {
                     let decoder = JSONDecoder()
                     decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    decoder.dateDecodingStrategy = .iso8601
                     let response = try decoder.decode(Response.self, from: data)
                     completion(.success(response))
-                    self?.task = nil
                 } catch {
                     completion(.failure(error))
                     print("[imageFeed][fetch][\(urlRequest.url ?? NetworkConstants.defaultBaseURL)]: [\(error)]")
                 }
                 return
             }
+            self?.task = nil
         }
         self.task = task
         task.resume()

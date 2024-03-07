@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -53,5 +54,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window = window
             window.makeKeyAndVisible()
         }
+    }
+    
+    private func initKF() {
+        KingfisherManager.shared.defaultOptions = [.requestModifier(KingfisherTokenPlugin(token:"abcdef123456"))]
     }
 }
