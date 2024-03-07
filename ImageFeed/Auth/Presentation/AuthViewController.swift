@@ -8,7 +8,11 @@
 import UIKit
 
 final class AuthViewController: UIViewController {
+    // MARK: - Private Properties
+
     private weak var delegate: AuthViewControllerDelegate?
+    
+    // MARK: - Initializers
 
     init(delegate: AuthViewControllerDelegate) {
         super.init(nibName: nil, bundle: nil)
@@ -18,12 +22,16 @@ final class AuthViewController: UIViewController {
     required init?(coder: NSCoder) {
         super.init(nibName: nil, bundle: nil)
     }
+    
+    // MARK: - UIViewController(*)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubViews()
         applyConstraints()
     }
+    
+    // MARK: - Private Methods
 
     private func addSubViews() {
         view.backgroundColor = .ypBlack

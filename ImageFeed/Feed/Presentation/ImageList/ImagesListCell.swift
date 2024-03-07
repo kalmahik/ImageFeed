@@ -8,7 +8,11 @@
 import UIKit
 
 final class ImagesListCell: UITableViewCell {
+    // MARK: - Constants
+    
     static let reuseIdentifier = "ImagesListCell"
+    
+    // MARK: - Public Methods
 
     func configCell(_ imageName: String, _ dateText: String, _ isLike: Bool) {
         pictureImageView.image = UIImage(named: imageName)
@@ -17,6 +21,8 @@ final class ImagesListCell: UITableViewCell {
         addSubViews()
         applyConstraints()
     }
+    
+    // MARK: - Private Methods
 
     private func addSubViews() {
         [pictureImageView, likeButton, gradientView, dateLabel].forEach {

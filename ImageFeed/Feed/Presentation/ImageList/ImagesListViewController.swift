@@ -7,12 +7,17 @@
 
 import UIKit
 
-let tableContentInsets: UIEdgeInsets = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
-let imageInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 8, right: 16)
-
 class ImagesListViewController: UIViewController {
+    // MARK: - Constants
+
+    static let tableContentInsets: UIEdgeInsets = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
+    static let imageInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 8, right: 16)
+
+    // MARK: - Private Properties
 
     private let photosName: [String] = Array(0..<20).map { "\($0)" }
+    
+    // MARK: - UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +26,8 @@ class ImagesListViewController: UIViewController {
         addSubViews()
         applyConstraints()
     }
+    
+    // MARK: - Private Methods
 
     private func addSubViews() {
         view.addSubview(tableView)
@@ -77,8 +84,8 @@ extension ImagesListViewController: UITableViewDataSource {
         let image = UIImage(named: "\(indexPath.row)")
         guard let image else { return 0 }
         let originalRatio =  image.size.height / image.size.width
-        let imageViewWidth = tableView.bounds.width - imageInsets.right - imageInsets.left
-        let cellHeight = imageViewWidth * originalRatio + imageInsets.bottom
+        let imageViewWidth = tableView.bounds.width - ImagesListViewController.imageInsets.right - ImagesListViewController.imageInsets.left
+        let cellHeight = imageViewWidth * originalRatio + ImagesListViewController.imageInsets.bottom
         return cellHeight
     }
 }

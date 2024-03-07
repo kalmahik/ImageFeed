@@ -9,8 +9,15 @@ import UIKit
 import WebKit
 
 final class WebViewViewController: UIViewController {
+    // MARK: - Public Properties
+
     weak var delegate: WebViewViewControllerDelegate?
+    
+    // MARK: - Private Properties
+
     private var estimatedProgressObservation: NSKeyValueObservation?
+
+    // MARK: - UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +31,8 @@ final class WebViewViewController: UIViewController {
         super.viewDidAppear(animated)
         subscribeProgress()
     }
+    
+    // MARK: - Private Methods
 
     private func addSubViews() {
         view.addSubview(webView)

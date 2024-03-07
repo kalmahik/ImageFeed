@@ -9,17 +9,23 @@ import UIKit
 import Kingfisher
 
 class ProfileViewController: UIViewController {
+    // MARK: - Private Properties
+
     private lazy var storage = OAuthTokenStorage()
     private lazy var profileService = ProfileService.shared
     private lazy var profileImageService = ProfileImageService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
 
+    // MARK: - UIViewController(*)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubViews()
         applyConstraints()
         addObserver()
     }
+    
+    // MARK: - Private Methods
 
     private func addObserver() {
         profileImageServiceObserver = NotificationCenter.default

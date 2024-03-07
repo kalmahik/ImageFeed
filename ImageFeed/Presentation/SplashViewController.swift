@@ -8,10 +8,14 @@
 import UIKit
 
 final class SplashViewController: UIViewController {
+    // MARK: - Private Properties
+
     private let oAuthService = OAuthService.shared
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
     private let storage = OAuthTokenStorage()
+    
+    // MARK: - UIViewController(*)
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -23,6 +27,8 @@ final class SplashViewController: UIViewController {
         addSubViews()
         applyConstraints()
     }
+    
+    // MARK: - Private Methods
 
     private func addSubViews() {
         view.backgroundColor = .ypBlack
