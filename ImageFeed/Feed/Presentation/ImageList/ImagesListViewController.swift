@@ -80,7 +80,6 @@ extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row + 1 == feedService.photos.count {
             feedService.fetchFeed()
-            feedService.fetchFeed()
         }
     }
 }
