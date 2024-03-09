@@ -11,7 +11,7 @@ final class FeedService: FeedServiceProtocol {
     static let shared = FeedService()
     static let didChangeNotification = Notification.Name(rawValue: FeedConstants.notifyDataLoaded)
     let networkClient: NetworkClientProtocol = NetworkClient()
-    let lastLoadedPage = 0
+    var lastLoadedPage = 0
 
     private init() {}
 
@@ -19,10 +19,10 @@ final class FeedService: FeedServiceProtocol {
 
     func fetchFeed(completion: @escaping (Result<[Photo], Error>) -> Void) {
         assert(Thread.isMainThread)
-        let nextPage = (lastLoadedPage) + 1
+        let nextPage = lastLoadedPage + 1
         let queryItems = [
             URLQueryItem(name: FeedConstants.page, value: "\(nextPage)"),
-            URLQueryItem(name: FeedConstants.perPage, value: "10")
+            URLQueryItem(name: FeedConstants.perPage, value: "\(FeedConstants.photosPerPage)")
         ]
         let request = URLRequest.makeRequest(path: FeedConstants.feedPath, queryItems: queryItems)
         networkClient.fetch(urlRequest: request) { [weak self] (result: Result<[PhotoResponse], Error>) in
@@ -30,14 +30,15 @@ final class FeedService: FeedServiceProtocol {
             case .failure(let error):
                 completion(.failure(error))
             case .success(let response):
-                let lastPhotos = response.map { Photo.convertPhoto($0) }
+                self?.lastLoadedPage = nextPage
+                let lastPhotos = response.map { Photo($0) }
                 DispatchQueue.main.async { [weak self] in
                     self?.photos.append(contentsOf: lastPhotos)
                 }
                 NotificationCenter.default.post(
                     name: FeedService.didChangeNotification,
                     object: self,
-                    userInfo: ["photos": self?.photos ?? []])
+                    userInfo: nil)
                 completion(.success(self?.photos ?? []))
             }
         }

@@ -12,5 +12,5 @@ struct FeedConstants {
     static let feedPath = "/photos"
     static let page = "page"
     static let perPage = "per_page"
-
+    static let photosPerPage = 10
 }

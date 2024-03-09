@@ -78,25 +78,19 @@ extension ImagesListViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        fetch new data if user scroll to the last cell
-//        guard isLoadingIndexPath(indexPath) else { return }
-//        if self.totalItems > orders.count {
-//            fetchNextPage()
-//        }
-
-//        if indexPath.row + 1 == photos.count {
-//            
-//        }
+        if indexPath.row + 1 == feedService.photos.count {
+            fetchFeed()
+        }
     }
 
     private func fetchFeed() {
-        feedService.fetchFeed { [weak self] result in
-            DispatchQueue.main.async { [weak self] in
+        feedService.fetchFeed { result in
+            DispatchQueue.main.async {
                 switch result {
                 case .success:
                     break
                 case .failure:
-                    self?.showAlert()
+                    break
                 }
             }
         }

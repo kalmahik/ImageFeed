@@ -17,6 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         loadRootController(scene)
+        initKF()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -55,8 +56,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.makeKeyAndVisible()
         }
     }
-    
+
     private func initKF() {
-        KingfisherManager.shared.defaultOptions = [.requestModifier(KingfisherTokenPlugin(token:"abcdef123456"))]
+        KingfisherManager.shared.defaultOptions = [.requestModifier(KingfisherTokenPlugin())]
     }
 }
