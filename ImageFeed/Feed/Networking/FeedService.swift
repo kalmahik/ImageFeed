@@ -17,7 +17,7 @@ final class FeedService: FeedServiceProtocol {
 
     private (set) var photos: [Photo] = []
 
-    func fetchFeed(completion: @escaping (Result<[Photo], Error>) -> Void) {
+    func fetchFeed() {
         assert(Thread.isMainThread)
         let nextPage = lastLoadedPage + 1
         let queryItems = [
@@ -27,19 +27,15 @@ final class FeedService: FeedServiceProtocol {
         let request = URLRequest.makeRequest(path: FeedConstants.feedPath, queryItems: queryItems)
         networkClient.fetch(urlRequest: request) { [weak self] (result: Result<[PhotoResponse], Error>) in
             switch result {
-            case .failure(let error):
-                completion(.failure(error))
+            case .failure:
+                break
             case .success(let response):
                 self?.lastLoadedPage = nextPage
                 let lastPhotos = response.map { Photo($0) }
                 DispatchQueue.main.async { [weak self] in
                     self?.photos.append(contentsOf: lastPhotos)
                 }
-                NotificationCenter.default.post(
-                    name: FeedService.didChangeNotification,
-                    object: self,
-                    userInfo: nil)
-                completion(.success(self?.photos ?? []))
+                NotificationCenter.default.post(name: FeedService.didChangeNotification, object: self)
             }
         }
     }

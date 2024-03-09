@@ -27,7 +27,7 @@ class ImagesListViewController: UIViewController {
         tableView.delegate = self
         addSubViews()
         applyConstraints()
-        fetchFeed()
+        feedService.fetchFeed()
         addObserver()
     }
 
@@ -79,20 +79,8 @@ extension ImagesListViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row + 1 == feedService.photos.count {
-            fetchFeed()
-        }
-    }
-
-    private func fetchFeed() {
-        feedService.fetchFeed { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success:
-                    break
-                case .failure:
-                    break
-                }
-            }
+            feedService.fetchFeed()
+            feedService.fetchFeed()
         }
     }
 }

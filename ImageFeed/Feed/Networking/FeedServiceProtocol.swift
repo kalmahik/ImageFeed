@@ -10,5 +10,5 @@ import Foundation
 protocol FeedServiceProtocol {
     var networkClient: NetworkClientProtocol { get }
 
-    func fetchFeed(completion: @escaping (Result<[Photo], Error>) -> Void)
+    func fetchFeed()
 }

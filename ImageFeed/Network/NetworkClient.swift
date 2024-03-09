@@ -11,12 +11,13 @@ class NetworkClient: NetworkClientProtocol {
 
     func fetch<Response: Decodable>(urlRequest: URLRequest, completion: @escaping (Result<Response, Error>) -> Void) {
         if task != nil {
+            print("[imageFeed][fetch][\(urlRequest.url ?? NetworkConstants.defaultBaseURL)]: [cancelled]")
             task?.cancel()
         }
         let task = URLSession.shared.dataTask(with: urlRequest) { [weak self] data, response, error in
             if let error {
                 completion(.failure(error))
-                print("[imageFeed][fetch][\(urlRequest.url ?? NetworkConstants.defaultBaseURL)]: [\(error)]")
+                print("[imageFeed][fetch][\(urlRequest.url ?? NetworkConstants.defaultBaseURL)]: [\(error.localizedDescription)]")
                 return
             }
             if let response = response as? HTTPURLResponse, response.statusCode < 200 || response.statusCode >= 300 {
@@ -33,7 +34,7 @@ class NetworkClient: NetworkClientProtocol {
                     completion(.success(response))
                 } catch {
                     completion(.failure(error))
-                    print("[imageFeed][fetch][\(urlRequest.url ?? NetworkConstants.defaultBaseURL)]: [\(error)]")
+                    print("[imageFeed][fetch][\(urlRequest.url ?? NetworkConstants.defaultBaseURL)]: [\(error.localizedDescription)]")
                 }
                 return
             }

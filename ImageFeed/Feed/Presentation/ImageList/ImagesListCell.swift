@@ -13,6 +13,13 @@ final class ImagesListCell: UITableViewCell {
 
     static let reuseIdentifier = "ImagesListCell"
 
+    // MARK: - UIViewController
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        pictureImageView.kf.cancelDownloadTask()
+    }
+
     // MARK: - Public Methods
 
     func configCell(_ imageName: String, _ dateText: String, _ isLike: Bool) {
