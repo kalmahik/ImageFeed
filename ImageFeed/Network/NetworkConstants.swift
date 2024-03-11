@@ -16,4 +16,5 @@ struct NetworkConstants {
 enum Methods: String {
     case post = "POST"
     case get = "GET"
+    case delete = "DELETE"
 }

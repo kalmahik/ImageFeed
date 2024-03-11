@@ -9,9 +9,14 @@ import UIKit
 import Kingfisher
 
 final class ImagesListCell: UITableViewCell {
+
     // MARK: - Constants
 
     static let reuseIdentifier = "ImagesListCell"
+
+    // MARK: - Public Properties
+
+    weak var delegate: ImagesListCellDelegate?
 
     // MARK: - UIViewController
 
@@ -22,15 +27,28 @@ final class ImagesListCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func configCell(_ imageName: String, _ dateText: String, _ isLike: Bool) {
-        pictureImageView.kf.setImage(with: URL(string: imageName))
+    func configCell(_ imageUrl: String, _ dateText: String, _ isLike: Bool) {
+        pictureImageView.kf.setImage(with: URL(string: imageUrl))
+        pictureImageView.kf.indicatorType = .activity
         dateLabel.text = dateText
         likeButton.tintColor = isLike ? .ypRed : .ypWhite50
         addSubViews()
         applyConstraints()
     }
 
+    func setIsLiked(_ isLike: Bool) {
+        likeButton.tintColor = isLike ? .ypRed : .ypWhite50
+    }
+
+    func setLikeEnabled(_ isEnabled: Bool) {
+        likeButton.isEnabled = isEnabled
+    }
+
     // MARK: - Private Methods
+
+    @objc private func didTapLike() {
+        delegate?.didTapLike(self)
+    }
 
     private func addSubViews() {
         [pictureImageView, likeButton, gradientView, dateLabel].forEach {
@@ -70,7 +88,7 @@ final class ImagesListCell: UITableViewCell {
         UIButton.systemButton(
             with: UIImage(systemName: "heart.fill") ?? UIImage(),
             target: nil,
-            action: nil
+            action: #selector(didTapLike)
         )
     }()
 

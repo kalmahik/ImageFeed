@@ -18,6 +18,7 @@ class ImagesListViewController: UIViewController {
     private let feedService = FeedService.shared
     private var feedServiceObserver: NSObjectProtocol?
     private let token = OAuthTokenStorage().token
+    private var photosCount: Int = 0
 
     // MARK: - UIViewController
 
@@ -40,8 +41,23 @@ class ImagesListViewController: UIViewController {
                 object: nil,
                 queue: .main
             ) { [weak self] _ in
-                self?.tableView.reloadData()
+//                let imageIndex = notification.userInfo?[FeedConstants.photoIndex] as? Int
+                self?.updateTableViewAnimated()
             }
+    }
+
+    private func updateTableViewAnimated() {
+        let oldCount = photosCount
+        let newCount = feedService.photos.count
+        photosCount = feedService.photos.count
+        if oldCount != newCount {
+            tableView.performBatchUpdates {
+                let indexPaths = (oldCount..<newCount).map { i in
+                    IndexPath(row: i, section: 0)
+                }
+                tableView.insertRows(at: indexPaths, with: .automatic)
+            }
+        }
     }
 
     private func addSubViews() {
@@ -72,7 +88,8 @@ class ImagesListViewController: UIViewController {
 
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let viewController = SingleImageViewController(imageName: "\(indexPath.row)")
+        let photo = feedService.photos[indexPath.row]
+        let viewController = SingleImageViewController(photo: photo)
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
     }
@@ -92,12 +109,12 @@ extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath)
         guard let imageListCell = cell as? ImagesListCell else { return UITableViewCell() }
-        let imageUrl = feedService.photos[indexPath.row].thumbImageURL
-        let dateLabel = Date().dateString
-        let isLike = indexPath.row % 2 == 0
+        let photo = feedService.photos[indexPath.row]
+        let dateLabel = (photo.createdAt ?? Date()).dateString
         imageListCell.selectionStyle = .none
         imageListCell.backgroundColor = .ypBlack
-        imageListCell.configCell(imageUrl, dateLabel, isLike)
+        imageListCell.delegate = self
+        imageListCell.configCell(photo.thumbImageURL, dateLabel, photo.isLiked)
         return imageListCell
     }
 
@@ -108,5 +125,24 @@ extension ImagesListViewController: UITableViewDataSource {
         let imageViewWidth = tableView.bounds.width - insets.right - insets.left
         let cellHeight = imageViewWidth * originalRatio + insets.bottom
         return cellHeight
+    }
+}
+
+extension ImagesListViewController: ImagesListCellDelegate {
+    func didTapLike(_ cell: ImagesListCell) {
+        cell.setLikeEnabled(false)
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let photo = feedService.photos[indexPath.row]
+        feedService.changeLike(photoId: photo.id, isLike: !photo.isLiked) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let newPhoto):
+                    cell.setIsLiked(newPhoto.isLiked)
+                case .failure(let error):
+                    print(error)
+                }
+                cell.setLikeEnabled(true)
+            }
+        }
     }
 }

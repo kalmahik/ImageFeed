@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import ProgressHUD
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -18,6 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         loadRootController(scene)
         initKF()
+        initProgressHUD()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -59,5 +61,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     private func initKF() {
         KingfisherManager.shared.defaultOptions = [.requestModifier(KingfisherTokenPlugin())]
+    }
+
+    private func initProgressHUD() {
+        ProgressHUD.animationType = .activityIndicator
+        ProgressHUD.colorHUD = .ypBlack
+        ProgressHUD.colorAnimation = .ypGray
     }
 }

@@ -12,7 +12,7 @@ final class WebViewViewController: UIViewController {
     // MARK: - Public Properties
 
     weak var delegate: WebViewViewControllerDelegate?
-    
+
     // MARK: - Private Properties
 
     private var estimatedProgressObservation: NSKeyValueObservation?
@@ -31,7 +31,7 @@ final class WebViewViewController: UIViewController {
         super.viewDidAppear(animated)
         subscribeProgress()
     }
-    
+
     // MARK: - Private Methods
 
     private func addSubViews() {
@@ -74,7 +74,7 @@ final class WebViewViewController: UIViewController {
     private func loadWebview() {
         var urlComponents = URLComponents(string: AuthConstants.authURL) ?? URLComponents()
         urlComponents.queryItems = [
-            URLQueryItem(name: AuthKeys.clientID.rawValue, value: AuthConstants.accessKey),
+            URLQueryItem(name: AuthKeys.clientID.rawValue, value: AuthConstants.accessKey[1]),
             URLQueryItem(name: AuthKeys.redirectUri.rawValue, value: AuthConstants.redirectURI),
             URLQueryItem(name: AuthKeys.responseType.rawValue, value: AuthKeys.code.rawValue),
             URLQueryItem(name: AuthKeys.scope.rawValue, value: AuthConstants.accessScope)

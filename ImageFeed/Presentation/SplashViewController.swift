@@ -14,7 +14,7 @@ final class SplashViewController: UIViewController {
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
     private let storage = OAuthTokenStorage()
-    
+
     // MARK: - UIViewController(*)
 
     override func viewDidAppear(_ animated: Bool) {
@@ -27,7 +27,7 @@ final class SplashViewController: UIViewController {
         addSubViews()
         applyConstraints()
     }
-    
+
     // MARK: - Private Methods
 
     private func addSubViews() {
@@ -75,7 +75,7 @@ extension SplashViewController: AuthViewControllerDelegate {
     private func loadToken(code: String) {
         UIBlockingProgressHUD.show()
         oAuthService.fetchAuthToken(code: code) { [weak self] result in
-            DispatchQueue.main.async { [weak self] in
+            DispatchQueue.main.async {
                 UIBlockingProgressHUD.dismiss()
                 switch result {
                 case .success(let token):
@@ -92,7 +92,7 @@ extension SplashViewController: AuthViewControllerDelegate {
     private func fetchProfile() {
         UIBlockingProgressHUD.show()
         profileService.fetchProfile { [weak self] result in
-            DispatchQueue.main.async { [weak self] in
+            DispatchQueue.main.async {
                 UIBlockingProgressHUD.dismiss()
                 switch result {
                 case .success(let profile):

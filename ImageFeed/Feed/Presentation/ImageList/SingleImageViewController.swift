@@ -7,17 +7,19 @@
 
 import UIKit
 import LinkPresentation
+import Kingfisher
 
 class SingleImageViewController: UIViewController {
     // MARK: - Private Properties
 
-    private var imageName: String = ""
+    private var photo: Photo?
+    private let kfManager = KingfisherManager.shared
 
     // MARK: - Initializers
 
-    init(imageName: String) {
+    init(photo: Photo) {
         super.init(nibName: nil, bundle: nil)
-        self.imageName = imageName
+        self.photo = photo
     }
 
     required init?(coder: NSCoder) {
@@ -31,6 +33,31 @@ class SingleImageViewController: UIViewController {
     }
 
     // MARK: - Private Methods
+
+    @objc private func didShareImage() {
+        let image = downloadImage(imageUrl: photo?.largeImageURL ?? "")
+        let activityViewController = UIActivityViewController(activityItems: [image, self], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        self.present(activityViewController, animated: true, completion: nil)
+    }
+
+    @objc private func didTapBackButton() {
+        dismiss(animated: true, completion: nil)
+    }
+
+    private func downloadImage(imageUrl: String) -> UIImage {
+        var image = UIImage()
+        guard let url = URL(string: imageUrl) else { return image }
+        kfManager.retrieveImage(with: url) { result in
+            switch result {
+            case .success(let value):
+                image = value.image
+            case .failure:
+                break
+            }
+        }
+        return image
+    }
 
     private func addSubViews() {
         [zoomImage, shareButton, backButton].forEach {
@@ -57,9 +84,7 @@ class SingleImageViewController: UIViewController {
     }
 
     private lazy var zoomImage: UIPanZoomImageView = {
-        let zoomImage = UIPanZoomImageView(named: self.imageName)
-        zoomImage.imageName = imageName
-        return zoomImage
+        UIPanZoomImageView(photo: photo)
     }()
 
     private lazy var shareButton: UIButton = {
@@ -80,29 +105,20 @@ class SingleImageViewController: UIViewController {
         button.tintColor = .ypWhite
         return button
     }()
-
-    @objc private func didShareImage() {
-        let image = UIImage(named: imageName) ?? UIImage()
-        let activityViewController = UIActivityViewController(activityItems: [image, self], applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view
-        self.present(activityViewController, animated: true, completion: nil)
-    }
-
-    @objc private func didTapBackButton() {
-        dismiss(animated: true, completion: nil)
-    }
 }
 
 extension SingleImageViewController: UIActivityItemSource {
     func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
-        let image = UIImage(named: imageName) ?? UIImage()
+        let image = downloadImage(imageUrl: photo?.thumbImageURL ?? "")
         let imageProvider = NSItemProvider(object: image)
         let metadata = LPLinkMetadata()
         metadata.imageProvider = imageProvider
         return metadata
     }
 
-    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any { imageName }
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+        photo?.largeImageURL ?? ""
+    }
 
     func activityViewController(
         _ activityViewController: UIActivityViewController,

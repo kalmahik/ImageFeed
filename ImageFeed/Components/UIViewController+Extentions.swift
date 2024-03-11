@@ -27,9 +27,9 @@ extension UIViewController {
         let action = UIAlertAction(title: alertData.buttonText, style: .default, handler: alertData.completion)
         alert.addAction(action)
         alert.view.accessibilityIdentifier = "Alert"
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.main.async {
             // TODO: refactor this later
-            (self?.presentedViewController ?? self)?.present(alert, animated: true, completion: nil)
+            (self.presentedViewController ?? self).present(alert, animated: true, completion: nil)
         }
     }
 }

@@ -9,7 +9,7 @@ import Foundation
 
 final class ProfileImageService: ProfileImageServiceProtocol {
     static let shared = ProfileImageService()
-    static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
+    static let didChangeNotification = Notification.Name(rawValue: ProfileConstants.didChangeNotification)
     let networkClient: NetworkClientProtocol = NetworkClient()
     private (set) var profileImageURL: String?
 
@@ -28,7 +28,7 @@ final class ProfileImageService: ProfileImageServiceProtocol {
                 NotificationCenter.default.post(
                     name: ProfileImageService.didChangeNotification,
                     object: self,
-                    userInfo: ["URL": profileImageURL])
+                    userInfo: [ProfileConstants.url: profileImageURL])
                 completion(.success(profileImageURL))
             }
         }

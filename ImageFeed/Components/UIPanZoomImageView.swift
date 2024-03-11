@@ -1,20 +1,14 @@
 //
-//  PanZoomImageView.swift
+//  UIPanZoomImageView.swift
 //  ImageFeed
 //
 //  Created by Admin on 23.01.2024.
 //
 
 import UIKit
+import Kingfisher
 
 class UIPanZoomImageView: UIScrollView {
-
-    var imageName: String? {
-        didSet {
-            guard let imageName else { return }
-            imageView.image = UIImage(named: imageName)
-        }
-    }
 
     private let imageView = UIImageView()
 
@@ -28,9 +22,11 @@ class UIPanZoomImageView: UIScrollView {
         commonInit()
     }
 
-    convenience init(named: String) {
+    convenience init(photo: Photo?) {
         self.init(frame: .zero)
-        self.imageName = named
+        guard let photo else { return }
+        imageView.kf.setImage(with: URL(string: photo.largeImageURL))
+        imageView.kf.indicatorType = .activity
     }
 
     private func commonInit() {

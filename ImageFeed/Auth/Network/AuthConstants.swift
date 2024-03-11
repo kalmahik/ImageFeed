@@ -8,8 +8,8 @@
 import Foundation
 
 struct AuthConstants {
-    static let accessKey = "jsR4eJSa8sZwpX4IH0jIha-l-I52ziQiCOtVIWENf6k"
-    static let secretKey = "6M0kRYVdL9qadhIOgL5R66WBjrqG72nrJ_hbFuNhStQ"
+    static let accessKey = ["jsR4eJSa8sZwpX4IH0jIha-l-I52ziQiCOtVIWENf6k", "DRn3RhRnPFClKYg17IoSY9JStbmF5g-FmJ0hEN-ma88"]
+    static let secretKey = ["6M0kRYVdL9qadhIOgL5R66WBjrqG72nrJ_hbFuNhStQ", "bgvTrHqb2KMiGgZwqYIwF7zft7Ytwicx-fogIfasD8c"]
     static let redirectURI = "urn:ietf:wg:oauth:2.0:oob"
     static let accessScope = "public+read_user+write_likes"
 
