@@ -1,10 +1,3 @@
-//
-//  ImagesListCell.swift
-//  ImageFeed
-//
-//  Created by Murad Azimov on 11.01.2024.
-//
-
 import UIKit
 import Kingfisher
 
@@ -28,8 +21,8 @@ final class ImagesListCell: UITableViewCell {
     // MARK: - Public Methods
 
     func configCell(_ imageUrl: String, _ dateText: String, _ isLike: Bool) {
-        pictureImageView.kf.setImage(with: URL(string: imageUrl))
         pictureImageView.kf.indicatorType = .activity
+        pictureImageView.kf.setImage(with: URL(string: imageUrl))
         dateLabel.text = dateText
         likeButton.tintColor = isLike ? .ypRed : .ypWhite50
         addSubViews()

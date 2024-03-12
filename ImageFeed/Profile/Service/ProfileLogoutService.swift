@@ -1,10 +1,3 @@
-//
-//  ProfileLogoutService.swift
-//  ImageFeed
-//
-//  Created by Murad Azimov on 11.03.2024.
-//
-
 import Foundation
 import WebKit
 

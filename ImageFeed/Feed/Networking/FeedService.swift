@@ -1,10 +1,3 @@
-//
-//  FeedService.swift
-//  ImageFeed
-//
-//  Created by Murad Azimov on 05.03.2024.
-//
-
 import Foundation
 
 final class FeedService: FeedServiceProtocol {
@@ -44,7 +37,7 @@ final class FeedService: FeedServiceProtocol {
     func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Photo, Error>) -> Void) {
         assert(Thread.isMainThread)
         let path = FeedConstants.likePath.replacingOccurrences(of: "id", with: photoId)
-        let method = isLike ? Methods.post.rawValue : Methods.delete.rawValue
+        let method = isLike ? HttpMethods.post.rawValue : HttpMethods.delete.rawValue
         let request = URLRequest.makeRequest(httpMethod: method, path: path)
         networkClient.fetch(urlRequest: request) { [weak self] (result: Result<LikeResponse, Error>) in
             guard let self else { return }

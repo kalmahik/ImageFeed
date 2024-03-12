@@ -1,10 +1,3 @@
-//
-//  FeedConstants.swift
-//  ImageFeed
-//
-//  Created by Murad Azimov on 05.03.2024.
-//
-
 import Foundation
 
 struct FeedConstants {

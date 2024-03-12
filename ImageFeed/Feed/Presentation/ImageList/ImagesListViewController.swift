@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  ImageFeed
-//
-//  Created by Murad Azimov on 06.01.2024.
-//
-
 import UIKit
 import Kingfisher
 
@@ -41,7 +34,6 @@ class ImagesListViewController: UIViewController {
                 object: nil,
                 queue: .main
             ) { [weak self] _ in
-//                let imageIndex = notification.userInfo?[FeedConstants.photoIndex] as? Int
                 self?.updateTableViewAnimated()
             }
     }
@@ -139,7 +131,7 @@ extension ImagesListViewController: ImagesListCellDelegate {
                 case .success(let newPhoto):
                     cell.setIsLiked(newPhoto.isLiked)
                 case .failure(let error):
-                    print(error)
+                    self.showAlert()
                 }
                 cell.setLikeEnabled(true)
             }

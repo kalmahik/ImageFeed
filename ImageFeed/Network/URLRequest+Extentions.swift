@@ -1,15 +1,8 @@
-//
-//  URLRequest+Extentions.swift
-//  ImageFeed
-//
-//  Created by kalmahik on 11.02.2024.
-//
-
 import Foundation
 
 extension URLRequest {
     static func makeRequest(
-        httpMethod: String? = Methods.get.rawValue,
+        httpMethod: String? = HttpMethods.get.rawValue,
         path: String, host: String? = NetworkConstants.host,
         queryItems: [URLQueryItem]? = []
     ) -> URLRequest {

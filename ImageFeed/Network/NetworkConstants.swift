@@ -1,10 +1,3 @@
-//
-//  Constants.swift
-//  ImageFeed
-//
-//  Created by kalmahik on 25.02.2024.
-//
-
 import Foundation
 
 struct NetworkConstants {
@@ -13,7 +6,7 @@ struct NetworkConstants {
     static let schema = "https"
 }
 
-enum Methods: String {
+enum HttpMethods: String {
     case post = "POST"
     case get = "GET"
     case delete = "DELETE"

@@ -1,4 +1,5 @@
 import Foundation
+import os
 
 private enum NetworkError: Error {
     case httpStatusCode(Int)
@@ -11,15 +12,15 @@ class NetworkClient: NetworkClientProtocol {
     private lazy var profileLogoutService = ProfileLogoutService.shared
 
     func fetch<Response: Decodable>(urlRequest: URLRequest, completion: @escaping (Result<Response, Error>) -> Void) {
-        print("[imageFeed][fetch][\(urlRequest.httpMethod ?? "")][\(urlRequest.url ?? NetworkConstants.defaultBaseURL)]: [attempt to call]")
+        Logger.networkLog(message: "attempt to call", urlRequest: urlRequest)
         if task != nil {
-            print("[imageFeed][fetch][\(urlRequest.httpMethod ?? "")][\(urlRequest.url ?? NetworkConstants.defaultBaseURL)]: [cancelled]")
+            Logger.networkLog(message: "cancelled", urlRequest: urlRequest)
             task?.cancel()
         }
         let task = URLSession.shared.dataTask(with: urlRequest) { [weak self] data, response, error in
             if let error {
                 completion(.failure(error))
-                print("[imageFeed][fetch][\(urlRequest.httpMethod ?? "")][\(urlRequest.url ?? NetworkConstants.defaultBaseURL)]: [\(error.localizedDescription)]")
+                Logger.networkLog(message: error.localizedDescription, urlRequest: urlRequest)
                 return
             }
             if let response = response as? HTTPURLResponse, response.statusCode == 403 {
@@ -28,7 +29,7 @@ class NetworkClient: NetworkClientProtocol {
             }
             if let response = response as? HTTPURLResponse, response.statusCode < 200 || response.statusCode >= 300 {
                 completion(.failure(NetworkError.httpStatusCode(response.statusCode)))
-                print("[imageFeed][fetch][\(urlRequest.httpMethod ?? "")][\(urlRequest.url ?? NetworkConstants.defaultBaseURL)]: [\(response.statusCode)]")
+                Logger.networkLog(message: "\(response.statusCode)", urlRequest: urlRequest)
                 return
             }
             if let data {
@@ -40,7 +41,7 @@ class NetworkClient: NetworkClientProtocol {
                     completion(.success(response))
                 } catch {
                     completion(.failure(error))
-                    print("[imageFeed][fetch][\(urlRequest.httpMethod ?? "")][\(urlRequest.url ?? NetworkConstants.defaultBaseURL)]: [\(error.localizedDescription)]")
+                    Logger.networkLog(message: error.localizedDescription, urlRequest: urlRequest)
                 }
                 return
             }

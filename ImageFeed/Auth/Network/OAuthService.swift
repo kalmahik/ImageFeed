@@ -1,10 +1,3 @@
-//
-//  OAuthService.swift
-//  ImageFeed
-//
-//  Created by kalmahik on 11.02.2024.
-//
-
 import Foundation
 
 private enum OAuthServiceError: Error {
@@ -21,19 +14,19 @@ final class OAuthService: OAuthServiceProtocol {
     func fetchAuthToken(code: String, completion: @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
         if lastCode == code {
-            print("[imageFeed][fetchAuthToken][\(AuthConstants.tokenPath)]: [the same code]")
+            Logger.networkLog(message: "the same code")
             return
         }
         lastCode = code
         let queryItems = [
-            URLQueryItem(name: AuthKeys.clientID.rawValue, value: AuthConstants.accessKey[1]),
-            URLQueryItem(name: AuthKeys.clientSecret.rawValue, value: AuthConstants.secretKey[1]),
+            URLQueryItem(name: AuthKeys.clientID.rawValue, value: AuthConstants.accessKey[0]),
+            URLQueryItem(name: AuthKeys.clientSecret.rawValue, value: AuthConstants.secretKey[0]),
             URLQueryItem(name: AuthKeys.redirectUri.rawValue, value: AuthConstants.redirectURI),
             URLQueryItem(name: AuthKeys.code.rawValue, value: code),
             URLQueryItem(name: AuthKeys.grantType.rawValue, value: AuthKeys.authorizationCode.rawValue)
         ]
         let request = URLRequest.makeRequest(
-            httpMethod: Methods.post.rawValue,
+            httpMethod: HttpMethods.post.rawValue,
             path: AuthConstants.tokenPath,
             host: AuthConstants.hostToken,
             queryItems: queryItems

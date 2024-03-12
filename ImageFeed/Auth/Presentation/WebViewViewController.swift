@@ -1,10 +1,3 @@
-//
-//  WebViewViewController.swift
-//  ImageFeed
-//
-//  Created by kalmahik on 08.02.2024.
-//
-
 import UIKit
 import WebKit
 
@@ -74,7 +67,7 @@ final class WebViewViewController: UIViewController {
     private func loadWebview() {
         var urlComponents = URLComponents(string: AuthConstants.authURL) ?? URLComponents()
         urlComponents.queryItems = [
-            URLQueryItem(name: AuthKeys.clientID.rawValue, value: AuthConstants.accessKey[1]),
+            URLQueryItem(name: AuthKeys.clientID.rawValue, value: AuthConstants.accessKey[0]),
             URLQueryItem(name: AuthKeys.redirectUri.rawValue, value: AuthConstants.redirectURI),
             URLQueryItem(name: AuthKeys.responseType.rawValue, value: AuthKeys.code.rawValue),
             URLQueryItem(name: AuthKeys.scope.rawValue, value: AuthConstants.accessScope)
