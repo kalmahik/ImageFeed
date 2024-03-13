@@ -22,7 +22,11 @@ final class ImagesListCell: UITableViewCell {
 
     func configCell(_ imageUrl: String, _ dateText: String, _ isLike: Bool) {
         pictureImageView.kf.indicatorType = .activity
-        pictureImageView.kf.setImage(with: URL(string: imageUrl))
+        let placeholder = UIImage(named: "image_placeholder")
+        pictureImageView.contentMode = .center
+        pictureImageView.kf.setImage(with: URL(string: imageUrl), placeholder: placeholder) { [weak self] resilt in
+            self?.pictureImageView.contentMode = .scaleAspectFill
+        }
         dateLabel.text = dateText
         likeButton.tintColor = isLike ? .ypRed : .ypWhite50
         addSubViews()
@@ -74,6 +78,7 @@ final class ImagesListCell: UITableViewCell {
         let image = UIImageView()
         image.layer.cornerRadius = 16
         image.layer.masksToBounds = true
+        image.backgroundColor = .ypGray
         return image
     }()
 
