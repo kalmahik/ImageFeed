@@ -5,9 +5,10 @@ import Kingfisher
 class SingleImageViewController: UIViewController {
     // MARK: - Private Properties
 
+    private var image: UIImage?
     private var photo: Photo?
     private let kfManager = KingfisherManager.shared
-
+    
     // MARK: - Initializers
 
     init(photo: Photo) {
@@ -18,17 +19,24 @@ class SingleImageViewController: UIViewController {
     required init?(coder: NSCoder) {
         super.init(nibName: nil, bundle: nil)
     }
+    
+    // MARK: - UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubViews()
         applyConstraints()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        downloadImage(imageUrl: photo?.largeImageURL)
+    }
 
     // MARK: - Private Methods
 
     @objc private func didShareImage() {
-        let image = downloadImage(imageUrl: photo?.largeImageURL ?? "")
+        guard let image else { return }
         let activityViewController = UIActivityViewController(activityItems: [image, self], applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
         self.present(activityViewController, animated: true, completion: nil)
@@ -38,18 +46,19 @@ class SingleImageViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
-    private func downloadImage(imageUrl: String) -> UIImage {
-        var image = UIImage()
-        guard let url = URL(string: imageUrl) else { return image }
-        kfManager.retrieveImage(with: url) { result in
+    private func downloadImage(imageUrl: String?) {
+        guard let imageUrl, let url = URL(string: imageUrl) else { return }
+        UIBlockingProgressHUD.show()
+        kfManager.retrieveImage(with: url) { [weak self] result in
             switch result {
             case .success(let value):
-                image = value.image
+                self?.image = value.image
+                self?.zoomImage.loadImage(value.image)
             case .failure:
                 break
             }
+            UIBlockingProgressHUD.dismiss()
         }
-        return image
     }
 
     private func addSubViews() {
@@ -76,9 +85,7 @@ class SingleImageViewController: UIViewController {
         ])
     }
 
-    private lazy var zoomImage: UIPanZoomImageView = {
-        UIPanZoomImageView(photo: photo)
-    }()
+    private lazy var zoomImage: UIZoomImageView = UIZoomImageView()
 
     private lazy var shareButton: UIButton = {
         let button = UIButton()
@@ -102,7 +109,7 @@ class SingleImageViewController: UIViewController {
 
 extension SingleImageViewController: UIActivityItemSource {
     func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
-        let image = downloadImage(imageUrl: photo?.thumbImageURL ?? "")
+        guard let image else { return LPLinkMetadata() }
         let imageProvider = NSItemProvider(object: image)
         let metadata = LPLinkMetadata()
         metadata.imageProvider = imageProvider

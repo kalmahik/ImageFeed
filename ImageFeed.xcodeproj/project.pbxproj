@@ -11,7 +11,7 @@
 		840FEB502B748E990076067E /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840FEB4F2B748E990076067E /* WebViewViewController.swift */; };
 		841FDACC2B58EFA90001C286 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FDACB2B58EFA90001C286 /* ProfileViewController.swift */; };
 		841FDAD02B5A41D80001C286 /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FDACF2B5A41D80001C286 /* SingleImageViewController.swift */; };
-		847B024F2B5F17D9005CC977 /* UIPanZoomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847B024E2B5F17D9005CC977 /* UIPanZoomImageView.swift */; };
+		847B024F2B5F17D9005CC977 /* UIZoomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847B024E2B5F17D9005CC977 /* UIZoomImageView.swift */; };
 		8484F8102B749BB5006D0AF5 /* WebViewViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484F80F2B749BB5006D0AF5 /* WebViewViewControllerDelegate.swift */; };
 		8484F8122B78ED1F006D0AF5 /* OAuthTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484F8112B78ED1F006D0AF5 /* OAuthTokenResponse.swift */; };
 		8484F8142B78EDFF006D0AF5 /* OAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484F8132B78EDFF006D0AF5 /* OAuthService.swift */; };
@@ -75,7 +75,7 @@
 		840FEB4F2B748E990076067E /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		841FDACB2B58EFA90001C286 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		841FDACF2B5A41D80001C286 /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
-		847B024E2B5F17D9005CC977 /* UIPanZoomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPanZoomImageView.swift; sourceTree = "<group>"; };
+		847B024E2B5F17D9005CC977 /* UIZoomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIZoomImageView.swift; sourceTree = "<group>"; };
 		8484F80F2B749BB5006D0AF5 /* WebViewViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewControllerDelegate.swift; sourceTree = "<group>"; };
 		8484F8112B78ED1F006D0AF5 /* OAuthTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthTokenResponse.swift; sourceTree = "<group>"; };
 		8484F8132B78EDFF006D0AF5 /* OAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthService.swift; sourceTree = "<group>"; };
@@ -160,7 +160,7 @@
 			children = (
 				84A9F0E72B8B557A00EC6307 /* UIBlockingProgressHUD.swift */,
 				84ED9C572B51F49F00BB8102 /* UIGradientView.swift */,
-				847B024E2B5F17D9005CC977 /* UIPanZoomImageView.swift */,
+				847B024E2B5F17D9005CC977 /* UIZoomImageView.swift */,
 				F5E991392B8E83D8001CEDDD /* UIViewController+Extentions.swift */,
 			);
 			path = Components;
@@ -526,7 +526,7 @@
 				840FEB502B748E990076067E /* WebViewViewController.swift in Sources */,
 				84A9F0EE2B8B5BE300EC6307 /* Profile.swift in Sources */,
 				F55D8F542B8D2B8600AAC426 /* ProfileImageServiceProtocol.swift in Sources */,
-				847B024F2B5F17D9005CC977 /* UIPanZoomImageView.swift in Sources */,
+				847B024F2B5F17D9005CC977 /* UIZoomImageView.swift in Sources */,
 				F554FB562B6FD93000241D83 /* AuthConstants.swift in Sources */,
 				8484F8122B78ED1F006D0AF5 /* OAuthTokenResponse.swift in Sources */,
 				84EA0D2E2B8B8B7900CA0CF7 /* ProfileConstants.swift in Sources */,
