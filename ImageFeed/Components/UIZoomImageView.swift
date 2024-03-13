@@ -1,7 +1,6 @@
 import UIKit
-import Kingfisher
 
-class UIPanZoomImageView: UIScrollView {
+class UIZoomImageView: UIScrollView {
 
     private let imageView = UIImageView()
 
@@ -15,13 +14,14 @@ class UIPanZoomImageView: UIScrollView {
         commonInit()
     }
 
-    convenience init(photo: Photo?) {
+    convenience init() {
         self.init(frame: .zero)
-        guard let photo else { return }
-        imageView.kf.indicatorType = .activity
-        imageView.kf.setImage(with: URL(string: photo.largeImageURL))
     }
-
+    
+    func loadImage(_ photo: UIImage) {
+        imageView.image = photo
+    }
+    
     private func commonInit() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
@@ -49,6 +49,6 @@ class UIPanZoomImageView: UIScrollView {
     }
 }
 
-extension UIPanZoomImageView: UIScrollViewDelegate {
+extension UIZoomImageView: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? { imageView }
 }
