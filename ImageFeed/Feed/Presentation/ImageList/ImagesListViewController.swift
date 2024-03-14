@@ -67,6 +67,8 @@ class ImagesListViewController: UIViewController {
     }
 
     private let tableView: UITableView = {
+        let placeholder = UIImageView(image: UIImage(named: "image_placeholder"))
+        placeholder.contentMode = .center
         let tableView  = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.contentInset = tableContentInsets
@@ -74,6 +76,7 @@ class ImagesListViewController: UIViewController {
         tableView.register(ImagesListCell.self, forCellReuseIdentifier: ImagesListCell.reuseIdentifier)
         tableView.separatorColor = .ypBlack
         tableView.backgroundColor = .ypBlack
+        tableView.backgroundView = placeholder
         return tableView
     }()
 }
