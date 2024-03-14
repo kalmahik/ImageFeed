@@ -21,4 +21,8 @@ final class ProfileService: ProfileServiceProtocol {
             }
         }
     }
+
+    func cleanData() {
+        profile = nil
+    }
 }

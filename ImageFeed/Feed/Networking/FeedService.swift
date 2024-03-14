@@ -56,4 +56,9 @@ final class FeedService: FeedServiceProtocol {
             }
         }
     }
+
+    func cleanData() {
+        photos = []
+        lastLoadedPage = 0
+    }
 }

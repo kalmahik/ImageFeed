@@ -3,13 +3,19 @@ import WebKit
 
 final class ProfileLogoutService {
     static let shared = ProfileLogoutService()
-    private lazy var storage = OAuthTokenStorage()
+
+    private let oAuthService = OAuthService.shared
+    private let profileService = ProfileService.shared
+    private let profileImageService = ProfileImageService.shared
+    private let storage = OAuthTokenStorage.shared
+    private let feedService = FeedService.shared
 
     private init() {}
 
     func logout() {
         cleanCookies()
         cleanToken()
+        cleanUserData()
         goToAuth()
     }
 
@@ -26,6 +32,12 @@ final class ProfileLogoutService {
 
     private func cleanToken() {
         storage.storeToken(token: nil)
+    }
+
+    private func cleanUserData() {
+        profileService.cleanData()
+        profileImageService.cleanData()
+        feedService.cleanData()
     }
 
     private func goToAuth() {

@@ -26,4 +26,8 @@ final class ProfileImageService: ProfileImageServiceProtocol {
             }
         }
     }
+
+    func cleanData() {
+        profileImageURL = nil
+    }
 }

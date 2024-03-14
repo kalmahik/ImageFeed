@@ -112,6 +112,18 @@ class ProfileViewController: UIViewController {
     }
 
     @objc private func didTapLogoutButton() {
+        let alertData = AlertModel(
+            title: "Пока, пока!",
+            message: "Уверены, что хотите выйти?",
+            actions: [
+                Action(buttonText: "Нет", action: nil, style: .cancel),
+                Action(buttonText: "Да", action: logoutAction, style: .destructive)
+            ]
+        )
+        showAlert(alertData: alertData)
+    }
+
+    private func logoutAction(action: UIAlertAction) {
         profileLogoutService.logout()
     }
 }

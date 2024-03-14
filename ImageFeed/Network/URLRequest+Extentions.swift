@@ -13,7 +13,7 @@ extension URLRequest {
         urlComponents.queryItems = queryItems
         var request = URLRequest(url: urlComponents.url ?? NetworkConstants.defaultBaseURL)
         request.httpMethod = httpMethod
-        let token = OAuthTokenStorage().token
+        let token = OAuthTokenStorage.shared.token
         if let token {
             request.setValue("\(AuthKeys.bearer.rawValue) \(token)", forHTTPHeaderField: AuthKeys.authorization.rawValue)
         }

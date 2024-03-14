@@ -2,7 +2,7 @@ import Foundation
 import Kingfisher
 
 class KingfisherTokenPlugin: ImageDownloadRequestModifier {
-    private let token = OAuthTokenStorage().token
+    private let token = OAuthTokenStorage.shared.token
 
     func modified(for request: URLRequest) -> URLRequest? {
         var request = request

@@ -10,7 +10,7 @@ class ImagesListViewController: UIViewController {
     // MARK: - Private Properties
     private let feedService = FeedService.shared
     private var feedServiceObserver: NSObjectProtocol?
-    private let token = OAuthTokenStorage().token
+    private let token = OAuthTokenStorage.shared.token
     private var photosCount: Int = 0
 
     // MARK: - UIViewController
@@ -102,7 +102,7 @@ extension ImagesListViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath)
         guard let imageListCell = cell as? ImagesListCell else { return UITableViewCell() }
         let photo = feedService.photos[indexPath.row]
-        let dateLabel = (photo.createdAt ?? Date()).dateString
+        let dateLabel = photo.createdAt?.dateString ?? ""
         imageListCell.selectionStyle = .none
         imageListCell.backgroundColor = .ypBlack
         imageListCell.delegate = self
@@ -130,7 +130,7 @@ extension ImagesListViewController: ImagesListCellDelegate {
                 switch result {
                 case .success(let newPhoto):
                     cell.setIsLiked(newPhoto.isLiked)
-                case .failure(let error):
+                case .failure:
                     self.showAlert()
                 }
                 cell.setLikeEnabled(true)
