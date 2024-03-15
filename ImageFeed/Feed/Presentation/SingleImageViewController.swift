@@ -8,7 +8,7 @@ class SingleImageViewController: UIViewController {
     private var image: UIImage?
     private var photo: Photo?
     private let kfManager = KingfisherManager.shared
-    
+
     // MARK: - Initializers
 
     init(photo: Photo) {
@@ -19,18 +19,19 @@ class SingleImageViewController: UIViewController {
     required init?(coder: NSCoder) {
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     // MARK: - UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubViews()
         applyConstraints()
+        getCachedImage()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        downloadImage(imageUrl: photo?.largeImageURL)
+        downloadImage()
     }
 
     // MARK: - Private Methods
@@ -46,8 +47,8 @@ class SingleImageViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
-    private func downloadImage(imageUrl: String?) {
-        guard let imageUrl, let url = URL(string: imageUrl) else { return }
+    private func downloadImage() {
+        guard let imageUrl = photo?.largeImageURL, let url = URL(string: imageUrl) else { return }
         UIBlockingProgressHUD.show()
         kfManager.retrieveImage(with: url) { [weak self] result in
             switch result {
@@ -58,6 +59,19 @@ class SingleImageViewController: UIViewController {
                 break
             }
             UIBlockingProgressHUD.dismiss()
+        }
+    }
+
+    private func getCachedImage() {
+        let cache = ImageCache.default
+        guard let preview = photo?.thumbImageURL else { return }
+        cache.retrieveImage(forKey: preview) { result in
+            switch result {
+            case .success(let value):
+                self.zoomImage.loadImage(value.image ?? UIImage())
+            case .failure:
+                break
+            }
         }
     }
 
