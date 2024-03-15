@@ -1,5 +1,6 @@
 import Foundation
 import WebKit
+import Kingfisher
 
 final class ProfileLogoutService {
     static let shared = ProfileLogoutService()
@@ -38,6 +39,7 @@ final class ProfileLogoutService {
         profileService.cleanData()
         profileImageService.cleanData()
         feedService.cleanData()
+        KingfisherManager.shared.cache.clearCache()
     }
 
     private func goToAuth() {

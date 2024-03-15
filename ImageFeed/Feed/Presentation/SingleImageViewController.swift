@@ -6,6 +6,7 @@ class SingleImageViewController: UIViewController {
     // MARK: - Private Properties
 
     private var image: UIImage?
+    private var imagePreview: UIImage?
     private var photo: Photo?
     private let kfManager = KingfisherManager.shared
 
@@ -68,6 +69,7 @@ class SingleImageViewController: UIViewController {
         cache.retrieveImage(forKey: preview) { result in
             switch result {
             case .success(let value):
+                self.imagePreview = value.image
                 self.zoomImage.loadImage(value.image ?? UIImage())
             case .failure:
                 break
@@ -123,8 +125,8 @@ class SingleImageViewController: UIViewController {
 
 extension SingleImageViewController: UIActivityItemSource {
     func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
-        guard let image else { return LPLinkMetadata() }
-        let imageProvider = NSItemProvider(object: image)
+        guard let imagePreview else { return LPLinkMetadata() }
+        let imageProvider = NSItemProvider(object: imagePreview)
         let metadata = LPLinkMetadata()
         metadata.imageProvider = imageProvider
         return metadata
