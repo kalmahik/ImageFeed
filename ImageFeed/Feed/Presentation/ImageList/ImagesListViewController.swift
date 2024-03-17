@@ -1,5 +1,5 @@
-import UIKit
 import Kingfisher
+import UIKit
 
 class ImagesListViewController: UIViewController {
     // MARK: - Constants
@@ -21,8 +21,9 @@ class ImagesListViewController: UIViewController {
         tableView.delegate = self
         addSubViews()
         applyConstraints()
-        feedService.fetchFeed()
         addObserver()
+        feedService.fetchFeed()
+        feedService.fetchFeed()
     }
 
     // MARK: - Private Methods

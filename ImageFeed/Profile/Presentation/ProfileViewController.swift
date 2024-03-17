@@ -1,5 +1,5 @@
-import UIKit
 import Kingfisher
+import UIKit
 
 class ProfileViewController: UIViewController {
     // MARK: - Private Properties

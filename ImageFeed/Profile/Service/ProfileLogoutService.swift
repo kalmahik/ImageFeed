@@ -1,6 +1,6 @@
 import Foundation
-import WebKit
 import Kingfisher
+import WebKit
 
 final class ProfileLogoutService {
     static let shared = ProfileLogoutService()

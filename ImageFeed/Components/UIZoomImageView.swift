@@ -17,11 +17,11 @@ class UIZoomImageView: UIScrollView {
     convenience init() {
         self.init(frame: .zero)
     }
-    
+
     func loadImage(_ photo: UIImage) {
         imageView.image = photo
     }
-    
+
     private func commonInit() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill

@@ -1,5 +1,5 @@
-import UIKit
 import Kingfisher
+import UIKit
 
 final class ImagesListCell: UITableViewCell {
 
@@ -24,7 +24,7 @@ final class ImagesListCell: UITableViewCell {
         pictureImageView.kf.indicatorType = .activity
         let placeholder = UIImage(named: "image_placeholder")
         pictureImageView.contentMode = .center
-        pictureImageView.kf.setImage(with: URL(string: imageUrl), placeholder: placeholder) { [weak self] resilt in
+        pictureImageView.kf.setImage(with: URL(string: imageUrl), placeholder: placeholder) { [weak self] _ in
             self?.pictureImageView.contentMode = .scaleAspectFill
         }
         dateLabel.text = dateText

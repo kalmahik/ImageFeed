@@ -1,6 +1,6 @@
-import UIKit
-import LinkPresentation
 import Kingfisher
+import LinkPresentation
+import UIKit
 
 class SingleImageViewController: UIViewController {
     // MARK: - Private Properties
