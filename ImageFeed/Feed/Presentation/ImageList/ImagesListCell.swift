@@ -24,8 +24,13 @@ final class ImagesListCell: UITableViewCell {
         pictureImageView.kf.indicatorType = .activity
         let placeholder = UIImage(named: "image_placeholder")
         pictureImageView.contentMode = .center
-        pictureImageView.kf.setImage(with: URL(string: imageUrl), placeholder: placeholder) { [weak self] _ in
-            self?.pictureImageView.contentMode = .scaleAspectFill
+        pictureImageView.kf.setImage(with: URL(string: imageUrl), placeholder: placeholder) { [weak self] result in
+            switch result {
+            case .success:
+                self?.pictureImageView.contentMode = .scaleAspectFill
+            case .failure:
+                self?.pictureImageView.contentMode = .center
+            }
         }
         dateLabel.text = dateText
         likeButton.tintColor = isLike ? .ypRed : .ypWhite50
