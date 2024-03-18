@@ -1,7 +1,10 @@
 import UIKit
 import WebKit
 
-final class WebViewViewController: UIViewController {
+final class WebViewViewController: UIViewController, WebViewViewControllerProtocol {
+
+    var presenter: WebViewPresenterProtocol?
+
     // MARK: - Public Properties
 
     weak var delegate: WebViewViewControllerDelegate?
@@ -16,13 +19,28 @@ final class WebViewViewController: UIViewController {
         super.viewDidLoad()
         addSubViews()
         applyConstraints()
-        loadWebview()
-        updateProgress()
+        presenter?.loadWebview()
+        presenter?.didUpdateProgressValue(0)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         subscribeProgress()
+    }
+
+    // MARK: - Public Methods
+
+    func load(_ request: URLRequest) {
+        webView.load(request)
+    }
+
+    func setProgressValue(_ newValue: Float) {
+//        progressView.progress = newValue
+        progressView.setProgress(newValue, animated: true)
+    }
+
+    func setProgressHidden(_ isHidden: Bool) {
+        progressView.isHidden = isHidden
     }
 
     // MARK: - Private Methods
@@ -49,30 +67,13 @@ final class WebViewViewController: UIViewController {
             \.estimatedProgress,
              options: [],
              changeHandler: { [weak self] _, _ in
-                 self?.updateProgress()
+                 self?.presenter?.didUpdateProgressValue(self?.webView.estimatedProgress ?? 0)
              }
         )
     }
 
     private func unsubscribeProgress() {
         webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), context: nil)
-    }
-
-    private func updateProgress() {
-        let progressValue = Float(webView.estimatedProgress)
-        progressView.setProgress(progressValue, animated: true)
-        progressView.isHidden = progressValue >= 1.0
-    }
-
-    private func loadWebview() {
-        var urlComponents = URLComponents(string: AuthConstants.authURL) ?? URLComponents()
-        urlComponents.queryItems = [
-            URLQueryItem(name: AuthKeys.clientID.rawValue, value: AuthConstants.accessKey),
-            URLQueryItem(name: AuthKeys.redirectUri.rawValue, value: AuthConstants.redirectURI),
-            URLQueryItem(name: AuthKeys.responseType.rawValue, value: AuthKeys.code.rawValue),
-            URLQueryItem(name: AuthKeys.scope.rawValue, value: AuthConstants.accessScope)
-        ]
-        webView.load(URLRequest(url: urlComponents.url ?? NetworkConstants.defaultBaseURL))
     }
 
     private lazy var webView: WKWebView = {
@@ -99,24 +100,12 @@ extension WebViewViewController: WKNavigationDelegate {
         decidePolicyFor navigationAction: WKNavigationAction,
         decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
     ) {
-        if let code = parseCode(from: navigationAction) {
+        if let url = navigationAction.request.url,
+           let code = presenter?.parseCode(from: url) {
             delegate?.webViewViewController(self, didAuthenticateWithCode: code)
             decisionHandler(.cancel)
         } else {
             decisionHandler(.allow)
-        }
-    }
-
-    private func parseCode(from navigationAction: WKNavigationAction) -> String? {
-        if
-            let url = navigationAction.request.url,
-            let urlComponents = URLComponents(string: url.absoluteString),
-            urlComponents.path == AuthConstants.redirectPath,
-            let items = urlComponents.queryItems,
-            let codeItem = items.first(where: { $0.name == AuthKeys.code.rawValue}) {
-            return codeItem.value
-        } else {
-            return nil
         }
     }
 }
