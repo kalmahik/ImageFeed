@@ -11,6 +11,8 @@
 		840FEB502B748E990076067E /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840FEB4F2B748E990076067E /* WebViewViewController.swift */; };
 		841FDACC2B58EFA90001C286 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FDACB2B58EFA90001C286 /* ProfileViewController.swift */; };
 		841FDAD02B5A41D80001C286 /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FDACF2B5A41D80001C286 /* SingleImageViewController.swift */; };
+		84676B4A2BA95534005D56D4 /* AuthHelperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84676B492BA95534005D56D4 /* AuthHelperProtocol.swift */; };
+		84676B4C2BA95965005D56D4 /* AuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84676B4B2BA95965005D56D4 /* AuthHelper.swift */; };
 		847B024F2B5F17D9005CC977 /* UIZoomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847B024E2B5F17D9005CC977 /* UIZoomImageView.swift */; };
 		8484F8102B749BB5006D0AF5 /* WebViewViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484F80F2B749BB5006D0AF5 /* WebViewViewControllerDelegate.swift */; };
 		8484F8122B78ED1F006D0AF5 /* OAuthTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484F8112B78ED1F006D0AF5 /* OAuthTokenResponse.swift */; };
@@ -78,6 +80,8 @@
 		840FEB4F2B748E990076067E /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		841FDACB2B58EFA90001C286 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		841FDACF2B5A41D80001C286 /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
+		84676B492BA95534005D56D4 /* AuthHelperProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHelperProtocol.swift; sourceTree = "<group>"; };
+		84676B4B2BA95965005D56D4 /* AuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHelper.swift; sourceTree = "<group>"; };
 		847B024E2B5F17D9005CC977 /* UIZoomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIZoomImageView.swift; sourceTree = "<group>"; };
 		8484F80F2B749BB5006D0AF5 /* WebViewViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewControllerDelegate.swift; sourceTree = "<group>"; };
 		8484F8112B78ED1F006D0AF5 /* OAuthTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthTokenResponse.swift; sourceTree = "<group>"; };
@@ -243,6 +247,8 @@
 		84A9F0F12B8B5E1900EC6307 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				84676B4B2BA95965005D56D4 /* AuthHelper.swift */,
+				84676B492BA95534005D56D4 /* AuthHelperProtocol.swift */,
 				F554FB592B70A69B00241D83 /* AuthViewController.swift */,
 				8484F82D2B7ABEBA006D0AF5 /* AuthViewControllerDelegate.swift */,
 				F5641C1F2BA8932900DF575F /* WebViewPresenter.swift */,
@@ -535,6 +541,7 @@
 				840FEB502B748E990076067E /* WebViewViewController.swift in Sources */,
 				84A9F0EE2B8B5BE300EC6307 /* Profile.swift in Sources */,
 				F55D8F542B8D2B8600AAC426 /* ProfileImageServiceProtocol.swift in Sources */,
+				84676B4C2BA95965005D56D4 /* AuthHelper.swift in Sources */,
 				847B024F2B5F17D9005CC977 /* UIZoomImageView.swift in Sources */,
 				F554FB562B6FD93000241D83 /* AuthConstants.swift in Sources */,
 				8484F8122B78ED1F006D0AF5 /* OAuthTokenResponse.swift in Sources */,
@@ -560,6 +567,7 @@
 				F58494832B8222C4004EA7F5 /* TabBarViewController.swift in Sources */,
 				F5BF84FC2B49EE89007CC292 /* AppDelegate.swift in Sources */,
 				8484F82C2B7AB73C006D0AF5 /* SplashViewController.swift in Sources */,
+				84676B4A2BA95534005D56D4 /* AuthHelperProtocol.swift in Sources */,
 				8484F8142B78EDFF006D0AF5 /* OAuthService.swift in Sources */,
 				841FDACC2B58EFA90001C286 /* ProfileViewController.swift in Sources */,
 				F5641C202BA8932900DF575F /* WebViewPresenter.swift in Sources */,
