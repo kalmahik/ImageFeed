@@ -2,10 +2,10 @@ import UIKit
 import WebKit
 
 final class WebViewViewController: UIViewController, WebViewViewControllerProtocol {
-
-    var presenter: WebViewPresenterProtocol?
-
+    
     // MARK: - Public Properties
+    
+    var presenter: WebViewPresenterProtocol?
 
     weak var delegate: WebViewViewControllerDelegate?
 
