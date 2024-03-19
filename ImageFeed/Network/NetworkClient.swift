@@ -17,7 +17,7 @@ class NetworkClient: NetworkClientProtocol {
             Logger.networkLog(message: "cancelled", urlRequest: urlRequest)
             task?.cancel()
         }
-        let task = URLSession.shared.dataTask(with: urlRequest) { [weak self] data, response, error in
+        task = URLSession.shared.dataTask(with: urlRequest) { [weak self] data, response, error in
             if let error {
                 completion(.failure(error))
                 Logger.networkLog(message: error.localizedDescription, urlRequest: urlRequest)
@@ -47,7 +47,6 @@ class NetworkClient: NetworkClientProtocol {
             }
             self?.task = nil
         }
-        self.task = task
-        task.resume()
+        task?.resume()
     }
 }

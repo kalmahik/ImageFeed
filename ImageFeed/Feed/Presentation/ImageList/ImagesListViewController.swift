@@ -23,7 +23,6 @@ class ImagesListViewController: UIViewController {
         applyConstraints()
         addObserver()
         feedService.fetchFeed()
-        feedService.fetchFeed()
     }
 
     // MARK: - Private Methods

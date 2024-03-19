@@ -5,6 +5,7 @@ final class FeedService: FeedServiceProtocol {
     static let didChangeNotification = Notification.Name(rawValue: FeedConstants.didChangeNotification)
     let networkClient: NetworkClientProtocol = NetworkClient()
     var lastLoadedPage = 0
+    var lastRequestedPage = 0
 
     private init() {}
 
@@ -13,6 +14,11 @@ final class FeedService: FeedServiceProtocol {
     func fetchFeed() {
         assert(Thread.isMainThread)
         let nextPage = lastLoadedPage + 1
+        if lastRequestedPage == nextPage {
+            Logger.networkLog(message: "the same page")
+            return
+        }
+        lastRequestedPage = nextPage
         let queryItems = [
             URLQueryItem(name: FeedConstants.page, value: "\(nextPage)"),
             URLQueryItem(name: FeedConstants.perPage, value: "\(FeedConstants.photosPerPage)")
