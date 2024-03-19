@@ -1,14 +1,7 @@
-//
-//  AuthHelper.swift
-//  ImageFeed
-//
-//  Created by kalmahik on 19.03.2024.
-//
-
 import Foundation
 
 struct AuthHelper: AuthHelperProtocol {
-    
+
     func authRequest() -> URLRequest {
         let url = authURL()
         return URLRequest(url: url)
