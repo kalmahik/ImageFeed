@@ -1,7 +1,12 @@
 import Kingfisher
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
+
+    // MARK: - Public Properties
+
+    var presenter: ProfilePresenterProtocol?
+
     // MARK: - Private Properties
 
     private lazy var profileService = ProfileService.shared
@@ -13,9 +18,16 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter = ProfilePresenter(self)
         addSubViews()
         applyConstraints()
         addObserver()
+    }
+
+    // MARK: - Public Methods
+
+    func showAlertModal(alertData: AlertModel) {
+        showAlert(alertData: alertData)
     }
 
     // MARK: - Private Methods
@@ -112,18 +124,6 @@ class ProfileViewController: UIViewController {
     }
 
     @objc private func didTapLogoutButton() {
-        let alertData = AlertModel(
-            title: "Пока, пока!",
-            message: "Уверены, что хотите выйти?",
-            actions: [
-                Action(buttonText: "Нет", action: nil, style: .cancel),
-                Action(buttonText: "Да", action: logoutAction, style: .destructive)
-            ]
-        )
-        showAlert(alertData: alertData)
-    }
-
-    private func logoutAction(action: UIAlertAction) {
-        profileLogoutService.logout()
+        presenter?.didTapLogoutButton()
     }
 }
