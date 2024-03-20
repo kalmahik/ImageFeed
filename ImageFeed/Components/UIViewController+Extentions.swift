@@ -2,7 +2,7 @@ import UIKit
 
 struct Action {
     let buttonText: String
-    let action: ((_: UIAlertAction) -> Void)?
+    let action: (() -> Void)?
     let style: UIAlertAction.Style
 }
 
@@ -10,7 +10,6 @@ struct AlertModel {
     let title: String
     let message: String
     let actions: [Action]
-
 }
 
 private let defaultAlertData = AlertModel(
@@ -22,8 +21,12 @@ private let defaultAlertData = AlertModel(
 extension UIViewController {
     func showAlert(alertData: AlertModel = defaultAlertData) {
         let alert = UIAlertController(title: alertData.title, message: alertData.message, preferredStyle: .alert)
-        alertData.actions.forEach {
-            let action = UIAlertAction(title: $0.buttonText, style: $0.style, handler: $0.action)
+        alertData.actions.forEach { action in
+            func handler(_: UIAlertAction) {
+                guard let action = action.action else { return }
+                action()
+            }
+            let action = UIAlertAction(title: action.buttonText, style: action.style, handler: handler)
             alert.addAction(action)
         }
         alert.view.accessibilityIdentifier = "Alert"
