@@ -15,7 +15,7 @@ final class ProfileService: ProfileServiceProtocol {
             case .failure(let error):
                 completion(.failure(error))
             case .success(let response):
-                let profile = Profile.convertProfile(response)
+                let profile = Profile(response)
                 self?.profile = profile
                 completion(.success(profile))
             }
