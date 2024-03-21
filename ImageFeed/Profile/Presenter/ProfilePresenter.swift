@@ -1,21 +1,28 @@
-//
-//  ProfilePresenter.swift
-//  ImageFeed
-//
-//  Created by kalmahik on 20.03.2024.
-//
-
 import Foundation
 
 final class ProfilePresenter: ProfilePresenterProtocol {
+
+    // MARK: - Public Properties
+
     weak var view: ProfileViewControllerProtocol?
-    
+
+    // MARK: - Private Properties
+
     private lazy var profileService = ProfileService.shared
     private lazy var profileImageService = ProfileImageService.shared
     private lazy var profileLogoutService = ProfileLogoutService.shared
+    private var profileImageServiceObserver: NSObjectProtocol?
 
-    init(_ view: ProfileViewController) {
+    // MARK: - Initializers
+
+    init(_ view: ProfileViewControllerProtocol) {
         self.view = view
+    }
+
+    // MARK: - Public Methods
+
+    func viewDidLoad() {
+        addObserver()
     }
 
     func didTapLogoutButton() {
@@ -30,9 +37,32 @@ final class ProfilePresenter: ProfilePresenterProtocol {
         view?.showAlertModal(alertData: alertData)
     }
 
-    func didUpdateAvatar() {
+    func getProfile() -> Profile? {
+        profileService.profile
+    }
+
+    func getProfileImageUrl() -> URL? {
         let avatarURL = profileImageService.profileImageURL
-        guard let avatarURL, let url = URL(string: avatarURL) else { return }
+        guard let avatarURL else { return nil}
+        return URL(string: avatarURL)
+    }
+
+    // MARK: - Private Methods
+
+    private func addObserver() {
+        profileImageServiceObserver = NotificationCenter.default
+            .addObserver(
+                forName: ProfileImageService.didChangeNotification,
+                object: nil,
+                queue: .main
+            ) { [weak self] _ in
+                self?.didUpdateAvatar()
+            }
+        didUpdateAvatar()
+    }
+
+    private func didUpdateAvatar() {
+        guard let url = getProfileImageUrl() else { return }
         view?.setAvatarImage(with: url)
     }
 

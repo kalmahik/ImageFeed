@@ -7,20 +7,14 @@ class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
 
     var presenter: ProfilePresenterProtocol?
 
-    // MARK: - Private Properties
-
-    private lazy var profileService = ProfileService.shared
-    private lazy var profileImageService = ProfileImageService.shared
-    private var profileImageServiceObserver: NSObjectProtocol?
-
     // MARK: - UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter = ProfilePresenter(self)
+        presenter?.viewDidLoad()
         addSubViews()
         applyConstraints()
-        addObserver()
     }
 
     // MARK: - Public Methods
@@ -35,18 +29,6 @@ class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
 
     // MARK: - Private Methods
 
-    private func addObserver() {
-        profileImageServiceObserver = NotificationCenter.default
-            .addObserver(
-                forName: ProfileImageService.didChangeNotification,
-                object: nil,
-                queue: .main
-            ) { [weak self] _ in
-                self?.presenter?.didUpdateAvatar()
-            }
-        presenter?.didUpdateAvatar()
-    }
-
     private func applyConstraints() {
         NSLayoutConstraint.activate([
             rootStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
@@ -60,13 +42,14 @@ class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
 
     private func addSubViews() {
         rootStack.addArrangedSubview(avatarStack)
-        rootStack.addArrangedSubview(configureLabel(profileService.profile?.name ?? "Firstname and lastname", size: 23, weight: .bold))
-        rootStack.addArrangedSubview(configureLabel(profileService.profile?.loginName ?? "nickname", color: .ypGray))
-        rootStack.addArrangedSubview(configureLabel(profileService.profile?.bio ?? "Description"))
         avatarStack.addArrangedSubview(avatarImage)
         avatarStack.addArrangedSubview(exitButton)
         view.addSubview(rootStack)
         view.backgroundColor = .ypBlack
+        guard let profile = presenter?.getProfile() else { return }
+        rootStack.addArrangedSubview(configureLabel(profile.name, size: 23, weight: .bold))
+        rootStack.addArrangedSubview(configureLabel(profile.loginName, color: .ypGray))
+        rootStack.addArrangedSubview(configureLabel(profile.bio))
     }
 
     private let rootStack: UIStackView =  {
@@ -93,9 +76,9 @@ class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
         let imageView = UIImageView(image: placeholder)
         imageView.layer.cornerRadius = 35
         imageView.layer.masksToBounds = true
-        let url = profileImageService.profileImageURL
+        let url = presenter?.getProfileImageUrl()
         guard let url else { return imageView }
-        imageView.kf.setImage(with: URL(string: url), placeholder: placeholder)
+        imageView.kf.setImage(with: url, placeholder: placeholder)
         return imageView
     }()
 
@@ -110,7 +93,12 @@ class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
         return button
     }()
 
-    private func configureLabel(_ text: String, size: CGFloat = 13, color: UIColor = .ypWhite, weight: UIFont.Weight = .regular) -> UILabel {
+    private func configureLabel(
+        _ text: String,
+        size: CGFloat = 13,
+        color: UIColor = .ypWhite,
+        weight: UIFont.Weight = .regular
+    ) -> UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = text

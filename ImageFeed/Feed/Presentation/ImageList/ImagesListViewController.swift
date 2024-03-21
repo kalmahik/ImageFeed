@@ -1,28 +1,31 @@
 import Kingfisher
 import UIKit
 
-class ImagesListViewController: UIViewController {
+class ImagesListViewController: UIViewController, ImagesListViewControllerProtocol {
     // MARK: - Constants
 
     static let tableContentInsets: UIEdgeInsets = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
     static let imageInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 8, right: 16)
 
+    // MARK: - Public Properties
+
+    var presenter: FeedPresenterProtocol?
+
     // MARK: - Private Properties
-    private let feedService = FeedService.shared
     private var feedServiceObserver: NSObjectProtocol?
-    private let token = OAuthTokenStorage.shared.token
-    private var photosCount: Int = 0
+    private let feedService = FeedService.shared
 
     // MARK: - UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter = FeedPresenter(self)
         tableView.dataSource = self
         tableView.delegate = self
         addSubViews()
         applyConstraints()
         addObserver()
-        feedService.fetchFeed()
+        presenter?.fetchFeed()
     }
 
     // MARK: - Private Methods
@@ -34,21 +37,16 @@ class ImagesListViewController: UIViewController {
                 object: nil,
                 queue: .main
             ) { [weak self] _ in
-                self?.updateTableViewAnimated()
+                self?.presenter?.didUpdateTableViewAnimated()
             }
     }
 
-    private func updateTableViewAnimated() {
-        let oldCount = photosCount
-        let newCount = feedService.photos.count
-        photosCount = feedService.photos.count
-        if oldCount != newCount {
-            tableView.performBatchUpdates {
-                let indexPaths = (oldCount..<newCount).map { i in
-                    IndexPath(row: i, section: 0)
-                }
-                tableView.insertRows(at: indexPaths, with: .automatic)
+    func updateTableViewAnimated(from: Int, to: Int) {
+        tableView.performBatchUpdates {
+            let indexPaths = (from..<to).map { i in
+                IndexPath(row: i, section: 0)
             }
+            tableView.insertRows(at: indexPaths, with: .automatic)
         }
     }
 
@@ -91,7 +89,7 @@ extension ImagesListViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row + 1 == feedService.photos.count {
-            feedService.fetchFeed()
+            presenter?.fetchFeed()
         }
     }
 }

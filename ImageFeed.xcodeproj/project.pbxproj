@@ -31,6 +31,9 @@
 		84A848282BAABD4100867F78 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A848272BAABD4100867F78 /* ProfilePresenter.swift */; };
 		84A8482A2BAABD5500867F78 /* ProfilePresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A848292BAABD5500867F78 /* ProfilePresenterProtocol.swift */; };
 		84A8482C2BAAC07400867F78 /* ProfileViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A8482B2BAAC07400867F78 /* ProfileViewControllerProtocol.swift */; };
+		84A8482F2BABF93F00867F78 /* FeedPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A8482E2BABF93F00867F78 /* FeedPresenterProtocol.swift */; };
+		84A848312BABFB6700867F78 /* ImagesListViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A848302BABFB6700867F78 /* ImagesListViewControllerProtocol.swift */; };
+		84A848332BABFCCD00867F78 /* FeedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A848322BABFCCD00867F78 /* FeedPresenter.swift */; };
 		84A9F0E82B8B557A00EC6307 /* UIBlockingProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A9F0E72B8B557A00EC6307 /* UIBlockingProgressHUD.swift */; };
 		84A9F0EC2B8B591000EC6307 /* ProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A9F0EB2B8B591000EC6307 /* ProfileResponse.swift */; };
 		84A9F0EE2B8B5BE300EC6307 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A9F0ED2B8B5BE300EC6307 /* Profile.swift */; };
@@ -114,6 +117,9 @@
 		84A848272BAABD4100867F78 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
 		84A848292BAABD5500867F78 /* ProfilePresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenterProtocol.swift; sourceTree = "<group>"; };
 		84A8482B2BAAC07400867F78 /* ProfileViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerProtocol.swift; sourceTree = "<group>"; };
+		84A8482E2BABF93F00867F78 /* FeedPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPresenterProtocol.swift; sourceTree = "<group>"; };
+		84A848302BABFB6700867F78 /* ImagesListViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListViewControllerProtocol.swift; sourceTree = "<group>"; };
+		84A848322BABFCCD00867F78 /* FeedPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedPresenter.swift; sourceTree = "<group>"; };
 		84A9F0E72B8B557A00EC6307 /* UIBlockingProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBlockingProgressHUD.swift; sourceTree = "<group>"; };
 		84A9F0EB2B8B591000EC6307 /* ProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponse.swift; sourceTree = "<group>"; };
 		84A9F0ED2B8B5BE300EC6307 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
@@ -188,6 +194,7 @@
 				7CE513AD2B4FC62C00DD146A /* ImagesListCell.swift */,
 				F5BF84FF2B49EE89007CC292 /* ImagesListViewController.swift */,
 				F545E6A42B9DD4940098F39C /* ImagesListCellDelegate.swift */,
+				84A848302BABFB6700867F78 /* ImagesListViewControllerProtocol.swift */,
 			);
 			path = ImageList;
 			sourceTree = "<group>";
@@ -280,6 +287,15 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
+		84A8482D2BABF92500867F78 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				84A8482E2BABF93F00867F78 /* FeedPresenterProtocol.swift */,
+				84A848322BABFCCD00867F78 /* FeedPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		84A9F0EF2B8B5D8A00EC6307 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -329,6 +345,7 @@
 		84A9F0F32B8B5E7A00EC6307 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				84A8482D2BABF92500867F78 /* Presenter */,
 				F5EDAB812B96EC1B002540B5 /* Model */,
 				F5EDAB7E2B96EAAD002540B5 /* Networking */,
 				84A9F0F42B8B5F2000EC6307 /* Presentation */,
@@ -658,6 +675,7 @@
 				8484F81C2B791894006D0AF5 /* NetworkClientProtocol.swift in Sources */,
 				F545E6832B999BEC0098F39C /* KingfisherTokenPlugin.swift in Sources */,
 				84ED9C582B51F49F00BB8102 /* UIGradientView.swift in Sources */,
+				84A848332BABFCCD00867F78 /* FeedPresenter.swift in Sources */,
 				8484F82A2B7AA416006D0AF5 /* OAuthTokenStorageProtocol.swift in Sources */,
 				8484F8292B7AA416006D0AF5 /* OAuthTokenStorage.swift in Sources */,
 				F5EDAB872B96F2DD002540B5 /* PhotoResponse.swift in Sources */,
@@ -672,9 +690,11 @@
 				841FDACC2B58EFA90001C286 /* ProfileViewController.swift in Sources */,
 				F5641C202BA8932900DF575F /* WebViewPresenter.swift in Sources */,
 				F55D8F562B8D2BD800AAC426 /* UserResponse.swift in Sources */,
+				84A8482F2BABF93F00867F78 /* FeedPresenterProtocol.swift in Sources */,
 				8484F82E2B7ABEBA006D0AF5 /* AuthViewControllerDelegate.swift in Sources */,
 				84A9F0E82B8B557A00EC6307 /* UIBlockingProgressHUD.swift in Sources */,
 				F545E6A92B9EDC780098F39C /* ProfileLogoutService.swift in Sources */,
+				84A848312BABFB6700867F78 /* ImagesListViewControllerProtocol.swift in Sources */,
 				F554FB5A2B70A69B00241D83 /* AuthViewController.swift in Sources */,
 				F5BF84FE2B49EE89007CC292 /* SceneDelegate.swift in Sources */,
 				841FDAD02B5A41D80001C286 /* SingleImageViewController.swift in Sources */,
