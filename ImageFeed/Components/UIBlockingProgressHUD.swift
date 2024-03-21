@@ -1,12 +1,5 @@
-//
-//  UIBlockingProgressHUD.swift
-//  ImageFeed
-//
-//  Created by kalmahik on 25.02.2024.
-//
-
-import UIKit
 import ProgressHUD
+import UIKit
 
 final class UIBlockingProgressHUD {
     private static var window: UIWindow? {

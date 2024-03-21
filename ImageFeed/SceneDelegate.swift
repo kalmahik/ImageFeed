@@ -1,10 +1,5 @@
-//
-//  SceneDelegate.swift
-//  ImageFeed
-//
-//  Created by Murad Azimov on 06.01.2024.
-//
-
+import Kingfisher
+import ProgressHUD
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -16,6 +11,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         loadRootController(scene)
+        initKF()
+        initProgressHUD()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -53,5 +50,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window = window
             window.makeKeyAndVisible()
         }
+    }
+
+    private func initKF() {
+        KingfisherManager.shared.defaultOptions = [.requestModifier(KingfisherTokenPlugin())]
+    }
+
+    private func initProgressHUD() {
+        ProgressHUD.animationType = .activityIndicator
+        ProgressHUD.colorHUD = .ypBlack
+        ProgressHUD.colorAnimation = .ypGray
     }
 }

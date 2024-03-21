@@ -1,16 +1,9 @@
-//
-//  TabBarViewController.swift
-//  ImageFeed
-//
-//  Created by Murad Azimov on 18.02.2024.
-//
-
 import UIKit
 
 final class TabBarViewController: UITabBarController {
 
     // MARK: - UIViewController
-    
+
     override public func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self

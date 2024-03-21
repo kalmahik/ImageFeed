@@ -1,10 +1,3 @@
-//
-//  GradientView.swift
-//  ImageFeed
-//
-//  Created by Admin on 13.01.2024.
-//
-
 import UIKit
 
 public class UIGradientView: UIView {

@@ -1,28 +1,56 @@
-//
-//  ImagesListCell.swift
-//  ImageFeed
-//
-//  Created by Murad Azimov on 11.01.2024.
-//
-
+import Kingfisher
 import UIKit
 
 final class ImagesListCell: UITableViewCell {
+
     // MARK: - Constants
-    
+
     static let reuseIdentifier = "ImagesListCell"
-    
+
+    // MARK: - Public Properties
+
+    weak var delegate: ImagesListCellDelegate?
+
+    // MARK: - UIViewController
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        pictureImageView.kf.cancelDownloadTask()
+    }
+
     // MARK: - Public Methods
 
-    func configCell(_ imageName: String, _ dateText: String, _ isLike: Bool) {
-        pictureImageView.image = UIImage(named: imageName)
+    func configCell(_ imageUrl: String, _ dateText: String, _ isLike: Bool) {
+        pictureImageView.kf.indicatorType = .activity
+        let placeholder = UIImage(named: "image_placeholder")
+        pictureImageView.contentMode = .center
+        pictureImageView.kf.setImage(with: URL(string: imageUrl), placeholder: placeholder) { [weak self] result in
+            switch result {
+            case .success:
+                self?.pictureImageView.contentMode = .scaleAspectFill
+            case .failure:
+                self?.pictureImageView.contentMode = .center
+            }
+        }
         dateLabel.text = dateText
         likeButton.tintColor = isLike ? .ypRed : .ypWhite50
         addSubViews()
         applyConstraints()
     }
-    
+
+    func setIsLiked(_ isLike: Bool) {
+        likeButton.tintColor = isLike ? .ypRed : .ypWhite50
+    }
+
+    func setLikeEnabled(_ isEnabled: Bool) {
+        likeButton.isEnabled = isEnabled
+    }
+
     // MARK: - Private Methods
+
+    @objc private func didTapLike() {
+        delegate?.didTapLike(self)
+    }
 
     private func addSubViews() {
         [pictureImageView, likeButton, gradientView, dateLabel].forEach {
@@ -55,6 +83,7 @@ final class ImagesListCell: UITableViewCell {
         let image = UIImageView()
         image.layer.cornerRadius = 16
         image.layer.masksToBounds = true
+        image.backgroundColor = .ypGray
         return image
     }()
 
@@ -62,7 +91,7 @@ final class ImagesListCell: UITableViewCell {
         UIButton.systemButton(
             with: UIImage(systemName: "heart.fill") ?? UIImage(),
             target: nil,
-            action: nil
+            action: #selector(didTapLike)
         )
     }()
 

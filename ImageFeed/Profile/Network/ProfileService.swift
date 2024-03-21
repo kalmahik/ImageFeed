@@ -1,10 +1,3 @@
-//
-//  ProfileService.swift
-//  ImageFeed
-//
-//  Created by kalmahik on 25.02.2024.
-//
-
 import Foundation
 
 final class ProfileService: ProfileServiceProtocol {
@@ -27,5 +20,9 @@ final class ProfileService: ProfileServiceProtocol {
                 completion(.success(profile))
             }
         }
+    }
+
+    func cleanData() {
+        profile = nil
     }
 }

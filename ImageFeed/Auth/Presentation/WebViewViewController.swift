@@ -1,10 +1,3 @@
-//
-//  WebViewViewController.swift
-//  ImageFeed
-//
-//  Created by kalmahik on 08.02.2024.
-//
-
 import UIKit
 import WebKit
 
@@ -12,7 +5,7 @@ final class WebViewViewController: UIViewController {
     // MARK: - Public Properties
 
     weak var delegate: WebViewViewControllerDelegate?
-    
+
     // MARK: - Private Properties
 
     private var estimatedProgressObservation: NSKeyValueObservation?
@@ -31,7 +24,7 @@ final class WebViewViewController: UIViewController {
         super.viewDidAppear(animated)
         subscribeProgress()
     }
-    
+
     // MARK: - Private Methods
 
     private func addSubViews() {

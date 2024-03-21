@@ -1,15 +1,8 @@
-//
-//  ProfileService.swift
-//  ImageFeed
-//
-//  Created by kalmahik on 25.02.2024.
-//
-
 import Foundation
 
 final class ProfileImageService: ProfileImageServiceProtocol {
     static let shared = ProfileImageService()
-    static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
+    static let didChangeNotification = Notification.Name(rawValue: ProfileConstants.didChangeNotification)
     let networkClient: NetworkClientProtocol = NetworkClient()
     private (set) var profileImageURL: String?
 
@@ -25,12 +18,16 @@ final class ProfileImageService: ProfileImageServiceProtocol {
             case .success(let response):
                 let profileImageURL = response.profileImage.medium
                 self?.profileImageURL = profileImageURL
-                completion(.success(profileImageURL))
                 NotificationCenter.default.post(
                     name: ProfileImageService.didChangeNotification,
                     object: self,
-                    userInfo: ["URL": profileImageURL])
+                    userInfo: [ProfileConstants.url: profileImageURL])
+                completion(.success(profileImageURL))
             }
         }
+    }
+
+    func cleanData() {
+        profileImageURL = nil
     }
 }

@@ -1,17 +1,10 @@
-//
-//  AuthViewController.swift
-//  ImageFeed
-//
-//  Created by Murad Azimov on 05.02.2024.
-//
-
 import UIKit
 
 final class AuthViewController: UIViewController {
     // MARK: - Private Properties
 
     private weak var delegate: AuthViewControllerDelegate?
-    
+
     // MARK: - Initializers
 
     init(delegate: AuthViewControllerDelegate) {
@@ -22,7 +15,7 @@ final class AuthViewController: UIViewController {
     required init?(coder: NSCoder) {
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     // MARK: - UIViewController(*)
 
     override func viewDidLoad() {
@@ -30,7 +23,7 @@ final class AuthViewController: UIViewController {
         addSubViews()
         applyConstraints()
     }
-    
+
     // MARK: - Private Methods
 
     private func addSubViews() {

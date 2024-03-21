@@ -1,30 +1,23 @@
-//
-//  ProfileViewController.swift
-//  ImageFeed
-//
-//  Created by Murad Azimov on 18.01.2024.
-//
-
-import UIKit
 import Kingfisher
+import UIKit
 
 class ProfileViewController: UIViewController {
     // MARK: - Private Properties
 
-    private lazy var storage = OAuthTokenStorage()
     private lazy var profileService = ProfileService.shared
     private lazy var profileImageService = ProfileImageService.shared
+    private lazy var profileLogoutService = ProfileLogoutService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
 
-    // MARK: - UIViewController(*)
-    
+    // MARK: - UIViewController
+
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubViews()
         applyConstraints()
         addObserver()
     }
-    
+
     // MARK: - Private Methods
 
     private func addObserver() {
@@ -40,7 +33,9 @@ class ProfileViewController: UIViewController {
     }
 
     private func updateAvatar() {
-        guard let avatarURL = profileImageService.profileImageURL, let url = URL(string: avatarURL) else { return }
+        let avatarURL = profileImageService.profileImageURL
+        guard let avatarURL else { return }
+        let url = URL(string: avatarURL)
         avatarImage.kf.setImage(with: url)
     }
 
@@ -90,9 +85,9 @@ class ProfileViewController: UIViewController {
         let imageView = UIImageView(image: placeholder)
         imageView.layer.cornerRadius = 35
         imageView.layer.masksToBounds = true
-        if let url = profileImageService.profileImageURL {
-            imageView.kf.setImage(with: URL(string: url), placeholder: placeholder)
-        }
+        let url = profileImageService.profileImageURL
+        guard let url else { return imageView }
+        imageView.kf.setImage(with: URL(string: url), placeholder: placeholder)
         return imageView
     }()
 
@@ -113,14 +108,22 @@ class ProfileViewController: UIViewController {
         label.text = text
         label.textColor = color
         label.font = UIFont.systemFont(ofSize: size, weight: weight)
-
         return label
     }
 
     @objc private func didTapLogoutButton() {
-        // TODO: refactor this method
-        storage.storeToken(token: nil)
-        guard let window = UIApplication.shared.windows.first else { return }
-        window.rootViewController = SplashViewController()
+        let alertData = AlertModel(
+            title: "Пока, пока!",
+            message: "Уверены, что хотите выйти?",
+            actions: [
+                Action(buttonText: "Нет", action: nil, style: .cancel),
+                Action(buttonText: "Да", action: logoutAction, style: .destructive)
+            ]
+        )
+        showAlert(alertData: alertData)
+    }
+
+    private func logoutAction(action: UIAlertAction) {
+        profileLogoutService.logout()
     }
 }

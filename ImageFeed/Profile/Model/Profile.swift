@@ -1,10 +1,3 @@
-//
-//  Profile.swift
-//  ImageFeed
-//
-//  Created by kalmahik on 25.02.2024.
-//
-
 import Foundation
 
 struct Profile {
@@ -13,12 +6,12 @@ struct Profile {
     let loginName: String
     let bio: String
 
-    static func convertProfile(_ profileResult: ProfileResponse) -> Profile {
-        return Profile(
-            username: profileResult.username,
-            name: "\(profileResult.firstName ?? "") \(profileResult.lastName ?? "")",
-            loginName: "@\(profileResult.username)",
-            bio: profileResult.bio ?? ""
+    static func convertProfile(_ profileResponse: ProfileResponse) -> Profile {
+        Profile(
+            username: profileResponse.username,
+            name: "\(profileResponse.firstName ?? "") \(profileResponse.lastName ?? "")",
+            loginName: "@\(profileResponse.username)",
+            bio: profileResponse.bio ?? ""
         )
     }
 }

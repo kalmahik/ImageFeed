@@ -1,15 +1,8 @@
-//
-//  URLRequest+Extentions.swift
-//  ImageFeed
-//
-//  Created by kalmahik on 11.02.2024.
-//
-
 import Foundation
 
 extension URLRequest {
     static func makeRequest(
-        httpMethod: String? = Methods.get.rawValue,
+        httpMethod: String? = HttpMethods.get.rawValue,
         path: String, host: String? = NetworkConstants.host,
         queryItems: [URLQueryItem]? = []
     ) -> URLRequest {
@@ -20,7 +13,7 @@ extension URLRequest {
         urlComponents.queryItems = queryItems
         var request = URLRequest(url: urlComponents.url ?? NetworkConstants.defaultBaseURL)
         request.httpMethod = httpMethod
-        let token = OAuthTokenStorage().token
+        let token = OAuthTokenStorage.shared.token
         if let token {
             request.setValue("\(AuthKeys.bearer.rawValue) \(token)", forHTTPHeaderField: AuthKeys.authorization.rawValue)
         }
