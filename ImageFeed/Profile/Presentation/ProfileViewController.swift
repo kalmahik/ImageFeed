@@ -11,7 +11,6 @@ class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
 
     private lazy var profileService = ProfileService.shared
     private lazy var profileImageService = ProfileImageService.shared
-    private lazy var profileLogoutService = ProfileLogoutService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
 
     // MARK: - UIViewController
@@ -30,6 +29,10 @@ class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
         showAlert(alertData: alertData)
     }
 
+    func setAvatarImage(with url: URL) {
+        avatarImage.kf.setImage(with: url)
+    }
+
     // MARK: - Private Methods
 
     private func addObserver() {
@@ -39,16 +42,9 @@ class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
                 object: nil,
                 queue: .main
             ) { [weak self] _ in
-                self?.updateAvatar()
+                self?.presenter?.didUpdateAvatar()
             }
-        updateAvatar()
-    }
-
-    private func updateAvatar() {
-        let avatarURL = profileImageService.profileImageURL
-        guard let avatarURL else { return }
-        let url = URL(string: avatarURL)
-        avatarImage.kf.setImage(with: url)
+        presenter?.didUpdateAvatar()
     }
 
     private func applyConstraints() {

@@ -9,6 +9,10 @@ import Foundation
 
 final class ProfilePresenter: ProfilePresenterProtocol {
     weak var view: ProfileViewControllerProtocol?
+    
+    private lazy var profileService = ProfileService.shared
+    private lazy var profileImageService = ProfileImageService.shared
+    private lazy var profileLogoutService = ProfileLogoutService.shared
 
     init(_ view: ProfileViewController) {
         self.view = view
@@ -26,9 +30,11 @@ final class ProfilePresenter: ProfilePresenterProtocol {
         view?.showAlertModal(alertData: alertData)
     }
 
-    private lazy var profileService = ProfileService.shared
-    private lazy var profileImageService = ProfileImageService.shared
-    private lazy var profileLogoutService = ProfileLogoutService.shared
+    func didUpdateAvatar() {
+        let avatarURL = profileImageService.profileImageURL
+        guard let avatarURL, let url = URL(string: avatarURL) else { return }
+        view?.setAvatarImage(with: url)
+    }
 
     private func logoutAction() {
         profileLogoutService.logout()
