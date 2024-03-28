@@ -11,10 +11,6 @@ class ImagesListViewController: UIViewController, ImagesListViewControllerProtoc
 
     var presenter: FeedPresenterProtocol?
 
-    // MARK: - Private Properties
-    private var feedServiceObserver: NSObjectProtocol?
-    private let feedService = FeedService.shared
-
     // MARK: - UIViewController
 
     override func viewDidLoad() {
@@ -22,24 +18,20 @@ class ImagesListViewController: UIViewController, ImagesListViewControllerProtoc
         presenter = FeedPresenter(self)
         tableView.dataSource = self
         tableView.delegate = self
-        addSubViews()
-        applyConstraints()
-        addObserver()
-        presenter?.fetchFeed()
+        presenter?.viewDidLoad()
+    }
+
+    // MARK: - Public Methods
+
+    func getTable() -> UITableView { tableView }
+
+    func showAlert() { super.showAlert() }
+
+    func present(viewController: UIViewController, animated: Bool) {
+        present(viewController, animated: animated)
     }
 
     // MARK: - Private Methods
-
-    private func addObserver() {
-        feedServiceObserver = NotificationCenter.default
-            .addObserver(
-                forName: FeedService.didChangeNotification,
-                object: nil,
-                queue: .main
-            ) { [weak self] _ in
-                self?.presenter?.didUpdateTableViewAnimated()
-            }
-    }
 
     func updateTableViewAnimated(from: Int, to: Int) {
         tableView.performBatchUpdates {
@@ -50,19 +42,7 @@ class ImagesListViewController: UIViewController, ImagesListViewControllerProtoc
         }
     }
 
-    private func addSubViews() {
-        view.addSubview(tableView)
-        view.backgroundColor = .ypBlack
-    }
-
-    private func applyConstraints() {
-        NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-    }
+    // MARK: - Views
 
     private let tableView: UITableView = {
         let placeholder = UIImageView(image: UIImage(named: "image_placeholder"))
@@ -79,30 +59,29 @@ class ImagesListViewController: UIViewController, ImagesListViewControllerProtoc
     }()
 }
 
+// MARK: - UITableViewDelegate
+
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let photo = feedService.photos[indexPath.row]
-        let viewController = SingleImageViewController(photo: photo)
-        viewController.modalPresentationStyle = .fullScreen
-        present(viewController, animated: true)
+        presenter?.openDetails(indexPath: indexPath)
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row + 1 == feedService.photos.count {
-            presenter?.fetchFeed()
-        }
+        presenter?.fetchNextFeed(indexPath: indexPath)
     }
 }
 
+// MARK: - UITableViewDataSource
+
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return feedService.photos.count
+        presenter?.getPhotos().count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath)
         guard let imageListCell = cell as? ImagesListCell else { return UITableViewCell() }
-        let photo = feedService.photos[indexPath.row]
+        guard let photo = presenter?.getPhotos()[indexPath.row] else { return UITableViewCell() }
         let dateLabel = photo.createdAt?.dateString ?? ""
         imageListCell.selectionStyle = .none
         imageListCell.backgroundColor = .ypBlack
@@ -111,31 +90,32 @@ extension ImagesListViewController: UITableViewDataSource {
         return imageListCell
     }
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let photo = feedService.photos[indexPath.row]
-        let insets = ImagesListViewController.imageInsets
-        let originalRatio =  photo.size.height / photo.size.width
-        let imageViewWidth = tableView.bounds.width - insets.right - insets.left
-        let cellHeight = imageViewWidth * originalRatio + insets.bottom
-        return cellHeight
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { presenter?.getCellHeight(indexPath: indexPath) ?? 0
     }
 }
 
+// MARK: - ImagesListCellDelegate
+
 extension ImagesListViewController: ImagesListCellDelegate {
     func didTapLike(_ cell: ImagesListCell) {
-        cell.setLikeEnabled(false)
-        guard let indexPath = tableView.indexPath(for: cell) else { return }
-        let photo = feedService.photos[indexPath.row]
-        feedService.changeLike(photoId: photo.id, isLike: !photo.isLiked) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let newPhoto):
-                    cell.setIsLiked(newPhoto.isLiked)
-                case .failure:
-                    self.showAlert()
-                }
-                cell.setLikeEnabled(true)
-            }
-        }
+        presenter?.didTapLike(cell)
+    }
+}
+
+// MARK: - applyConstraints && addSubViews
+
+extension ImagesListViewController {
+    func addSubViews() {
+        view.addSubview(tableView)
+        view.backgroundColor = .ypBlack
+    }
+
+    func applyConstraints() {
+        NSLayoutConstraint.activate([
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
 }
