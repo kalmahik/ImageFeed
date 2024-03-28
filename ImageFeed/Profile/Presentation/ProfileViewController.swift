@@ -13,8 +13,6 @@ class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
         super.viewDidLoad()
         presenter = ProfilePresenter(self)
         presenter?.viewDidLoad()
-        addSubViews()
-        applyConstraints()
     }
 
     // MARK: - Public Methods
@@ -27,30 +25,7 @@ class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
         avatarImage.kf.setImage(with: url)
     }
 
-    // MARK: - Private Methods
-
-    private func applyConstraints() {
-        NSLayoutConstraint.activate([
-            rootStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            rootStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            rootStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
-            avatarStack.widthAnchor.constraint(equalTo: rootStack.widthAnchor),
-            avatarImage.widthAnchor.constraint(equalToConstant: 70),
-            avatarImage.heightAnchor.constraint(equalToConstant: 70)
-        ])
-    }
-
-    private func addSubViews() {
-        rootStack.addArrangedSubview(avatarStack)
-        avatarStack.addArrangedSubview(avatarImage)
-        avatarStack.addArrangedSubview(exitButton)
-        view.addSubview(rootStack)
-        view.backgroundColor = .ypBlack
-        guard let profile = presenter?.getProfile() else { return }
-        rootStack.addArrangedSubview(configureLabel(profile.name, size: 23, weight: .bold))
-        rootStack.addArrangedSubview(configureLabel(profile.loginName, color: .ypGray))
-        rootStack.addArrangedSubview(configureLabel(profile.bio))
-    }
+    // MARK: - Views
 
     private let rootStack: UIStackView =  {
         let rootStack: UIStackView = UIStackView()
@@ -106,8 +81,37 @@ class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
         label.font = UIFont.systemFont(ofSize: size, weight: weight)
         return label
     }
+    
+    // MARK: - Private Methods
 
     @objc private func didTapLogoutButton() {
         presenter?.didTapLogoutButton()
+    }
+}
+
+// MARK: - applyConstraints && addSubViews
+
+extension ProfileViewController {
+    func applyConstraints() {
+        NSLayoutConstraint.activate([
+            rootStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            rootStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            rootStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
+            avatarStack.widthAnchor.constraint(equalTo: rootStack.widthAnchor),
+            avatarImage.widthAnchor.constraint(equalToConstant: 70),
+            avatarImage.heightAnchor.constraint(equalToConstant: 70)
+        ])
+    }
+
+    func addSubViews() {
+        rootStack.addArrangedSubview(avatarStack)
+        avatarStack.addArrangedSubview(avatarImage)
+        avatarStack.addArrangedSubview(exitButton)
+        guard let profile = presenter?.getProfile() else { return }
+        rootStack.addArrangedSubview(configureLabel(profile.name, size: 23, weight: .bold))
+        rootStack.addArrangedSubview(configureLabel(profile.loginName, color: .ypGray))
+        rootStack.addArrangedSubview(configureLabel(profile.bio))
+        view.addSubview(rootStack)
+        view.backgroundColor = .ypBlack
     }
 }

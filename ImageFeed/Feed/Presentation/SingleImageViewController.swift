@@ -13,8 +13,8 @@ class SingleImageViewController: UIViewController {
     // MARK: - Initializers
 
     init(photo: Photo) {
-        super.init(nibName: nil, bundle: nil)
         self.photo = photo
+        super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder: NSCoder) {
