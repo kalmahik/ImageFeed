@@ -5,4 +5,6 @@ protocol ProfileViewControllerProtocol: AnyObject {
 
     func showAlertModal(alertData: AlertModel)
     func setAvatarImage(with url: URL)
+    func addSubViews()
+    func applyConstraints()
 }

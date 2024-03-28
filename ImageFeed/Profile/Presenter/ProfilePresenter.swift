@@ -23,6 +23,8 @@ final class ProfilePresenter: ProfilePresenterProtocol {
 
     func viewDidLoad() {
         addObserver()
+        view?.addSubViews()
+        view?.applyConstraints()
     }
 
     func didTapLogoutButton() {
