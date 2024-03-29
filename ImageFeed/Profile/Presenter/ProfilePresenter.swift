@@ -1,7 +1,6 @@
 import Foundation
 
 final class ProfilePresenter: ProfilePresenterProtocol {
-
     // MARK: - Public Properties
 
     weak var view: ProfileViewControllerProtocol?
@@ -12,12 +11,6 @@ final class ProfilePresenter: ProfilePresenterProtocol {
     private lazy var profileImageService = ProfileImageService.shared
     private lazy var profileLogoutService = ProfileLogoutService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
-
-    // MARK: - Initializers
-
-    init(_ view: ProfileViewControllerProtocol) {
-        self.view = view
-    }
 
     // MARK: - Public Methods
 

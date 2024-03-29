@@ -5,7 +5,8 @@ final class ProfileTests: XCTestCase {
     func testViewControllerCallsViewDidLoad() {
         // given
         let profileViewController = ProfileViewController()
-        let profilePresenter = ProfilePresenterSpy(profileViewController)
+        let profilePresenter = ProfilePresenterSpy()
+        profilePresenter.view = profileViewController
         profileViewController.presenter = profilePresenter
 
         // when
@@ -13,5 +14,19 @@ final class ProfileTests: XCTestCase {
 
         // then
         XCTAssertTrue(profilePresenter.viewDidLoadCalled)
+    }
+
+    func testAlertWasShown() {
+        // given
+        let profileViewController = ProfileViewControllerSpy()
+        let profilePresenter = ProfilePresenter()
+        profileViewController.presenter = profilePresenter
+        profilePresenter.view = profileViewController
+
+        // when
+        profilePresenter.didTapLogoutButton()
+
+        // then
+        XCTAssertTrue(profileViewController.isAlertModalWasShown)
     }
 }

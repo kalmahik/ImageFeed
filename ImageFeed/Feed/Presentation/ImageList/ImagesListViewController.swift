@@ -15,7 +15,6 @@ class ImagesListViewController: UIViewController, ImagesListViewControllerProtoc
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter = FeedPresenter(self)
         tableView.dataSource = self
         tableView.delegate = self
         presenter?.viewDidLoad()

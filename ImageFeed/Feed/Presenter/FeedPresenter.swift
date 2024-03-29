@@ -9,10 +9,6 @@ final class FeedPresenter: FeedPresenterProtocol {
     private let feedService = FeedService.shared
     private var photosCount: Int = 0
 
-    init(_ view: ImagesListViewControllerProtocol) {
-        self.view = view
-    }
-
     func viewDidLoad() {
         view?.addSubViews()
         view?.applyConstraints()

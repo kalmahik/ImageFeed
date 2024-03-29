@@ -2,9 +2,9 @@ import UIKit
 import WebKit
 
 final class WebViewViewController: UIViewController, WebViewViewControllerProtocol {
-    
+
     // MARK: - Public Properties
-    
+
     var presenter: WebViewPresenterProtocol?
 
     weak var delegate: WebViewViewControllerDelegate?
@@ -35,7 +35,6 @@ final class WebViewViewController: UIViewController, WebViewViewControllerProtoc
     }
 
     func setProgressValue(_ newValue: Float) {
-//        progressView.progress = newValue
         progressView.setProgress(newValue, animated: true)
     }
 
