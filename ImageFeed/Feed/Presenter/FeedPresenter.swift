@@ -4,6 +4,7 @@ final class FeedPresenter: FeedPresenterProtocol {
     weak var view: ImagesListViewControllerProtocol?
 
     // MARK: - Private Properties
+
     private var feedServiceObserver: NSObjectProtocol?
     private let feedService = FeedService.shared
     private var photosCount: Int = 0

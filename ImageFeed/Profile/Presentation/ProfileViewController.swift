@@ -11,13 +11,14 @@ class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter = ProfilePresenter(self)
+        addSubViews()
+        applyConstraints()
         presenter?.viewDidLoad()
     }
 
     // MARK: - Public Methods
 
-    func showAlertModal(alertData: AlertModel) {
+    func showAlertModal(alertData: AlertData) {
         showAlert(alertData: alertData)
     }
 
@@ -81,7 +82,7 @@ class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
         label.font = UIFont.systemFont(ofSize: size, weight: weight)
         return label
     }
-    
+
     // MARK: - Private Methods
 
     @objc private func didTapLogoutButton() {

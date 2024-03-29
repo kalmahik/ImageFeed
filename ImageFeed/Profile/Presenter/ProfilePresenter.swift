@@ -23,12 +23,10 @@ final class ProfilePresenter: ProfilePresenterProtocol {
 
     func viewDidLoad() {
         addObserver()
-        view?.addSubViews()
-        view?.applyConstraints()
     }
 
     func didTapLogoutButton() {
-        let alertData = AlertModel(
+        let alertData = AlertData(
             title: "Пока, пока!",
             message: "Уверены, что хотите выйти?",
             actions: [

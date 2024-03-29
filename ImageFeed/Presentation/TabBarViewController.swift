@@ -13,6 +13,7 @@ final class TabBarViewController: UITabBarController {
     func setupViewControllers() {
         let feedVC = ImagesListViewController()
         let profileVC = ProfileViewController()
+        profileVC.presenter = ProfilePresenter(profileVC)
 
         feedVC.tabBarItem = UITabBarItem(
             title: nil,

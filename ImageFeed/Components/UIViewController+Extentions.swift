@@ -6,20 +6,20 @@ struct Action {
     let style: UIAlertAction.Style
 }
 
-struct AlertModel {
+struct AlertData {
     let title: String
     let message: String
     let actions: [Action]
 }
 
-private let defaultAlertData = AlertModel(
+private let defaultAlertData = AlertData(
     title: "Что-то пошло не так(",
     message: "Не удалось войти в систему",
     actions: [Action(buttonText: "ОК", action: nil, style: .default)]
 )
 
 extension UIViewController {
-    func showAlert(alertData: AlertModel = defaultAlertData) {
+    func showAlert(alertData: AlertData = defaultAlertData) {
         let alert = UIAlertController(title: alertData.title, message: alertData.message, preferredStyle: .alert)
         alertData.actions.forEach { action in
             func handler(_: UIAlertAction) {
