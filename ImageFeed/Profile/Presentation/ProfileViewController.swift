@@ -66,6 +66,7 @@ class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
         )
         button.tintColor = .ypRed
         button.contentEdgeInsets = UIEdgeInsets(top: 16, left: 8, bottom: 16, right: 8)
+        button.accessibilityLabel = "logout"
         return button
     }()
 
@@ -105,14 +106,14 @@ extension ProfileViewController {
     }
 
     func addSubViews() {
-        rootStack.addArrangedSubview(avatarStack)
         avatarStack.addArrangedSubview(avatarImage)
         avatarStack.addArrangedSubview(exitButton)
+        rootStack.addArrangedSubview(avatarStack)
+        view.addSubview(rootStack)
+        view.backgroundColor = .ypBlack
         guard let profile = presenter?.getProfile() else { return }
         rootStack.addArrangedSubview(configureLabel(profile.name, size: 23, weight: .bold))
         rootStack.addArrangedSubview(configureLabel(profile.loginName, color: .ypGray))
         rootStack.addArrangedSubview(configureLabel(profile.bio))
-        view.addSubview(rootStack)
-        view.backgroundColor = .ypBlack
     }
 }

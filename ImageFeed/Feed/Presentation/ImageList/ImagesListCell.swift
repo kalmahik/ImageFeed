@@ -88,11 +88,13 @@ final class ImagesListCell: UITableViewCell {
     }()
 
     private let likeButton: UIButton = {
-        UIButton.systemButton(
+        let button = UIButton.systemButton(
             with: UIImage(systemName: "heart.fill") ?? UIImage(),
             target: nil,
             action: #selector(didTapLike)
         )
+        button.accessibilityLabel = "like"
+        return button
     }()
 
     private let dateLabel: UILabel = {

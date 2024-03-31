@@ -6,8 +6,8 @@ final class ProfileTests: XCTestCase {
         // given
         let profileViewController = ProfileViewController()
         let profilePresenter = ProfilePresenterSpy()
-        profilePresenter.view = profileViewController
         profileViewController.presenter = profilePresenter
+        profilePresenter.view = profileViewController
 
         // when
         _ = profileViewController.view

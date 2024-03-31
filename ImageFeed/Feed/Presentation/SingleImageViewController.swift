@@ -3,6 +3,7 @@ import LinkPresentation
 import UIKit
 
 class SingleImageViewController: UIViewController {
+
     // MARK: - Private Properties
 
     private var image: UIImage?
@@ -119,6 +120,7 @@ class SingleImageViewController: UIViewController {
             action: #selector(didTapBackButton)
         )
         button.tintColor = .ypWhite
+        button.accessibilityLabel = "back"
         return button
     }()
 }

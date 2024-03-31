@@ -19,8 +19,7 @@ final class WebViewViewController: UIViewController, WebViewViewControllerProtoc
         super.viewDidLoad()
         addSubViews()
         applyConstraints()
-        presenter?.loadWebview()
-        presenter?.didUpdateProgressValue(0)
+        presenter?.viewDidLoad()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -80,6 +79,7 @@ final class WebViewViewController: UIViewController, WebViewViewControllerProtoc
         webView.navigationDelegate = self
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.allowsBackForwardNavigationGestures = true
+        webView.accessibilityIdentifier = "unsplashWebView"
         return webView
     }()
 

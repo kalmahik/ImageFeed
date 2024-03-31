@@ -25,7 +25,7 @@ final class WebViewTests: XCTestCase {
         webViewPresenter.view = webviewController
 
         // when
-        webViewPresenter.loadWebview()
+        webViewPresenter.viewDidLoad()
 
         // then
         XCTAssertTrue(webviewController.viewLoadCalled)

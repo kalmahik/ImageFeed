@@ -15,7 +15,8 @@ struct Profile {
 
     init(_ profileResponse: ProfileResponse) {
         self.username = profileResponse.username
-        self.name = "\(profileResponse.firstName ?? "") \(profileResponse.lastName ?? "")"
+        let lastName = profileResponse.lastName != nil ? " \(String(describing: profileResponse.lastName))" : ""
+        self.name = "\(profileResponse.firstName ?? "")\(lastName)"
         self.loginName = "@\(profileResponse.username)"
         self.bio = profileResponse.bio ?? ""
     }
