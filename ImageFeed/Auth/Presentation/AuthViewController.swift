@@ -43,8 +43,12 @@ final class AuthViewController: UIViewController {
         ])
     }
 
-    @objc private func didTapLogoutButton() {
+    @objc private func didTapLoginButton() {
+        let authHelper = AuthHelper()
         let webviewController = WebViewViewController()
+        let webViewPresenter = WebViewPresenter(authHelper: authHelper)
+        webviewController.presenter = webViewPresenter
+        webViewPresenter.view = webviewController
         webviewController.delegate = self
         self.navigationController?.pushViewController(webviewController, animated: true)
     }
@@ -61,9 +65,10 @@ final class AuthViewController: UIViewController {
         button.backgroundColor = .ypWhite
         button.setTitle("Войти", for: .normal)
         button.setTitleColor(.ypBlack, for: .normal)
-        button.addTarget(self, action: #selector(didTapLogoutButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         button.layer.cornerRadius = 16
+        button.accessibilityIdentifier = "login"
         return button
     }()
 }

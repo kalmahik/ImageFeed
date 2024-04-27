@@ -6,12 +6,18 @@ struct Profile {
     let loginName: String
     let bio: String
 
-    static func convertProfile(_ profileResponse: ProfileResponse) -> Profile {
-        Profile(
-            username: profileResponse.username,
-            name: "\(profileResponse.firstName ?? "") \(profileResponse.lastName ?? "")",
-            loginName: "@\(profileResponse.username)",
-            bio: profileResponse.bio ?? ""
-        )
+    init(username: String, name: String, loginName: String, bio: String) {
+        self.username = username
+        self.name = name
+        self.loginName = loginName
+        self.bio = bio
+    }
+
+    init(_ profileResponse: ProfileResponse) {
+        self.username = profileResponse.username
+        let lastName = profileResponse.lastName != nil ? " \(String(describing: profileResponse.lastName))" : ""
+        self.name = "\(profileResponse.firstName ?? "")\(lastName)"
+        self.loginName = "@\(profileResponse.username)"
+        self.bio = profileResponse.bio ?? ""
     }
 }

@@ -1,13 +1,11 @@
 import Kingfisher
 import UIKit
 
-class ProfileViewController: UIViewController {
-    // MARK: - Private Properties
+class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
 
-    private lazy var profileService = ProfileService.shared
-    private lazy var profileImageService = ProfileImageService.shared
-    private lazy var profileLogoutService = ProfileLogoutService.shared
-    private var profileImageServiceObserver: NSObjectProtocol?
+    // MARK: - Public Properties
+
+    var presenter: ProfilePresenterProtocol?
 
     // MARK: - UIViewController
 
@@ -15,51 +13,20 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         addSubViews()
         applyConstraints()
-        addObserver()
+        presenter?.viewDidLoad()
     }
 
-    // MARK: - Private Methods
+    // MARK: - Public Methods
 
-    private func addObserver() {
-        profileImageServiceObserver = NotificationCenter.default
-            .addObserver(
-                forName: ProfileImageService.didChangeNotification,
-                object: nil,
-                queue: .main
-            ) { [weak self] _ in
-                self?.updateAvatar()
-            }
-        updateAvatar()
+    func showAlertModal(alertData: AlertData) {
+        showAlert(alertData: alertData)
     }
 
-    private func updateAvatar() {
-        let avatarURL = profileImageService.profileImageURL
-        guard let avatarURL else { return }
-        let url = URL(string: avatarURL)
+    func setAvatarImage(with url: URL) {
         avatarImage.kf.setImage(with: url)
     }
 
-    private func applyConstraints() {
-        NSLayoutConstraint.activate([
-            rootStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            rootStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            rootStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
-            avatarStack.widthAnchor.constraint(equalTo: rootStack.widthAnchor),
-            avatarImage.widthAnchor.constraint(equalToConstant: 70),
-            avatarImage.heightAnchor.constraint(equalToConstant: 70)
-        ])
-    }
-
-    private func addSubViews() {
-        rootStack.addArrangedSubview(avatarStack)
-        rootStack.addArrangedSubview(configureLabel(profileService.profile?.name ?? "Firstname and lastname", size: 23, weight: .bold))
-        rootStack.addArrangedSubview(configureLabel(profileService.profile?.loginName ?? "nickname", color: .ypGray))
-        rootStack.addArrangedSubview(configureLabel(profileService.profile?.bio ?? "Description"))
-        avatarStack.addArrangedSubview(avatarImage)
-        avatarStack.addArrangedSubview(exitButton)
-        view.addSubview(rootStack)
-        view.backgroundColor = .ypBlack
-    }
+    // MARK: - Views
 
     private let rootStack: UIStackView =  {
         let rootStack: UIStackView = UIStackView()
@@ -85,9 +52,9 @@ class ProfileViewController: UIViewController {
         let imageView = UIImageView(image: placeholder)
         imageView.layer.cornerRadius = 35
         imageView.layer.masksToBounds = true
-        let url = profileImageService.profileImageURL
+        let url = presenter?.getProfileImageUrl()
         guard let url else { return imageView }
-        imageView.kf.setImage(with: URL(string: url), placeholder: placeholder)
+        imageView.kf.setImage(with: url, placeholder: placeholder)
         return imageView
     }()
 
@@ -99,10 +66,16 @@ class ProfileViewController: UIViewController {
         )
         button.tintColor = .ypRed
         button.contentEdgeInsets = UIEdgeInsets(top: 16, left: 8, bottom: 16, right: 8)
+        button.accessibilityLabel = "logout"
         return button
     }()
 
-    private func configureLabel(_ text: String, size: CGFloat = 13, color: UIColor = .ypWhite, weight: UIFont.Weight = .regular) -> UILabel {
+    private func configureLabel(
+        _ text: String,
+        size: CGFloat = 13,
+        color: UIColor = .ypWhite,
+        weight: UIFont.Weight = .regular
+    ) -> UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = text
@@ -111,19 +84,36 @@ class ProfileViewController: UIViewController {
         return label
     }
 
+    // MARK: - Private Methods
+
     @objc private func didTapLogoutButton() {
-        let alertData = AlertModel(
-            title: "Пока, пока!",
-            message: "Уверены, что хотите выйти?",
-            actions: [
-                Action(buttonText: "Нет", action: nil, style: .cancel),
-                Action(buttonText: "Да", action: logoutAction, style: .destructive)
-            ]
-        )
-        showAlert(alertData: alertData)
+        presenter?.didTapLogoutButton()
+    }
+}
+
+// MARK: - applyConstraints && addSubViews
+
+extension ProfileViewController {
+    func applyConstraints() {
+        NSLayoutConstraint.activate([
+            rootStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            rootStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            rootStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
+            avatarStack.widthAnchor.constraint(equalTo: rootStack.widthAnchor),
+            avatarImage.widthAnchor.constraint(equalToConstant: 70),
+            avatarImage.heightAnchor.constraint(equalToConstant: 70)
+        ])
     }
 
-    private func logoutAction(action: UIAlertAction) {
-        profileLogoutService.logout()
+    func addSubViews() {
+        avatarStack.addArrangedSubview(avatarImage)
+        avatarStack.addArrangedSubview(exitButton)
+        rootStack.addArrangedSubview(avatarStack)
+        view.addSubview(rootStack)
+        view.backgroundColor = .ypBlack
+        guard let profile = presenter?.getProfile() else { return }
+        rootStack.addArrangedSubview(configureLabel(profile.name, size: 23, weight: .bold))
+        rootStack.addArrangedSubview(configureLabel(profile.loginName, color: .ypGray))
+        rootStack.addArrangedSubview(configureLabel(profile.bio))
     }
 }
